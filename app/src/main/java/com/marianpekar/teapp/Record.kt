@@ -5,7 +5,7 @@ class Record(
     private val grams: Float,
     private val milliliters: Int,
     private val temperature: Int,
-    private val seconds: Int,
+    private val seconds: Long,
     private val infusions: Int
 ) {
 
@@ -18,6 +18,10 @@ class Record(
         val remainingSeconds = seconds % 60
 
         return String.format("%d:%02d", minutes, remainingSeconds)
+    }
+
+    fun getTime(): Long {
+        return seconds
     }
 
     fun getName(): String {
