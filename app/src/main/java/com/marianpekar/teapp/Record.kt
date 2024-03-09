@@ -2,7 +2,7 @@ package com.marianpekar.teapp
 
 class Record(
     private val name: String,
-    private val grams: Int,
+    private val grams: Float,
     private val milliliters: Int,
     private val temperature: Int,
     private val seconds: Int,

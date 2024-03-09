@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var recycler: RecyclerView
     private lateinit var adapter : RecordsAdapter
-    private var records = ArrayList<Record>()
+    private lateinit var records : RecordsStorage
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,15 +24,13 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        recycler = findViewById(R.id.recyclerRecords)
+        records = RecordsStorage(this@MainActivity)
 
+        recycler = findViewById(R.id.recyclerRecords)
         recycler.layoutManager = LinearLayoutManager(this@MainActivity)
 
-        records.add(Record("Sencha Natsu", 2, 250, 80, 120, 2))
-        records.add(Record("Sencha Miyazaki", 2, 250, 60, 300, 4))
-        records.add(Record("Genmaicha", 3, 250, 70, 90, 2))
+        adapter = RecordsAdapter(records.getAllRecords(), this@MainActivity)
 
-        adapter = RecordsAdapter(records, this@MainActivity)
         recycler.adapter = adapter
     }
 }
