@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Teapp</string>
+    <string name="add_new_record">Add new record</string>
+    <string name="default_record_name">Record Name</string>
+    <string name="default_record_summary">0g | 0ml | 0° | 0:00 | 0x</string>
+    <string name="open_record">Open Record</string>
+</resources>
