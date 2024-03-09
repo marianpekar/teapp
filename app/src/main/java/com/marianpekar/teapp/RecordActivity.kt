@@ -12,10 +12,15 @@ import androidx.core.view.WindowInsetsCompat
 
 class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler {
 
+    private lateinit var record: Record
+
     private lateinit var timer: CustomCountdownTimer
     private lateinit var textViewStopWatch: TextView
     private lateinit var buttonStartStop: Button
-    private lateinit var record: Record
+
+    private lateinit var textViewInfusionsCounter: TextView
+    private var infusions: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +35,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         setRecord()
         setHeader()
         setStopWatch()
+        setInfusionCounter()
     }
 
     private fun setRecord()
@@ -65,7 +71,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         timer = CustomCountdownTimer(record.getTime() * 1000, 1000, this)
 
         buttonStartStop = findViewById(R.id.buttonStopWatchStartStop)
-        val buttonReset : Button = findViewById(R.id.buttonStopWatchReset)
 
         buttonStartStop.setOnClickListener {
             if (timer.isRunning()) {
@@ -77,6 +82,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
                 buttonStartStop.text = getString(R.string.pause)
             }
         }
+
+        val buttonReset : Button = findViewById(R.id.buttonStopWatchReset)
 
         buttonReset.setOnClickListener {
             timer.reset()
@@ -98,5 +105,46 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     override fun onTimerFinished() {
         //TODO: Play sound
         buttonStartStop.text = getString(R.string.start)
+        removeOneInfusion()
+    }
+
+    private fun setInfusionCounter() {
+        infusions = record.getInfusions()
+        textViewInfusionsCounter = findViewById(R.id.textViewCounter)
+        updateInfusionCounterText()
+
+        val plusOneButton : Button = findViewById(R.id.buttonCounterPlusOne)
+        val minusOneButton : Button = findViewById(R.id.buttonCounterMinusOne)
+        val resetButton : Button = findViewById(R.id.buttonCounterReset)
+
+        plusOneButton.setOnClickListener {
+            if (infusions >= record.getInfusions())
+                return@setOnClickListener
+
+            infusions++
+            updateInfusionCounterText()
+        }
+
+        minusOneButton.setOnClickListener {
+            removeOneInfusion()
+        }
+
+        resetButton.setOnClickListener {
+            infusions = record.getInfusions()
+            updateInfusionCounterText()
+        }
+    }
+
+    private fun removeOneInfusion()
+    {
+        if (infusions <= 0)
+            return
+
+        infusions--
+        updateInfusionCounterText()
+    }
+
+    private fun updateInfusionCounterText() {
+        textViewInfusionsCounter.text = infusions.toString()
     }
 }

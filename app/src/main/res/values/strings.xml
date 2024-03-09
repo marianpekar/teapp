@@ -9,4 +9,7 @@
     <string name="start">Start</string>
     <string name="pause">Pause</string>
     <string name="reset">Reset</string>
+    <string name="default_counter_value">0</string>
+    <string name="plus_one">+1</string>
+    <string name="minus_one">-1</string>
 </resources>

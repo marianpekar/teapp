@@ -27,4 +27,8 @@ class Record(
     fun getName(): String {
         return name
     }
+
+    fun getInfusions(): Int {
+        return infusions
+    }
 }
