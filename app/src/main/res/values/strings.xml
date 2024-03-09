@@ -4,4 +4,5 @@
     <string name="default_record_name">Record Name</string>
     <string name="default_record_summary">0g | 0ml | 0° | 0:00 | 0x</string>
     <string name="open_record">Open Record</string>
+    <string name="back">Back</string>
 </resources>

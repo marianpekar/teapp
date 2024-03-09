@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RecordsAdapter(
     private var records: List<Record>,
-    var context: Context) : RecyclerView.Adapter<RecordsAdapter.RecordsViewHolder>() {
+    private var context: Context
+) : RecyclerView.Adapter<RecordsAdapter.RecordsViewHolder>() {
 
-    class RecordsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
-        var textRecordName : TextView = itemView.findViewById(R.id.textRecordName)
-        var textRecordSummary : TextView = itemView.findViewById(R.id.textRecordSummary)
-        var imageButtonCup : ImageButton = itemView.findViewById(R.id.imageButtonCup)
+    class RecordsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var textRecordName: TextView = itemView.findViewById(R.id.textRecordName)
+        var textRecordSummary: TextView = itemView.findViewById(R.id.textRecordSummary)
+        var imageButtonCup: ImageButton = itemView.findViewById(R.id.imageButtonCup)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordsViewHolder {
-        val view : View = LayoutInflater.from(parent.context).inflate(R.layout.card_record, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.card_record, parent, false)
         return RecordsViewHolder(view)
     }
 
@@ -35,7 +35,6 @@ class RecordsAdapter(
             context.startActivity(intent)
         }
     }
-
 
     override fun getItemCount(): Int {
         return records.size

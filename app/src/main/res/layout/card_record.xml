@@ -10,7 +10,7 @@
         android:layout_marginLeft="2dp"
         android:layout_marginTop="3dp"
         android:layout_marginRight="2dp"
-        android:backgroundTint="#E2F4CD"
+        android:backgroundTint="@color/green_tea"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,7 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/teacup"
                 android:background="@android:color/transparent"
-                app:tint="#A8E364"
+                app:tint="@color/green_tea_darker"
                 android:contentDescription="@string/open_record" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
