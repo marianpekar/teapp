@@ -31,4 +31,16 @@ class Record(
     fun getInfusions(): Int {
         return infusions
     }
+
+    fun getRatio(): Float {
+        return milliliters / grams
+    }
+
+    fun getGrams(): Float {
+        return grams
+    }
+
+    fun getMilliliters(): Int {
+        return milliliters
+    }
 }

@@ -3,12 +3,14 @@ package com.marianpekar.teapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.addTextChangedListener
 
 class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler {
 
@@ -36,10 +38,10 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         setHeader()
         setStopWatch()
         setInfusionCounter()
+        setRatioCalculator()
     }
 
-    private fun setRecord()
-    {
+    private fun setRecord() {
         val recordIndex = intent.getIntExtra("position", -1)
         if (recordIndex == -1) {
             throw Exception("Record index is -1")
@@ -76,14 +78,13 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
             if (timer.isRunning()) {
                 timer.pause()
                 buttonStartStop.text = getString(R.string.start)
-            }
-            else {
+            } else {
                 timer.start()
                 buttonStartStop.text = getString(R.string.pause)
             }
         }
 
-        val buttonReset : Button = findViewById(R.id.buttonStopWatchReset)
+        val buttonReset: Button = findViewById(R.id.buttonStopWatchReset)
 
         buttonReset.setOnClickListener {
             timer.reset()
@@ -91,7 +92,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         }
     }
 
-    private fun formatTime(seconds: Long) : String {
+    private fun formatTime(seconds: Long): String {
         val minutes = seconds / 60
         val remainingSeconds = seconds % 60
 
@@ -113,9 +114,9 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         textViewInfusionsCounter = findViewById(R.id.textViewCounter)
         updateInfusionCounterText()
 
-        val plusOneButton : Button = findViewById(R.id.buttonCounterPlusOne)
-        val minusOneButton : Button = findViewById(R.id.buttonCounterMinusOne)
-        val resetButton : Button = findViewById(R.id.buttonCounterReset)
+        val plusOneButton: Button = findViewById(R.id.buttonCounterPlusOne)
+        val minusOneButton: Button = findViewById(R.id.buttonCounterMinusOne)
+        val resetButton: Button = findViewById(R.id.buttonCounterReset)
 
         plusOneButton.setOnClickListener {
             if (infusions >= record.getInfusions())
@@ -135,8 +136,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         }
     }
 
-    private fun removeOneInfusion()
-    {
+    private fun removeOneInfusion() {
         if (infusions <= 0)
             return
 
@@ -146,5 +146,71 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
     private fun updateInfusionCounterText() {
         textViewInfusionsCounter.text = infusions.toString()
+    }
+
+    private fun setRatioCalculator() {
+        val editTextGrams: EditText = findViewById(R.id.editTextGrams)
+        val editTextMillis: EditText = findViewById(R.id.editTextMillis)
+
+        fun resetValues()
+        {
+            editTextGrams.setText(String.format("%.1f", record.getGrams()))
+            editTextMillis.setText(record.getMilliliters().toString())
+        }
+
+        resetValues()
+
+        val ratio = record.getRatio()
+
+        var gramsTextChangedByUser = false
+        var millisTextChangedByUser = false
+
+        editTextGrams.addTextChangedListener {
+            if (gramsTextChangedByUser)
+                return@addTextChangedListener
+
+            val gramsText = it.toString()
+            if (gramsText.isNotEmpty()) {
+                val gramsValue = gramsText.toFloat()
+
+                if (gramsValue <= 0.0f) {
+                    return@addTextChangedListener
+                }
+
+                val newMillis = (gramsValue * ratio).toInt()
+                millisTextChangedByUser = true
+                editTextMillis.setText(newMillis.toString())
+                millisTextChangedByUser = false
+            }
+
+        }
+
+        editTextMillis.addTextChangedListener {
+            if (millisTextChangedByUser)
+                return@addTextChangedListener
+
+            val millisText = it.toString()
+            if (millisText.isNotEmpty()) {
+                val millisValue = millisText.toFloat()
+
+                if (millisValue <= 0.0f) {
+                    return@addTextChangedListener
+                }
+
+                val newGrams = millisValue / ratio
+                gramsTextChangedByUser = true
+                editTextGrams.setText(String.format("%.1f", newGrams))
+                gramsTextChangedByUser = false
+            }
+        }
+
+        val buttonResetRatio: Button = findViewById(R.id.buttonRatioReset)
+        buttonResetRatio.setOnClickListener {
+            gramsTextChangedByUser =  true
+            millisTextChangedByUser = true
+            resetValues()
+            gramsTextChangedByUser = false
+            millisTextChangedByUser = false
+        }
     }
 }

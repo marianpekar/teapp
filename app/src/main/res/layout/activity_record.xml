@@ -171,4 +171,83 @@
 
     </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginRight="2dp"
+        android:backgroundTint="@color/green_tea"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextGrams"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-condensed"
+                    android:inputType="number"
+                    android:text="@string/default_counter_value"
+                    android:textAlignment="viewEnd"
+                    android:textSize="48sp"
+                    android:importantForAutofill="no" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/grams_short"
+                    android:textSize="24sp"
+                    android:translationY="5dp" />
+
+                <EditText
+                    android:id="@+id/editTextMillis"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-condensed"
+                    android:inputType="numberDecimal"
+                    android:text="@string/default_counter_value"
+                    android:textAlignment="viewEnd"
+                    android:textSize="48sp"
+                    android:importantForAutofill="no" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/millis_short"
+                    android:textSize="24sp"
+                    android:translationY="5dp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonRatioReset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="@string/reset" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </LinearLayout>
