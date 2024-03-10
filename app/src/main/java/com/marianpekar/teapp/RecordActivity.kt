@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -106,7 +107,9 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     override fun onTimerFinished() {
         //TODO: Play sound
         buttonStartStop.text = getString(R.string.start)
+        timer.reset()
         removeOneInfusion()
+        Toast.makeText(this@RecordActivity, R.string.yourTeaIsReady, Toast.LENGTH_LONG).show()
     }
 
     private fun setInfusionCounter() {

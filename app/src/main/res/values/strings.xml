@@ -14,4 +14,5 @@
     <string name="minus_one">-1</string>
     <string name="grams_short">g</string>
     <string name="millis_short">ml</string>
+    <string name="yourTeaIsReady">Your tea is ready!</string>
 </resources>
