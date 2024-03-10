@@ -4,5 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="green_tea">#E2F4CD</color>
     <color name="green_tea_darker">#A8E364</color>
+    <color name="red_caution">#DC3545</color>
     <color name="default_text_on_light">#49454F</color>
 </resources>

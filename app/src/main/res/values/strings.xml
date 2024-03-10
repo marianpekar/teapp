@@ -28,4 +28,5 @@
     <string name="save_record">Save Record</string>
     <string name="cant_add_record">Can\'t store record with empty or zero values</string>
     <string name="new_record_added">New record added</string>
+    <string name="delete_record">Delete Record</string>
 </resources>

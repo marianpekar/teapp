@@ -29,6 +29,8 @@
         android:focusable="true"
         app:backgroundTint="@color/green_tea_darker"
         app:fabSize="normal"
+        android:scaleType="center"
+        app:maxImageSize="32dp"
         app:tint="@color/default_text_on_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

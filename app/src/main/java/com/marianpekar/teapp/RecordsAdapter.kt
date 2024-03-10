@@ -18,6 +18,7 @@ class RecordsAdapter(
         var textRecordName: TextView = itemView.findViewById(R.id.textRecordName)
         var textRecordSummary: TextView = itemView.findViewById(R.id.textRecordSummary)
         var imageButtonCup: ImageButton = itemView.findViewById(R.id.imageButtonCup)
+        var imageButtonEdit: ImageButton = itemView.findViewById(R.id.imageButtonPencil)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordsViewHolder {
@@ -29,8 +30,15 @@ class RecordsAdapter(
         val record = records[position]
         holder.textRecordName.text = record.getName()
         holder.textRecordSummary.text = record.detailsFormatted()
+
         holder.imageButtonCup.setOnClickListener {
             val intent = Intent(context, RecordActivity::class.java)
+            intent.putExtra("position", position)
+            context.startActivity(intent)
+        }
+
+        holder.imageButtonEdit.setOnClickListener {
+            val intent = Intent(context, EditRecordActivity::class.java)
             intent.putExtra("position", position)
             context.startActivity(intent)
         }
