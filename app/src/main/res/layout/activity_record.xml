@@ -7,259 +7,271 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginRight="2dp"
-        android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textRecordName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="@string/default_record_name"
-                android:textSize="32sp"
-                app:layout_constraintStart_toEndOf="@+id/imageButtonLeftArrow"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textRecordSummary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="@string/default_record_summary"
-                android:textSize="14sp"
-                app:layout_constraintStart_toEndOf="@+id/imageButtonLeftArrow"
-                app:layout_constraintTop_toBottomOf="@+id/textRecordName" />
-
-            <ImageButton
-                android:id="@+id/imageButtonLeftArrow"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
-                android:scaleType="centerInside"
-                android:padding="10dp"
-                android:background="@drawable/rounded_button_background"
-                android:contentDescription="@string/back"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="2dp"
+                android:backgroundTint="@color/green_tea"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/left_arrow"
-                app:tint="@color/default_text_on_light" />
+                app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="2dp"
-        android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="0dp">
+                    <TextView
+                        android:id="@+id/textRecordName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="@string/default_record_name"
+                        android:textSize="32sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageButtonLeftArrow"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/textRecordSummary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:text="@string/default_record_summary"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/imageButtonLeftArrow"
+                        app:layout_constraintTop_toBottomOf="@+id/textRecordName" />
 
-            <TextView
-                android:id="@+id/textViewStopWatch"
+                    <ImageButton
+                        android:id="@+id/imageButtonLeftArrow"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/rounded_button_background"
+                        android:contentDescription="@string/back"
+                        android:padding="10dp"
+                        android:scaleType="centerInside"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/left_arrow"
+                        app:tint="@color/default_text_on_light" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="center_horizontal"
-                android:text="@string/default_stopwatch_value"
-                android:textSize="92sp" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:backgroundTint="@color/green_tea"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
 
-            <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textViewStopWatch"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center_horizontal"
+                        android:text="@string/default_stopwatch_value"
+                        android:textSize="92sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/buttonStopWatchStartStop"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:text="@string/start" />
+
+                        <Button
+                            android:id="@+id/buttonStopWatchReset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/reset" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:backgroundTint="@color/green_tea"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
 
-                <Button
-                    android:id="@+id/buttonStopWatchStartStop"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:text="@string/start" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/buttonStopWatchReset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="@string/reset" />
+                    <TextView
+                        android:id="@+id/textViewCounter"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center_horizontal"
+                        android:text="@string/default_counter_value"
+                        android:textSize="92sp" />
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
 
+                        <Button
+                            android:id="@+id/buttonCounterPlusOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/plus_one" />
+
+                        <Button
+                            android:id="@+id/buttonCounterMinusOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/minus_one" />
+
+                        <Button
+                            android:id="@+id/buttonCounterReset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:text="@string/reset" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="2dp"
+                android:backgroundTint="@color/green_tea"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editTextGrams"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:fontFamily="sans-serif-condensed"
+                            android:importantForAutofill="no"
+                            android:inputType="number"
+                            android:text="@string/default_counter_value"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@color/default_text_on_light"
+                            android:textSize="48sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="@string/grams_short"
+                            android:textSize="24sp"
+                            android:translationY="5dp" />
+
+                        <EditText
+                            android:id="@+id/editTextMillis"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:fontFamily="sans-serif-condensed"
+                            android:importantForAutofill="no"
+                            android:inputType="numberDecimal"
+                            android:text="@string/default_counter_value"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@color/default_text_on_light"
+                            android:textSize="48sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.25"
+                            android:fontFamily="sans-serif-condensed"
+                            android:text="@string/millis_short"
+                            android:textSize="24sp"
+                            android:translationY="5dp" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/buttonRatioReset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/reset" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
+    </ScrollView>
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="2dp"
-        android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="0dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewCounter"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif-condensed"
-                android:gravity="center_horizontal"
-                android:text="@string/default_counter_value"
-                android:textSize="92sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/buttonCounterPlusOne"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="@string/plus_one" />
-
-                <Button
-                    android:id="@+id/buttonCounterMinusOne"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:text="@string/minus_one" />
-
-                <Button
-                    android:id="@+id/buttonCounterReset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="@string/reset" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="2dp"
-        android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="0dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_horizontal"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_horizontal"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/editTextGrams"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="sans-serif-condensed"
-                    android:inputType="number"
-                    android:text="@string/default_counter_value"
-                    android:textAlignment="viewEnd"
-                    android:textSize="48sp"
-                    android:textColor="@color/default_text_on_light"
-                    android:importantForAutofill="no" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.25"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="@string/grams_short"
-                    android:textSize="24sp"
-                    android:translationY="5dp" />
-
-                <EditText
-                    android:id="@+id/editTextMillis"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:fontFamily="sans-serif-condensed"
-                    android:inputType="numberDecimal"
-                    android:text="@string/default_counter_value"
-                    android:textAlignment="viewEnd"
-                    android:textSize="48sp"
-                    android:textColor="@color/default_text_on_light"
-                    android:importantForAutofill="no" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.25"
-                    android:fontFamily="sans-serif-condensed"
-                    android:text="@string/millis_short"
-                    android:textSize="24sp"
-                    android:translationY="5dp" />
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/buttonRatioReset"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="@string/reset" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
