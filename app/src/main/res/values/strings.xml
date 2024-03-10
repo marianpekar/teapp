@@ -22,6 +22,10 @@
     <string name="deg60">60°</string>
     <string name="deg80">80°</string>
     <string name="deg90">90°</string>
-    <string name="deg100">100°</string>
+    <string name="plain60">60</string>
+    <string name="plain80">80</string>
+    <string name="plain90">90</string>
     <string name="save_record">Save Record</string>
+    <string name="cant_add_record">Can\'t store record with empty or zero values</string>
+    <string name="new_record_added">New record added</string>
 </resources>

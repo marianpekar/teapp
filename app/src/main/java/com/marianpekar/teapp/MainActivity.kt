@@ -1,5 +1,6 @@
 package com.marianpekar.teapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -26,11 +28,26 @@ class MainActivity : AppCompatActivity() {
 
         records = RecordsStorage(this@MainActivity)
 
+        setRecycler()
+        setAddNewRecordButton()
+    }
+
+    private fun setRecycler()
+    {
         recycler = findViewById(R.id.recyclerRecords)
         recycler.layoutManager = LinearLayoutManager(this@MainActivity)
 
         adapter = RecordsAdapter(records.getAllRecords(), this@MainActivity)
 
         recycler.adapter = adapter
+    }
+
+    private fun setAddNewRecordButton() {
+        val addRecordButton: FloatingActionButton = findViewById(R.id.buttonAddRecord)
+
+        addRecordButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, AddRecordActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

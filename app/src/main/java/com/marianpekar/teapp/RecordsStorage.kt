@@ -38,6 +38,17 @@ class RecordsStorage(private val context: Context) {
         saveRecords()
     }
 
+    fun areRecordParamsValid(
+        name: String,
+        grams: Float,
+        millis: Int,
+        temperature: Int,
+        seconds: Long,
+        infusions: Int
+    ): Boolean {
+        return name.isNotEmpty() && grams > 0 && millis > 0 && temperature > 0 && seconds > 0 && infusions > 0
+    }
+
     private fun saveRecords() {
         val json = Gson().toJson(records)
 
