@@ -14,5 +14,8 @@
     <string name="minus_one">-1</string>
     <string name="grams_short">g</string>
     <string name="millis_short">ml</string>
-    <string name="yourTeaIsReady">Your tea is ready!</string>
+    <string name="your_tea_is_ready">Your tea is ready!</string>
+    <string name="notification_channel_name">Teapp Notifications</string>
+    <string name="notification_channel_description">Receive notification when your tea is ready</string>
+    <string name="no_infusions_left">No infusions left</string>
 </resources>

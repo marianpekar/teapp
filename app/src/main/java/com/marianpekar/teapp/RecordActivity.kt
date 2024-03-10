@@ -1,5 +1,7 @@
 package com.marianpekar.teapp
 
+import android.Manifest
+import android.app.ActivityManager
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -12,6 +14,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.pm.PackageManager
+import android.media.AudioAttributes
+import android.media.MediaPlayer
+import android.net.Uri
+import android.os.Build
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 
 class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler {
 
@@ -24,6 +37,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private lateinit var textViewInfusionsCounter: TextView
     private var infusions: Int = 0
 
+    private lateinit var mediaPlayer: MediaPlayer
+    private val notificationChannelId: String = "teapp_notification_channel_id"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,11 +50,18 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
             insets
         }
 
+        mediaPlayer = MediaPlayer.create(this@RecordActivity, R.raw.flute_shot)
+
         setRecord()
         setHeader()
         setStopWatch()
         setInfusionCounter()
         setRatioCalculator()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mediaPlayer.release()
     }
 
     private fun setRecord() {
@@ -80,6 +102,12 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
                 timer.pause()
                 buttonStartStop.text = getString(R.string.start)
             } else {
+
+                if (infusions <= 0) {
+                    Toast.makeText(this@RecordActivity, R.string.no_infusions_left, Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+
                 timer.start()
                 buttonStartStop.text = getString(R.string.pause)
             }
@@ -105,11 +133,81 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     }
 
     override fun onTimerFinished() {
-        //TODO: Play sound
         buttonStartStop.text = getString(R.string.start)
         timer.reset()
         removeOneInfusion()
-        Toast.makeText(this@RecordActivity, R.string.yourTeaIsReady, Toast.LENGTH_LONG).show()
+
+        if (!isAppInForeground(this@RecordActivity)) {
+            showPushNotification()
+        } else {
+            Toast.makeText(this@RecordActivity, R.string.your_tea_is_ready, Toast.LENGTH_LONG).show()
+            mediaPlayer.start()
+        }
+    }
+
+    private fun showPushNotification() {
+        createNotificationChannel()
+
+        val notification = NotificationCompat.Builder(this@RecordActivity, notificationChannelId)
+            .setSmallIcon(R.drawable.teacup)
+            .setContentTitle(getString(R.string.app_name))
+            .setContentText(getString(R.string.your_tea_is_ready))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+
+        with(NotificationManagerCompat.from(this@RecordActivity)) {
+            if (ActivityCompat.checkSelfPermission(
+                    this@RecordActivity,
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return
+            }
+
+            notify(R.integer.notification_id, notification)
+        }
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                notificationChannelId,
+                getString(R.string.notification_channel_name),
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            .apply {
+                description = getString(R.string.notification_channel_description)
+                enableLights(true)
+                lightColor = R.color.green_tea_darker
+
+                // Enable custom notification sound
+                setSound(Uri.parse("android.resource://${packageName}/${R.raw.flute_shot}"), null)
+            }
+
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun isAppInForeground(context: Context): Boolean {
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val packageName = context.packageName
+
+        for (appProcess in activityManager.runningAppProcesses) {
+            if (appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND &&
+                appProcess.processName == packageName
+            ) {
+                return true
+            }
+        }
+        return false
     }
 
     private fun setInfusionCounter() {
