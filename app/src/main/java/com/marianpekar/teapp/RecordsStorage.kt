@@ -33,6 +33,11 @@ class RecordsStorage(private val context: Context) {
         saveRecords()
     }
 
+    fun replaceRecord(index: Int, record: Record) {
+        records[index] = record
+        saveRecords()
+    }
+
     fun removeRecord(index: Int) {
         records.removeAt(index)
         saveRecords()
@@ -53,7 +58,8 @@ class RecordsStorage(private val context: Context) {
         val json = Gson().toJson(records)
 
         try {
-            val outputStream: FileOutputStream = context.openFileOutput(fileName, Context.MODE_PRIVATE)
+            val outputStream: FileOutputStream =
+                context.openFileOutput(fileName, Context.MODE_PRIVATE)
             outputStream.write(json.toByteArray())
             outputStream.close()
         } catch (e: IOException) {

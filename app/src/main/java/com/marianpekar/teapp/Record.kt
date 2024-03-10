@@ -43,4 +43,8 @@ class Record(
     fun getMilliliters(): Int {
         return milliliters
     }
+
+    fun getTemperature(): Int {
+        return temperature
+    }
 }

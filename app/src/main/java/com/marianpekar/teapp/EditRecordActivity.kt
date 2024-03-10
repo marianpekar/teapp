@@ -18,8 +18,13 @@ class EditRecordActivity : AppCompatActivity() {
     private lateinit var record: Record
     private var recordIndex: Int = -1
 
-    private lateinit var editTextInfusions: EditText;
-    private lateinit var editTextTemperature: EditText;
+    private lateinit var editTextInfusions: EditText
+    private lateinit var editTextTemperature: EditText
+    private lateinit var editTextName: EditText
+    private lateinit var editTextMinutes: EditText
+    private lateinit var editTextSeconds: EditText
+    private lateinit var editTextGrams: EditText
+    private lateinit var editTextMillis: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +38,16 @@ class EditRecordActivity : AppCompatActivity() {
 
         records = RecordsStorage(this@EditRecordActivity)
 
+        editTextName = findViewById(R.id.editTextRecordName)
+        editTextMinutes = findViewById(R.id.editTextMinutes)
+        editTextSeconds = findViewById(R.id.editTextSeconds)
+        editTextGrams = findViewById(R.id.editTextGrams)
+        editTextMillis = findViewById(R.id.editTextMillis)
         editTextInfusions = findViewById(R.id.editTextCounter)
         editTextTemperature = findViewById(R.id.editTextTemperature)
 
         setRecord()
+        setEditTexts()
         setBackButton()
         setSaveRecordButton()
         setInfusionConvenientButtons()
@@ -53,6 +64,22 @@ class EditRecordActivity : AppCompatActivity() {
         record = RecordsStorage(this@EditRecordActivity).getRecord(recordIndex)
     }
 
+    private fun setEditTexts() {
+        editTextName.setText(record.getName())
+
+        val totalSeconds = record.getTime()
+        val minutes =  totalSeconds / 60
+        val remainingSeconds = totalSeconds % 60
+
+        editTextMinutes.setText(minutes.toString())
+        editTextSeconds.setText(remainingSeconds.toString())
+
+        editTextGrams.setText(record.getGrams().toString())
+        editTextMillis.setText(record.getMilliliters().toString())
+        editTextInfusions.setText(record.getInfusions().toString())
+        editTextTemperature.setText(record.getTemperature().toString())
+    }
+
     private fun setBackButton() {
         val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
         imageButtonLeftArrow.setOnClickListener {
@@ -61,12 +88,6 @@ class EditRecordActivity : AppCompatActivity() {
     }
 
     private fun setSaveRecordButton() {
-        val editTextName: EditText = findViewById(R.id.editTextRecordName)
-        val editTextMinutes: EditText = findViewById(R.id.editTextMinutes)
-        val editTextSeconds: EditText = findViewById(R.id.editTextSeconds)
-        val editTextGrams: EditText = findViewById(R.id.editTextGrams)
-        val editTextMillis: EditText = findViewById(R.id.editTextMillis)
-
         val buttonSaveRecord: ImageButton = findViewById(R.id.imageButtonSave)
 
         buttonSaveRecord.setOnClickListener {
@@ -102,7 +123,7 @@ class EditRecordActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            records.addRecord(Record(name, grams, millis, temperature, totalSeconds, infusions))
+            records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions))
 
             Toast.makeText(this@EditRecordActivity, R.string.record_saved, Toast.LENGTH_LONG).show()
 

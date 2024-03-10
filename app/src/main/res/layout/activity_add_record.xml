@@ -132,6 +132,7 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-condensed"
                         android:hint="@string/default_minutes_value"
+
                         android:textAlignment="textStart"
                         android:textColor="@color/default_text_on_light"
                         android:textSize="72sp" />
