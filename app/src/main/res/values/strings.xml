@@ -18,4 +18,10 @@
     <string name="notification_channel_name">Teapp Notifications</string>
     <string name="notification_channel_description">Receive notification when your tea is ready</string>
     <string name="no_infusions_left">No infusions left</string>
+    <string name="default_minutes_value">00</string>
+    <string name="deg60">60°</string>
+    <string name="deg80">80°</string>
+    <string name="deg90">90°</string>
+    <string name="deg100">100°</string>
+    <string name="save_record">Save Record</string>
 </resources>

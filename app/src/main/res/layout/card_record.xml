@@ -8,10 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="2dp"
         android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -45,15 +46,20 @@
 
             <ImageButton
                 android:id="@+id/imageButtonCup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="6dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/teacup"
-                android:background="@android:color/transparent"
-                app:tint="@color/green_tea_darker"
+                android:scaleType="centerInside"
+                android:paddingStart="13dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="10dp"
+                android:background="@drawable/rounded_button_background"
+                app:tint="@color/default_text_on_light"
                 android:contentDescription="@string/open_record" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

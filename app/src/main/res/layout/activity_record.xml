@@ -15,7 +15,8 @@
         android:layout_marginTop="3dp"
         android:layout_marginRight="2dp"
         android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -49,16 +50,20 @@
 
             <ImageButton
                 android:id="@+id/imageButtonLeftArrow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
-                android:background="@android:color/transparent"
-                android:contentDescription="@string/open_record"
+                android:scaleType="centerInside"
+                android:padding="10dp"
+                android:background="@drawable/rounded_button_background"
+                android:contentDescription="@string/back"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/left_arrow"
-                app:tint="@color/green_tea_darker" />
+                app:tint="@color/default_text_on_light" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
@@ -66,10 +71,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="2dp"
         android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +85,7 @@
             <TextView
                 android:id="@+id/textViewStopWatch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
@@ -117,10 +123,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="2dp"
         android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -130,7 +137,7 @@
             <TextView
                 android:id="@+id/textViewCounter"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center_horizontal"
@@ -175,10 +182,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="3dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="2dp"
         android:backgroundTint="@color/green_tea"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="15dp"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -189,7 +197,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -204,6 +214,7 @@
                     android:text="@string/default_counter_value"
                     android:textAlignment="viewEnd"
                     android:textSize="48sp"
+                    android:textColor="@color/default_text_on_light"
                     android:importantForAutofill="no" />
 
                 <TextView
@@ -226,6 +237,7 @@
                     android:text="@string/default_counter_value"
                     android:textAlignment="viewEnd"
                     android:textSize="48sp"
+                    android:textColor="@color/default_text_on_light"
                     android:importantForAutofill="no" />
 
                 <TextView
@@ -243,7 +255,7 @@
                 android:id="@+id/buttonRatioReset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/reset" />
 
         </LinearLayout>
