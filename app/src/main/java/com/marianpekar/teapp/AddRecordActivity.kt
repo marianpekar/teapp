@@ -53,7 +53,7 @@ class AddRecordActivity : AppCompatActivity() {
         val editTextGrams: EditText = findViewById(R.id.editTextGrams)
         val editTextMillis: EditText = findViewById(R.id.editTextMillis)
 
-        val buttonAddRecord: ImageButton = findViewById(R.id.imageButtonSave)
+        val buttonAddRecord: Button = findViewById(R.id.buttonSaveRecord)
 
         buttonAddRecord.setOnClickListener {
             val name = editTextName.text.toString()

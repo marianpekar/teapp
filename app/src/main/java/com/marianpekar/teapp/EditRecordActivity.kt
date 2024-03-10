@@ -88,7 +88,7 @@ class EditRecordActivity : AppCompatActivity() {
     }
 
     private fun setSaveRecordButton() {
-        val buttonSaveRecord: ImageButton = findViewById(R.id.imageButtonSave)
+        val buttonSaveRecord: Button = findViewById(R.id.buttonSaveRecord)
 
         buttonSaveRecord.setOnClickListener {
             val name = editTextName.text.toString()
@@ -192,6 +192,7 @@ class EditRecordActivity : AppCompatActivity() {
                 records.removeRecord(recordIndex)
                 backToMainActivity()
                 dialog.dismiss()
+                Toast.makeText(this@EditRecordActivity, R.string.record_removed, Toast.LENGTH_LONG).show()
             }
 
             alertDialogBuilder.setNegativeButton(R.string.no) { dialog, _ ->
