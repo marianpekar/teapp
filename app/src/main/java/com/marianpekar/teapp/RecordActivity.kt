@@ -18,10 +18,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
-import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
+import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -40,6 +41,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private lateinit var mediaPlayer: MediaPlayer
     private val notificationChannelId: String = "teapp_notification_channel_id"
 
+    private lateinit var wakeLock: PowerManager.WakeLock
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -52,6 +55,13 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
         mediaPlayer = MediaPlayer.create(this@RecordActivity, R.raw.flute_shot)
 
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        wakeLock = powerManager.newWakeLock(
+            PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK,
+            "RecordActivity::WakelockTag"
+        )
+        wakeLock.acquire(30*60*1000L /*30 minutes*/)
+
         setRecord()
         setHeader()
         setStopWatch()
@@ -62,6 +72,11 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
+
+        if(wakeLock.isHeld)
+        {
+            wakeLock.release()
+        }
     }
 
     private fun setRecord() {
