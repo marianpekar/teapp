@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.addTextChangedListener
 
 class EditRecordActivity : AppCompatActivity() {
 
@@ -50,6 +51,7 @@ class EditRecordActivity : AppCompatActivity() {
         setEditTexts()
         setBackButton()
         setSecondsEditText()
+        setTemperatureEditText()
         setSaveRecordButton()
         setInfusionConvenientButtons()
         setTemperatureConvenientButtons()
@@ -59,6 +61,11 @@ class EditRecordActivity : AppCompatActivity() {
     private fun setSecondsEditText() {
         val secondsTextWatcher = SecondsTextWatcher(editTextSeconds)
         editTextSeconds.addTextChangedListener(secondsTextWatcher)
+    }
+
+    private fun setTemperatureEditText() {
+        val temperatureTextWatcher = TemperatureTextWatcher(editTextTemperature)
+        editTextTemperature.addTextChangedListener(temperatureTextWatcher)
     }
 
     private fun setRecord() {

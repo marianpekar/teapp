@@ -37,6 +37,12 @@ class AddRecordActivity : AppCompatActivity() {
         setAddRecordButton()
         setInfusionConvenientButtons()
         setTemperatureConvenientButtons()
+        setTemperatureEditText()
+    }
+
+    private fun setTemperatureEditText() {
+        val temperatureTextWatcher = TemperatureTextWatcher(editTextTemperature)
+        editTextTemperature.addTextChangedListener(temperatureTextWatcher)
     }
 
     private fun setBackButton() {
