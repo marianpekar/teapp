@@ -1,5 +1,6 @@
 package com.marianpekar.teapp
 
+import SecondsTextWatcher
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -49,7 +50,11 @@ class AddRecordActivity : AppCompatActivity() {
     private fun setAddRecordButton() {
         val editTextName: EditText = findViewById(R.id.editTextRecordName)
         val editTextMinutes: EditText = findViewById(R.id.editTextMinutes)
+
         val editTextSeconds: EditText = findViewById(R.id.editTextSeconds)
+        val secondsTextWatcher = SecondsTextWatcher(editTextSeconds)
+        editTextSeconds.addTextChangedListener(secondsTextWatcher)
+
         val editTextGrams: EditText = findViewById(R.id.editTextGrams)
         val editTextMillis: EditText = findViewById(R.id.editTextMillis)
 
