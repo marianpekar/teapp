@@ -282,7 +282,7 @@
                             android:id="@+id/editTextTemperature"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginStart="120dp"
+                            android:layout_marginStart="100dp"
                             android:layout_marginEnd="0dp"
                             android:layout_weight="1"
                             android:fontFamily="sans-serif-condensed"
@@ -295,7 +295,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginEnd="115dp"
+                            android:layout_marginEnd="100dp"
                             android:text="@string/degree_symbol"
                             android:textColor="@color/default_text_on_light"
                             android:textSize="50sp" />
