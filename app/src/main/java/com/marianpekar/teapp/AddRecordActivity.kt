@@ -64,7 +64,7 @@ class AddRecordActivity : AppCompatActivity() {
             val minutes = if (minutesText.isNotEmpty()) minutesText.toLong() else 0
             val seconds = if (secondsText.isNotEmpty()) secondsText.toLong() else 0
 
-            val totalSeconds = if (minutes > 1) {
+            val totalSeconds = if (minutes >= 1) {
                 (minutes * 60) + seconds
             } else {
                 seconds
