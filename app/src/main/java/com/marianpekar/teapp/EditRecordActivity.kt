@@ -1,9 +1,7 @@
 package com.marianpekar.teapp
 
-import SecondsTextWatcher
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -13,7 +11,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
 
 class EditRecordActivity : AppCompatActivity() {
 
