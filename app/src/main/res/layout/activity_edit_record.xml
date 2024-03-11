@@ -337,8 +337,8 @@
 
                     <Button
                         android:id="@+id/buttonSaveRecord"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:backgroundTint="@color/green_tea_darker"
                         android:text="@string/update_record"
                         android:textColor="@color/white"
@@ -367,8 +367,8 @@
 
                     <Button
                         android:id="@+id/buttonDeleteRecord"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:backgroundTint="@color/red_caution"
                         android:text="@string/delete_record"
                         android:textColor="@color/white"
