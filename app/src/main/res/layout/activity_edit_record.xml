@@ -90,7 +90,7 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-condensed"
                         android:hint="@string/default_counter_value"
-                        android:inputType="numberDecimal"
+                        android:inputType="number"
                         android:textAlignment="textEnd"
                         android:textColor="@color/default_text_on_light"
                         android:textSize="72sp" />
@@ -114,6 +114,7 @@
                         android:layout_weight="1"
                         android:fontFamily="sans-serif-condensed"
                         android:hint="@string/default_minutes_value"
+                        android:inputType="number"
                         android:textAlignment="textStart"
                         android:textColor="@color/default_text_on_light"
                         android:textSize="72sp" />
@@ -152,6 +153,7 @@
                             android:layout_weight="1"
                             android:fontFamily="sans-serif-condensed"
                             android:gravity="center_horizontal"
+                            android:inputType="number"
                             android:hint="@string/default_counter_value"
                             android:textColor="@color/default_text_on_light"
                             android:textSize="72sp" />
@@ -234,7 +236,7 @@
                         android:fontFamily="sans-serif-condensed"
                         android:hint="@string/default_counter_value"
                         android:importantForAutofill="no"
-                        android:inputType="numberDecimal"
+                        android:inputType="number"
                         android:textAlignment="viewEnd"
                         android:textColor="@color/default_text_on_light"
                         android:textSize="48sp" />
@@ -282,7 +284,7 @@
                             android:fontFamily="sans-serif-condensed"
                             android:gravity="center_horizontal"
                             android:hint="@string/default_counter_value"
-                            android:inputType="numberDecimal"
+                            android:inputType="number"
                             android:textColor="@color/default_text_on_light"
                             android:textSize="72sp" />
 
