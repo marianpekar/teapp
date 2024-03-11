@@ -14,8 +14,9 @@ class RecordsStorage(private val context: Context) {
 
         if (records.isEmpty()) {
             // Add a default records when the class is initialized with no existing records
-            addRecord(Record("Sencha Satsuma", 3f, 250, 80, 120, 2))
-            addRecord(Record("Sencha Miyazaki", 3f, 250, 60, 240, 3))
+            addRecord(Record("Satsuma", 2f, 250, 80, 120, 2))
+            addRecord(Record("Miyazaki", 2f, 250, 60, 240, 3))
+            addRecord(Record("Natsu", 2f, 250, 80, 60, 3))
             saveRecords()
         }
     }
