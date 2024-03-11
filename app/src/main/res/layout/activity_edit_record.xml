@@ -274,17 +274,33 @@
                     android:layout_marginEnd="10dp"
                     android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/editTextTemperature"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-condensed"
-                        android:gravity="center_horizontal"
-                        android:hint="@string/default_counter_value"
-                        android:inputType="number"
-                        android:textColor="@color/default_text_on_light"
-                        android:textSize="72sp" />
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/editTextTemperature"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="120dp"
+                            android:layout_marginEnd="0dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif-condensed"
+                            android:gravity="center_horizontal"
+                            android:hint="@string/default_counter_value"
+                            android:inputType="number"
+                            android:textColor="@color/default_text_on_light"
+                            android:textSize="72sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="115dp"
+                            android:text="@string/degree_symbol"
+                            android:textColor="@color/default_text_on_light"
+                            android:textSize="50sp" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
