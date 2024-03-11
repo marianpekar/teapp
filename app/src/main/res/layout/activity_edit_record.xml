@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -7,64 +9,123 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="2dp"
+            android:backgroundTint="@color/green_tea"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/editTextRecordName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="@string/default_record_name"
+                    android:text=""
+                    android:textSize="32sp"
+                    app:layout_constraintStart_toEndOf="@+id/imageButtonLeftArrow"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/imageButtonLeftArrow"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/rounded_button_background"
+                    android:contentDescription="@string/back"
+                    android:padding="10dp"
+                    android:scaleType="centerInside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/left_arrow"
+                    app:tint="@color/default_text_on_light" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="2dp"
+            android:backgroundTint="@color/green_tea"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editTextMinutes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="@string/default_counter_value"
+                    android:inputType="number"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/default_text_on_light"
+                    android:textSize="72sp" />
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.8"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center_horizontal"
+                    android:text=":"
+                    android:textSize="64sp"
+                    android:translationY="10dp"
+                    tools:ignore="HardcodedText" />
+
+                <EditText
+                    android:id="@+id/editTextSeconds"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="@string/default_minutes_value"
+                    android:inputType="number"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/default_text_on_light"
+                    android:textSize="72sp" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginRight="2dp"
-                android:backgroundTint="@color/green_tea"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <EditText
-                        android:id="@+id/editTextRecordName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="sans-serif-condensed"
-                        android:hint="@string/default_record_name"
-                        android:text=""
-                        android:textSize="32sp"
-                        app:layout_constraintStart_toEndOf="@+id/imageButtonLeftArrow"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <ImageButton
-                        android:id="@+id/imageButtonLeftArrow"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="4dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/rounded_button_background"
-                        android:contentDescription="@string/back"
-                        android:padding="10dp"
-                        android:scaleType="centerInside"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/left_arrow"
-                        app:tint="@color/default_text_on_light" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -73,7 +134,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginRight="2dp"
                 android:backgroundTint="@color/green_tea"
-                app:cardCornerRadius="10dp"
+                app:cardCornerRadius="15dp"
                 app:cardElevation="0dp">
 
                 <LinearLayout
@@ -81,109 +142,120 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/editTextMinutes"
+                        android:id="@+id/editTextCounter"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:fontFamily="sans-serif-condensed"
-                        android:hint="@string/default_counter_value"
-                        android:inputType="number"
-                        android:textAlignment="textEnd"
-                        android:textColor="@color/default_text_on_light"
-                        android:textSize="72sp" />
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1.8"
                         android:fontFamily="sans-serif-condensed"
                         android:gravity="center_horizontal"
-                        android:text=":"
-                        android:textSize="64sp"
-                        android:translationY="10dp"
-                        tools:ignore="HardcodedText" />
-
-                    <EditText
-                        android:id="@+id/editTextSeconds"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:fontFamily="sans-serif-condensed"
-                        android:hint="@string/default_minutes_value"
+                        android:hint="@string/default_counter_value"
                         android:inputType="number"
-                        android:textAlignment="textStart"
                         android:textColor="@color/default_text_on_light"
                         android:textSize="72sp" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
 
+                        <Button
+                            android:id="@+id/buttonCounterPlusOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/plus_one" />
+
+                        <Button
+                            android:id="@+id/buttonCounterMinusOne"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/minus_one" />
+
+                    </LinearLayout>
                 </LinearLayout>
-
             </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="2dp"
+            android:backgroundTint="@color/green_tea"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/green_tea"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="0dp">
+                <EditText
+                    android:id="@+id/editTextGrams"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="@string/default_counter_value"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/default_text_on_light"
+                    android:textSize="48sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="vertical">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/grams_short"
+                    android:textSize="24sp"
+                    android:translationY="5dp" />
 
-                        <EditText
-                            android:id="@+id/editTextCounter"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:fontFamily="sans-serif-condensed"
-                            android:gravity="center_horizontal"
-                            android:inputType="number"
-                            android:hint="@string/default_counter_value"
-                            android:textColor="@color/default_text_on_light"
-                            android:textSize="72sp" />
+                <EditText
+                    android:id="@+id/editTextMillis"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-condensed"
+                    android:hint="@string/default_counter_value"
+                    android:importantForAutofill="no"
+                    android:inputType="number"
+                    android:textAlignment="viewEnd"
+                    android:textColor="@color/default_text_on_light"
+                    android:textSize="48sp" />
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:fontFamily="sans-serif-condensed"
+                    android:text="@string/millis_short"
+                    android:textSize="24sp"
+                    android:translationY="5dp" />
 
-                            <Button
-                                android:id="@+id/buttonCounterPlusOne"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/plus_one" />
-
-                            <Button
-                                android:id="@+id/buttonCounterMinusOne"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/minus_one" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-                </androidx.cardview.widget.CardView>
             </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -197,190 +269,115 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <EditText
-                        android:id="@+id/editTextGrams"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextTemperature"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_weight="1"
-                        android:ems="10"
                         android:fontFamily="sans-serif-condensed"
+                        android:gravity="center_horizontal"
                         android:hint="@string/default_counter_value"
-                        android:importantForAutofill="no"
-                        android:inputType="numberDecimal"
-                        android:textAlignment="viewEnd"
-                        android:textColor="@color/default_text_on_light"
-                        android:textSize="48sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="@string/grams_short"
-                        android:textSize="24sp"
-                        android:translationY="5dp" />
-
-                    <EditText
-                        android:id="@+id/editTextMillis"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:fontFamily="sans-serif-condensed"
-                        android:hint="@string/default_counter_value"
-                        android:importantForAutofill="no"
                         android:inputType="number"
-                        android:textAlignment="viewEnd"
                         android:textColor="@color/default_text_on_light"
-                        android:textSize="48sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.25"
-                        android:fontFamily="sans-serif-condensed"
-                        android:text="@string/millis_short"
-                        android:textSize="24sp"
-                        android:translationY="5dp" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="2dp"
-                    android:backgroundTint="@color/green_tea"
-                    app:cardCornerRadius="15dp"
-                    app:cardElevation="0dp">
+                        android:textSize="72sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:orientation="vertical">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="horizontal">
 
-                        <EditText
-                            android:id="@+id/editTextTemperature"
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:fontFamily="sans-serif-condensed"
-                            android:gravity="center_horizontal"
-                            android:hint="@string/default_counter_value"
-                            android:inputType="number"
-                            android:textColor="@color/default_text_on_light"
-                            android:textSize="72sp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <Button
+                            android:id="@+id/button60deg"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="20dp"
-                            android:gravity="center_horizontal"
-                            android:orientation="horizontal">
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/deg60" />
 
-                            <Button
-                                android:id="@+id/button60deg"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/deg60" />
+                        <Button
+                            android:id="@+id/button80deg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/deg80" />
 
-                            <Button
-                                android:id="@+id/button80deg"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/deg80" />
+                        <Button
+                            android:id="@+id/button90deg"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:text="@string/deg90" />
 
-                            <Button
-                                android:id="@+id/button90deg"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="5dp"
-                                android:text="@string/deg90" />
-
-                        </LinearLayout>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
-            </LinearLayout>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="2dp"
-                android:backgroundTint="@color/green_tea_darker"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="0dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Button
-                        android:id="@+id/buttonSaveRecord"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="@color/green_tea_darker"
-                        android:text="@string/update_record"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="75dp"
-                android:layout_marginLeft="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginRight="2dp"
-                android:backgroundTint="@color/red_caution"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="0dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Button
-                        android:id="@+id/buttonDeleteRecord"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="@color/red_caution"
-                        android:text="@string/delete_record"
-                        android:textColor="@color/white"
-                        android:textSize="22sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
         </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="2dp"
+            android:backgroundTint="@color/green_tea_darker"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonSaveRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/green_tea_darker"
+                    android:text="@string/update_record"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="2dp"
+            android:backgroundTint="@color/red_caution"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/buttonDeleteRecord"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/red_caution"
+                    android:text="@string/delete_record"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>
