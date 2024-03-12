@@ -2,30 +2,32 @@ package com.marianpekar.teapp
 
 import android.Manifest
 import android.app.ActivityManager
-import android.content.Intent
-import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.os.PowerManager
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.widget.addTextChangedListener
+
 
 class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler {
 
@@ -62,6 +64,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
         setWakeLock()
         setRecord()
+        setBackButton()
+        setOnBackPressedCallback()
         setHeader()
         setStopWatch()
         setInfusionCounter()
@@ -105,16 +109,33 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private fun setHeader() {
         val textRecordName: TextView = findViewById(R.id.textRecordName)
         val textRecordSummary: TextView = findViewById(R.id.textRecordSummary)
-        val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
 
         textRecordName.text = record.getName()
         textRecordSummary.text = record.detailsFormatted()
+    }
 
-        imageButtonLeftArrow.setOnClickListener {
-            val intent = Intent(this@RecordActivity, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+    private fun setOnBackPressedCallback()
+    {
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                backToMainActivity()
+            }
         }
+        this@RecordActivity.onBackPressedDispatcher.addCallback(this, callback);
+    }
+
+    private fun setBackButton() {
+        val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
+        imageButtonLeftArrow.setOnClickListener {
+            backToMainActivity()
+        }
+    }
+
+    private fun backToMainActivity() {
+        val intent = Intent(this@RecordActivity, MainActivity::class.java)
+        startActivity(intent)
+        timer.pause()
+        finish()
     }
 
     private fun setStopWatch() {
