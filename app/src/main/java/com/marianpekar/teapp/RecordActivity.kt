@@ -17,12 +17,12 @@ import androidx.core.widget.addTextChangedListener
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
-import android.view.WindowManager
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -43,6 +43,9 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
     private lateinit var wakeLock: PowerManager.WakeLock
 
+    private lateinit var preferences: SharedPreferences
+    private lateinit var infusionsPrefKey: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -55,13 +58,9 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
         mediaPlayer = MediaPlayer.create(this@RecordActivity, R.raw.flute_shot)
 
-        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-        wakeLock = powerManager.newWakeLock(
-            PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK,
-            "RecordActivity::WakelockTag"
-        )
-        wakeLock.acquire(30*60*1000L /*30 minutes*/)
+        preferences = applicationContext.getSharedPreferences(getString(R.string.app_name), 0)
 
+        setWakeLock()
         setRecord()
         setHeader()
         setStopWatch()
@@ -69,11 +68,24 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         setRatioCalculator()
     }
 
+    private fun setWakeLock() {
+        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
+        wakeLock = powerManager.newWakeLock(
+            PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK,
+            "RecordActivity::WakelockTag"
+        )
+        wakeLock.acquire(30*60*1000L /*30 minutes*/)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
 
-        if(wakeLock.isHeld)
+        val editor = preferences.edit()
+        editor.putInt(infusionsPrefKey, textViewInfusionsCounter.text.toString().toInt())
+        editor.apply()
+
+        if (wakeLock.isHeld)
         {
             wakeLock.release()
         }
@@ -86,6 +98,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         }
 
         record = RecordsStorage(this@RecordActivity).getRecord(recordIndex)
+        infusionsPrefKey = record.getName()
     }
 
     private fun setHeader() {
@@ -226,7 +239,12 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     }
 
     private fun setInfusionCounter() {
-        infusions = record.getInfusions()
+        infusions = preferences.getInt(infusionsPrefKey, 0)
+
+        if (infusions == 0) {
+            infusions = record.getInfusions()
+        }
+
         textViewInfusionsCounter = findViewById(R.id.textViewCounter)
         updateInfusionCounterText()
 
