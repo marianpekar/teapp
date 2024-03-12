@@ -37,4 +37,5 @@
     <string name="add_record">Add Record</string>
     <string name="record_removed">Record removed</string>
     <string name="degree_symbol">°</string>
+    <string name="cant_add_record_of_existing_name">You already have a record of this name</string>
 </resources>

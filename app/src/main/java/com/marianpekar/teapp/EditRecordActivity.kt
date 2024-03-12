@@ -130,9 +130,13 @@ class EditRecordActivity : AppCompatActivity() {
             val temperatureText = editTextTemperature.text.toString()
             val temperature = if (temperatureText.isNotEmpty()) temperatureText.toInt() else 0
 
-            if (!records.areRecordParamsValid(name, grams, millis, temperature, totalSeconds, infusions))
-            {
+            if (!records.areRecordParamsValid(name, grams, millis, temperature, totalSeconds, infusions)) {
                 Toast.makeText(this@EditRecordActivity, R.string.cant_add_record, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if (records.hasItemOfName(name) && name != record.getName()) {
+                Toast.makeText(this@EditRecordActivity, R.string.cant_add_record_of_existing_name, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
