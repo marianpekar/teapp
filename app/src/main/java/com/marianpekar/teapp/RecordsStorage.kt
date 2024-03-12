@@ -55,10 +55,6 @@ class RecordsStorage(private val context: Context) {
         return name.isNotEmpty() && grams > 0 && millis > 0 && temperature > 0 && seconds > 0 && infusions > 0
     }
 
-    fun hasItemOfName(name: String): Boolean {
-        return records.any { it.getName() == name }
-    }
-
     private fun saveRecords() {
         val json = Gson().toJson(records)
 

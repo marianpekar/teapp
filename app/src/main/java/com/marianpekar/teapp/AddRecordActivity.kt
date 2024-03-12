@@ -97,11 +97,6 @@ class AddRecordActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (records.hasItemOfName(name)) {
-                Toast.makeText(this@AddRecordActivity, R.string.cant_add_record_of_existing_name, Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
             records.addRecord(Record(name, grams, millis, temperature, totalSeconds, infusions))
 
             Toast.makeText(this@AddRecordActivity, R.string.new_record_added, Toast.LENGTH_LONG).show()

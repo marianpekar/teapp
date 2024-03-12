@@ -98,7 +98,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         }
 
         record = RecordsStorage(this@RecordActivity).getRecord(recordIndex)
-        infusionsPrefKey = record.getName()
+
+        infusionsPrefKey = "infusions_${recordIndex}"
     }
 
     private fun setHeader() {

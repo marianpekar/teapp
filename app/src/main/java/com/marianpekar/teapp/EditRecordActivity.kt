@@ -135,11 +135,6 @@ class EditRecordActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (records.hasItemOfName(name) && name != record.getName()) {
-                Toast.makeText(this@EditRecordActivity, R.string.cant_add_record_of_existing_name, Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
             records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions))
 
             Toast.makeText(this@EditRecordActivity, R.string.record_saved, Toast.LENGTH_LONG).show()
