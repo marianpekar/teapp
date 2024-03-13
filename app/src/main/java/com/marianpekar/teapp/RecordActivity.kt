@@ -12,6 +12,7 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -54,6 +55,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mediaPlayer = MediaPlayer.create(this@RecordActivity, R.raw.flute_shot)
 

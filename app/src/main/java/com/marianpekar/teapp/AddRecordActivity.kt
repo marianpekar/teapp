@@ -2,6 +2,7 @@ package com.marianpekar.teapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -27,6 +28,8 @@ class AddRecordActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         records = RecordsStorage(this@AddRecordActivity)
 
