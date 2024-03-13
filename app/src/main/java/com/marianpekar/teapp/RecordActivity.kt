@@ -12,7 +12,6 @@ import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.PowerManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
@@ -43,8 +42,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private lateinit var mediaPlayer: MediaPlayer
     private val notificationChannelId: String = "teapp_notification_channel_id"
 
-    private lateinit var wakeLock: PowerManager.WakeLock
-
     private lateinit var preferences: SharedPreferences
     private lateinit var infusionsPrefKey: String
 
@@ -62,7 +59,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
         preferences = applicationContext.getSharedPreferences(getString(R.string.app_name), 0)
 
-        setWakeLock()
         setRecord()
         setBackButton()
         setOnBackPressedCallback()
@@ -72,15 +68,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         setRatioCalculator()
     }
 
-    private fun setWakeLock() {
-        val powerManager = getSystemService(Context.POWER_SERVICE) as PowerManager
-        wakeLock = powerManager.newWakeLock(
-            PowerManager.PROXIMITY_SCREEN_OFF_WAKE_LOCK,
-            "RecordActivity::WakelockTag"
-        )
-        wakeLock.acquire(30*60*1000L /*30 minutes*/)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         mediaPlayer.release()
@@ -88,11 +75,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         val editor = preferences.edit()
         editor.putInt(infusionsPrefKey, textViewInfusionsCounter.text.toString().toInt())
         editor.apply()
-
-        if (wakeLock.isHeld)
-        {
-            wakeLock.release()
-        }
     }
 
     private fun setRecord() {
