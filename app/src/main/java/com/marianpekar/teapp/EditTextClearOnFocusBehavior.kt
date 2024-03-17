@@ -8,10 +8,13 @@ import android.widget.EditText
 
 fun EditText.setupClearOnFocusBehavior() {
     var previousValue: CharSequence? = null
+    val initialHint: CharSequence? = if (this.text.isNullOrBlank()) this.hint else this.text
 
     this.setOnFocusChangeListener { _, hasFocus ->
         if (hasFocus) {
             previousValue = this.text
+            this.hint = if (this.text.isNullOrBlank()) initialHint else previousValue
+
             this.text = null
 
             val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
