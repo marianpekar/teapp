@@ -28,6 +28,7 @@ import androidx.core.widget.addTextChangedListener
 class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler {
 
     private lateinit var record: Record
+    private var recordIndex: Int = -1
 
     private lateinit var timer: CustomCountdownTimer
     private lateinit var textViewStopWatch: TextView
@@ -107,7 +108,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     }
 
     private fun setRecord() {
-        val recordIndex = intent.getIntExtra("position", -1)
+        recordIndex = intent.getIntExtra("position", -1)
         if (recordIndex == -1) {
             throw Exception("Record index is -1")
         }
@@ -238,6 +239,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
     private fun pushNotification() {
         val serviceIntent = Intent(this@RecordActivity, NotificationService::class.java)
+        serviceIntent.putExtra("position", recordIndex)
         ContextCompat.startForegroundService(this@RecordActivity, serviceIntent)
     }
 

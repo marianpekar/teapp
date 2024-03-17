@@ -20,12 +20,18 @@ class NotificationService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        showNotification()
+        val position = intent?.getIntExtra("position", -1) ?: -1
+        showNotification(position)
         return START_STICKY
     }
 
-    private fun showNotification() {
-        val notificationIntent = Intent(this, MainActivity::class.java)
+    private fun showNotification(position: Int) {
+        val notificationIntent = Intent(this, RecordActivity::class.java)
+
+        notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+        notificationIntent.putExtra("position", position)
+
         val pendingIntent = PendingIntent.getActivity(
             this,
             0,
