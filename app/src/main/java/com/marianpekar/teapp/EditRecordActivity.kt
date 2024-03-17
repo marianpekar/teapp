@@ -103,7 +103,7 @@ class EditRecordActivity : AppCompatActivity() {
     private fun setEditTexts() {
         editTextName.setText(record.getName())
 
-        val totalSeconds = record.getTime()
+        val totalSeconds = record.getSeconds()
         val minutes =  totalSeconds / 60
         val remainingSeconds = totalSeconds % 60
 

@@ -21,7 +21,7 @@ class Record(
                 continue
 
             var summary = "${grams}g | ${milliliters}ml | ${temperature}° | ${timeFormatted()}"
-            adjustments.forEach { it -> summary += it.getSecondsAdjustmentFormatted()}
+            adjustments.forEach { summary += it.getSecondsAdjustmentFormatted()}
             return summary
         }
 
@@ -35,7 +35,7 @@ class Record(
         return String.format("%d:%02d", minutes, remainingSeconds)
     }
 
-    fun getTime(): Long {
+    fun getSeconds(): Long {
         return seconds
     }
 
@@ -65,5 +65,17 @@ class Record(
 
     fun getAdjustments(): List<Adjustment> {
         return adjustments
+    }
+
+    fun getSecondsAdjusted(infusion: Int) : Long {
+        if(!shouldAdjust(adjustments, infusion))
+            return getSeconds()
+
+        val adjustment = adjustments[getInfusions() - infusion - 1]
+        return getSeconds() + if (adjustment.getIsNegative()) adjustment.seconds * -1 else adjustment.seconds
+    }
+
+    private fun shouldAdjust(adjustments: List<Adjustment>, infusion: Int) : Boolean {
+        return adjustments.isNotEmpty() && infusion < getInfusions() && infusion > 0
     }
 }

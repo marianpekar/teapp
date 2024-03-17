@@ -66,13 +66,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
         preferences = applicationContext.getSharedPreferences(getString(R.string.app_name), 0)
 
-        textViewStopWatch = findViewById(R.id.textViewStopWatch)
-        buttonStartStop = findViewById(R.id.buttonStopWatchStartStop)
-        textViewInfusionsCounter = findViewById(R.id.textViewCounter)
-        plusOneButton = findViewById(R.id.buttonCounterPlusOne)
-        minusOneButton = findViewById(R.id.buttonCounterMinusOne)
-        resetInfusionsButton = findViewById(R.id.buttonCounterReset)
-        resetTimerButton = findViewById(R.id.buttonStopWatchReset)
+        setUiReferences()
 
         setRecord()
         setInfusions()
@@ -88,6 +82,16 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
         setInfusionCounter()
         setRatioCalculator()
+    }
+
+    private fun setUiReferences() {
+        textViewStopWatch = findViewById(R.id.textViewStopWatch)
+        buttonStartStop = findViewById(R.id.buttonStopWatchStartStop)
+        textViewInfusionsCounter = findViewById(R.id.textViewCounter)
+        plusOneButton = findViewById(R.id.buttonCounterPlusOne)
+        minusOneButton = findViewById(R.id.buttonCounterMinusOne)
+        resetInfusionsButton = findViewById(R.id.buttonCounterReset)
+        resetTimerButton = findViewById(R.id.buttonStopWatchReset)
     }
 
     override fun onDestroy() {
@@ -151,34 +155,18 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
     private fun setTimerText() {
         if (infusions > 0) {
-            var seconds = record.getTime()
-            val adjustments = record.getAdjustments()
-            if (adjustments.isNotEmpty() && infusions < record.getInfusions() && infusions > 0) {
-
-                val adjustment = adjustments[record.getInfusions() - infusions - 1]
-                val adjustmentSeconds = if (adjustment.getIsNegative()) adjustment.seconds * -1 else adjustment.seconds
-
-                seconds += adjustmentSeconds
-            }
-
-            textViewStopWatch.text = formatTime(seconds)
+            textViewStopWatch.text = formatTime(record.getSecondsAdjusted(infusions))
         } else {
             textViewStopWatch.text = getString(R.string.default_stopwatch_value)
         }
     }
 
     private fun setTimer() {
-        val adjustments = record.getAdjustments()
-        var seconds = record.getTime()
-        if (adjustments.isNotEmpty() && infusions < record.getInfusions() && infusions > 0) {
+        timer = CustomCountdownTimer(record.getSecondsAdjusted(infusions) * 1000, 1000, this)
+    }
 
-            val adjustment = adjustments[record.getInfusions() - infusions - 1]
-            val adjustmentSeconds = if (adjustment.getIsNegative()) adjustment.seconds * -1 else adjustment.seconds
-
-            seconds += adjustmentSeconds
-        }
-
-        timer = CustomCountdownTimer(seconds * 1000, 1000, this)
+    private fun shouldAdjustTimer(adjustments: List<Adjustment>) : Boolean {
+        return adjustments.isNotEmpty() && infusions < record.getInfusions() && infusions > 0
     }
 
     private fun setTimerButtons() {
