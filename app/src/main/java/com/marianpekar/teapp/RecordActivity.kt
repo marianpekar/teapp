@@ -82,7 +82,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         setTimerText()
         setTimerButtons()
 
-        setInfusionCounter()
+        setInfusionsCounter()
         setRatioCalculator()
     }
 
@@ -196,9 +196,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
                 timer.start()
                 buttonStartStop.text = getString(R.string.pause)
 
-                minusOneButton.isEnabled = false
-                plusOneButton.isEnabled = false
-                resetInfusionsButton.isEnabled = false
+                disableInfusionButtons()
             }
         }
 
@@ -212,9 +210,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
             timer.reset()
             buttonStartStop.text = getString(R.string.start)
 
-            minusOneButton.isEnabled = true
-            plusOneButton.isEnabled = true
-            resetInfusionsButton.isEnabled = true
+            enableInfusionsButtons()
         }
     }
 
@@ -232,9 +228,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     override fun onTimerFinished() {
         buttonStartStop.text = getString(R.string.start)
 
-        plusOneButton.isEnabled = true
-        minusOneButton.isEnabled = true
-        resetInfusionsButton.isEnabled = true
+        enableInfusionsButtons()
 
         removeOneInfusion()
 
@@ -250,6 +244,20 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
                 .show()
             mediaPlayer.start()
         }
+    }
+
+    private fun enableInfusionsButtons() {
+        setInfusionButtonsEnabled(true)
+    }
+
+    private fun disableInfusionButtons() {
+        setInfusionButtonsEnabled(false)
+    }
+
+    private fun setInfusionButtonsEnabled(value: Boolean) {
+        plusOneButton.isEnabled = value
+        minusOneButton.isEnabled = value
+        resetInfusionsButton.isEnabled = value
     }
 
     private fun showPushNotification() {
@@ -321,7 +329,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         return false
     }
 
-    private fun setInfusionCounter() {
+    private fun setInfusionsCounter() {
         updateInfusionsText()
 
         plusOneButton.setOnClickListener {
@@ -361,7 +369,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     }
 
     private fun setRatioCalculator() {
-
 
         fun resetValues() {
             editTextGrams.setText(String.format("%.1f", record.getGrams()))
