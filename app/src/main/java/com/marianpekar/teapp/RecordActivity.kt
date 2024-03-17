@@ -36,6 +36,10 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private lateinit var timer: CustomCountdownTimer
     private lateinit var textViewStopWatch: TextView
     private lateinit var buttonStartStop: Button
+    private lateinit var plusOneButton: Button
+    private lateinit var minusOneButton: Button
+    private lateinit var resetInfusionsButton: Button
+    private lateinit var resetTimerButton: Button
 
     private lateinit var textViewInfusionsCounter: TextView
     private var infusions: Int = 0
@@ -62,11 +66,26 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
         preferences = applicationContext.getSharedPreferences(getString(R.string.app_name), 0)
 
+        textViewStopWatch = findViewById(R.id.textViewStopWatch)
+        buttonStartStop = findViewById(R.id.buttonStopWatchStartStop)
+        textViewInfusionsCounter = findViewById(R.id.textViewCounter)
+        plusOneButton = findViewById(R.id.buttonCounterPlusOne)
+        minusOneButton = findViewById(R.id.buttonCounterMinusOne)
+        resetInfusionsButton = findViewById(R.id.buttonCounterReset)
+        resetTimerButton = findViewById(R.id.buttonStopWatchReset)
+
         setRecord()
+        setInfusions()
+
         setBackButton()
         setOnBackPressedCallback()
+
         setHeader()
-        setStopWatch()
+
+        setTimer()
+        setTimerText()
+        setTimerButtons()
+
         setInfusionCounter()
         setRatioCalculator()
     }
@@ -91,6 +110,14 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         infusionsPrefKey = "infusions_${recordIndex}"
     }
 
+    private fun setInfusions() {
+        infusions = preferences.getInt(infusionsPrefKey, 0)
+
+        if (infusions == 0) {
+            infusions = record.getInfusions()
+        }
+    }
+
     private fun setHeader() {
         val textRecordName: TextView = findViewById(R.id.textRecordName)
         val textRecordSummary: TextView = findViewById(R.id.textRecordSummary)
@@ -99,8 +126,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         textRecordSummary.text = record.detailsFormatted()
     }
 
-    private fun setOnBackPressedCallback()
-    {
+    private fun setOnBackPressedCallback() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 backToMainActivity()
@@ -123,15 +149,31 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         finish()
     }
 
-    private fun setStopWatch() {
-        textViewStopWatch = findViewById(R.id.textViewStopWatch)
+    private fun setTimerText() {
+        if (infusions > 0) {
+            var seconds = record.getTime()
+            val adjustments = record.getAdjustments()
+            if (adjustments.isNotEmpty() && infusions < record.getInfusions() && infusions > 0) {
+                seconds += adjustments[record.getInfusions() - infusions - 1].seconds
+            }
 
-        textViewStopWatch.text = formatTime(record.getTime())
+            textViewStopWatch.text = formatTime(seconds)
+        } else {
+            textViewStopWatch.text = getString(R.string.default_stopwatch_value)
+        }
+    }
 
-        timer = CustomCountdownTimer(record.getTime() * 1000, 1000, this)
+    private fun setTimer() {
+        val adjustments = record.getAdjustments()
+        var seconds = record.getTime()
+        if (adjustments.isNotEmpty() && infusions < record.getInfusions() && infusions > 0) {
+            seconds += adjustments[record.getInfusions() - infusions - 1].seconds
+        }
 
-        buttonStartStop = findViewById(R.id.buttonStopWatchStartStop)
+        timer = CustomCountdownTimer(seconds * 1000, 1000, this)
+    }
 
+    private fun setTimerButtons() {
         buttonStartStop.setOnClickListener {
             if (timer.isRunning()) {
                 timer.pause()
@@ -139,20 +181,36 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
             } else {
 
                 if (infusions <= 0) {
-                    Toast.makeText(this@RecordActivity, R.string.no_infusions_left, Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this@RecordActivity,
+                        R.string.no_infusions_left,
+                        Toast.LENGTH_LONG
+                    ).show()
                     return@setOnClickListener
                 }
 
                 timer.start()
                 buttonStartStop.text = getString(R.string.pause)
+
+                minusOneButton.isEnabled = false
+                plusOneButton.isEnabled = false
+                resetInfusionsButton.isEnabled = false
             }
         }
 
-        val buttonReset: Button = findViewById(R.id.buttonStopWatchReset)
+        resetTimerButton.setOnClickListener {
+            if (infusions <= 0) {
+                Toast.makeText(this@RecordActivity, R.string.no_infusions_left, Toast.LENGTH_LONG)
+                    .show()
+                return@setOnClickListener
+            }
 
-        buttonReset.setOnClickListener {
             timer.reset()
             buttonStartStop.text = getString(R.string.start)
+
+            minusOneButton.isEnabled = true
+            plusOneButton.isEnabled = true
+            resetInfusionsButton.isEnabled = true
         }
     }
 
@@ -169,13 +227,23 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
     override fun onTimerFinished() {
         buttonStartStop.text = getString(R.string.start)
-        timer.reset()
+
+        plusOneButton.isEnabled = true
+        minusOneButton.isEnabled = true
+        resetInfusionsButton.isEnabled = true
+
         removeOneInfusion()
+
+        if (infusions > 0) {
+            setTimer()
+            setTimerText()
+        }
 
         if (!isAppInForeground(this@RecordActivity)) {
             showPushNotification()
         } else {
-            Toast.makeText(this@RecordActivity, R.string.your_tea_is_ready, Toast.LENGTH_LONG).show()
+            Toast.makeText(this@RecordActivity, R.string.your_tea_is_ready, Toast.LENGTH_LONG)
+                .show()
             mediaPlayer.start()
         }
     }
@@ -217,16 +285,20 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
                 getString(R.string.notification_channel_name),
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-            .apply {
-                description = getString(R.string.notification_channel_description)
-                enableLights(true)
-                lightColor = R.color.green_tea_darker
+                .apply {
+                    description = getString(R.string.notification_channel_description)
+                    enableLights(true)
+                    lightColor = R.color.green_tea_darker
 
-                // Enable custom notification sound
-                setSound(Uri.parse("android.resource://${packageName}/${R.raw.flute_shot}"), null)
-            }
+                    // Enable custom notification sound
+                    setSound(
+                        Uri.parse("android.resource://${packageName}/${R.raw.flute_shot}"),
+                        null
+                    )
+                }
 
-            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val notificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
@@ -246,34 +318,29 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     }
 
     private fun setInfusionCounter() {
-        infusions = preferences.getInt(infusionsPrefKey, 0)
-
-        if (infusions == 0) {
-            infusions = record.getInfusions()
-        }
-
-        textViewInfusionsCounter = findViewById(R.id.textViewCounter)
-        updateInfusionCounterText()
-
-        val plusOneButton: Button = findViewById(R.id.buttonCounterPlusOne)
-        val minusOneButton: Button = findViewById(R.id.buttonCounterMinusOne)
-        val resetButton: Button = findViewById(R.id.buttonCounterReset)
+        updateInfusionsText()
 
         plusOneButton.setOnClickListener {
             if (infusions >= record.getInfusions())
                 return@setOnClickListener
 
             infusions++
-            updateInfusionCounterText()
+            updateInfusionsText()
+            setTimer()
+            setTimerText()
         }
 
         minusOneButton.setOnClickListener {
             removeOneInfusion()
+            setTimer()
+            setTimerText()
         }
 
-        resetButton.setOnClickListener {
+        resetInfusionsButton.setOnClickListener {
             infusions = record.getInfusions()
-            updateInfusionCounterText()
+            updateInfusionsText()
+            setTimer()
+            setTimerText()
         }
     }
 
@@ -282,10 +349,10 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
             return
 
         infusions--
-        updateInfusionCounterText()
+        updateInfusionsText()
     }
 
-    private fun updateInfusionCounterText() {
+    private fun updateInfusionsText() {
         textViewInfusionsCounter.text = infusions.toString()
     }
 
@@ -293,8 +360,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         val editTextGrams: EditText = findViewById(R.id.editTextGrams)
         val editTextMillis: EditText = findViewById(R.id.editTextMillis)
 
-        fun resetValues()
-        {
+        fun resetValues() {
             editTextGrams.setText(String.format("%.1f", record.getGrams()))
             editTextMillis.setText(record.getMilliliters().toString())
         }
@@ -347,7 +413,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
         val buttonResetRatio: Button = findViewById(R.id.buttonRatioReset)
         buttonResetRatio.setOnClickListener {
-            gramsTextChangedByUser =  true
+            gramsTextChangedByUser = true
             millisTextChangedByUser = true
             resetValues()
             gramsTextChangedByUser = false

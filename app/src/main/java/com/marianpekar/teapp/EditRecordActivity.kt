@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class EditRecordActivity : AppCompatActivity() {
 
@@ -28,6 +30,10 @@ class EditRecordActivity : AppCompatActivity() {
     private lateinit var editTextGrams: EditText
     private lateinit var editTextMillis: EditText
 
+    private lateinit var recyclerAdjustments: RecyclerView
+    private lateinit var adapterAdjustments : AdjustmentsAdapter
+    private var adjustments : MutableList<Adjustment> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,7 +44,7 @@ class EditRecordActivity : AppCompatActivity() {
             insets
         }
 
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         records = RecordsStorage(this@EditRecordActivity)
 
@@ -50,7 +56,15 @@ class EditRecordActivity : AppCompatActivity() {
         editTextInfusions = findViewById(R.id.editTextCounter)
         editTextTemperature = findViewById(R.id.editTextTemperature)
 
+        recyclerAdjustments = findViewById(R.id.recyclerTimeAdjustments)
+        recyclerAdjustments.layoutManager = LinearLayoutManager(this@EditRecordActivity)
+
+        editTextInfusions = findViewById(R.id.editTextCounter)
+
         setRecord()
+
+        setAdjustmentsRecycler()
+
         setEditTexts()
         setBackButton()
         setSecondsEditText()
@@ -59,6 +73,11 @@ class EditRecordActivity : AppCompatActivity() {
         setInfusionConvenientButtons()
         setTemperatureConvenientButtons()
         setDeleteButton()
+    }
+
+    private fun setAdjustmentsRecycler() {
+        adapterAdjustments = AdjustmentsAdapter(adjustments, this@EditRecordActivity)
+        recyclerAdjustments.adapter = adapterAdjustments
     }
 
     private fun setSecondsEditText() {
@@ -78,6 +97,7 @@ class EditRecordActivity : AppCompatActivity() {
         }
 
         record = RecordsStorage(this@EditRecordActivity).getRecord(recordIndex)
+        adjustments = record.getAdjustments().toMutableList()
     }
 
     private fun setEditTexts() {
@@ -92,7 +112,27 @@ class EditRecordActivity : AppCompatActivity() {
 
         editTextGrams.setText(record.getGrams().toString())
         editTextMillis.setText(record.getMilliliters().toString())
+
         editTextInfusions.setText(record.getInfusions().toString())
+        editTextInfusions.addTextChangedListener {
+            adjustments.clear()
+
+            val infusionsText = editTextInfusions.text.toString()
+            val infusions = if (infusionsText.isNotEmpty()) infusionsText.toInt() else 0
+
+            if (infusions >= 2)
+            {
+                var i = 0
+                while (i < infusions - 1)
+                {
+                    adjustments.add(Adjustment(0))
+                    i++
+                }
+            }
+
+            setAdjustmentsRecycler()
+        }
+
         editTextTemperature.setText(record.getTemperature().toString())
     }
 
@@ -138,7 +178,7 @@ class EditRecordActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions))
+            records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions, adjustments))
 
             Toast.makeText(this@EditRecordActivity, R.string.record_saved, Toast.LENGTH_LONG).show()
 

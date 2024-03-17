@@ -6,7 +6,8 @@ class Record(
     private val milliliters: Int,
     private val temperature: Int,
     private val seconds: Long,
-    private val infusions: Int
+    private val infusions: Int,
+    private val adjustments: List<Adjustment>
 ) {
 
     fun detailsFormatted(): String {
@@ -46,5 +47,9 @@ class Record(
 
     fun getTemperature(): Int {
         return temperature
+    }
+
+    fun getAdjustments(): List<Adjustment> {
+        return adjustments
     }
 }

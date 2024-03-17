@@ -11,14 +11,15 @@ class CustomCountdownTimer(
     private var remainingTimeMillis: Long = initialTimeMillis
     private lateinit var countDownTimer: CountDownTimer
     private var isRunning: Boolean = false
+    private var remainingTimeMillisWhenPaused: Long = initialTimeMillis
+
+    init {
+        setupCountDownTimer()
+    }
 
     interface OnChangeHandler {
         fun onTimeChanged(remainingTimeMillis: Long)
         fun onTimerFinished()
-    }
-
-    init {
-        setupCountDownTimer()
     }
 
     private fun setupCountDownTimer() {
@@ -35,21 +36,25 @@ class CustomCountdownTimer(
     }
 
     fun start() {
+        remainingTimeMillis = remainingTimeMillisWhenPaused
+        setupCountDownTimer()
         countDownTimer.start()
         isRunning = true
     }
 
     fun pause() {
+        remainingTimeMillisWhenPaused = remainingTimeMillis
         countDownTimer.cancel()
         isRunning = false
     }
 
     fun reset() {
-        countDownTimer.cancel()
         remainingTimeMillis = initialTimeMillis
+        remainingTimeMillisWhenPaused = initialTimeMillis
         onChangeHandler.onTimeChanged(remainingTimeMillis)
-        isRunning = false
+        countDownTimer.cancel()
         setupCountDownTimer()
+        isRunning = false
     }
 
     fun isRunning(): Boolean {
