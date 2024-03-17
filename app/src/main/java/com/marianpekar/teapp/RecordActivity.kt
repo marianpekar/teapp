@@ -58,6 +58,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
             insets
         }
 
+        stopService(Intent(this, NotificationService::class.java))
+
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         mediaPlayer = MediaPlayer.create(this@RecordActivity, R.raw.flute_shot)
