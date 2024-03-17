@@ -123,7 +123,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         val textRecordSummary: TextView = findViewById(R.id.textRecordSummary)
 
         textRecordName.text = record.getName()
-        textRecordSummary.text = record.detailsFormatted()
+        textRecordSummary.text = record.summaryWithAdjustmentsFormatted()
     }
 
     private fun setOnBackPressedCallback() {

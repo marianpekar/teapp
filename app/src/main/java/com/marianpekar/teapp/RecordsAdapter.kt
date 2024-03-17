@@ -29,7 +29,7 @@ class RecordsAdapter(
     override fun onBindViewHolder(holder: RecordsViewHolder, position: Int) {
         val record = records[position]
         holder.textRecordName.text = record.getName()
-        holder.textRecordSummary.text = record.detailsFormatted()
+        holder.textRecordSummary.text = record.summaryFormatted()
 
         holder.imageButtonCup.setOnClickListener {
             val intent = Intent(context, RecordActivity::class.java)

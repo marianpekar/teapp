@@ -10,8 +10,22 @@ class Record(
     private val adjustments: List<Adjustment>
 ) {
 
-    fun detailsFormatted(): String {
+    fun summaryFormatted(): String {
         return "${grams}g | ${milliliters}ml | ${temperature}° | ${timeFormatted()} | ${infusions}x"
+    }
+
+    fun summaryWithAdjustmentsFormatted(): String {
+
+        for (adjustment in adjustments) {
+            if (adjustment.seconds <= 0)
+                continue
+
+            var summary = "${grams}g | ${milliliters}ml | ${temperature}° | ${timeFormatted()}"
+            adjustments.forEach { it -> summary += it.getSecondsAdjustmentFormatted()}
+            return summary
+        }
+
+        return summaryFormatted()
     }
 
     private fun timeFormatted(): String {

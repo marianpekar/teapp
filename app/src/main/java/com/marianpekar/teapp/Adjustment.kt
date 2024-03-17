@@ -7,7 +7,7 @@ class Adjustment(
 
     fun getSecondsAdjustmentFormatted(): String {
         if (seconds == 0L)
-            return "0s"
+            return " 0s"
 
         return " ${if (seconds >= 0) "+" else "-"}${seconds}s"
     }
