@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,7 @@ class AdjustmentsAdapter(
     class AdjustmentsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val editTextMinutes: EditText = itemView.findViewById(R.id.editTextMinutes)
         val editTextSeconds: EditText = itemView.findViewById(R.id.editTextSeconds)
+        val buttonFlipSign: Button = itemView.findViewById(R.id.buttonFlipSign)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdjustmentsViewHolder {
@@ -32,6 +34,8 @@ class AdjustmentsAdapter(
         holder.editTextMinutes.setText(minutes.toString())
         holder.editTextSeconds.setText(String.format("%02d", remainingSeconds))
 
+        holder.buttonFlipSign.text = if (adjustments[position].getIsNegative()) "-" else "+"
+
         val secondsTextWatcher = SecondsTextWatcher(holder.editTextSeconds)
         holder.editTextSeconds.addTextChangedListener(secondsTextWatcher)
 
@@ -41,6 +45,12 @@ class AdjustmentsAdapter(
 
         holder.editTextSeconds.addTextChangedListener {
             setAdjustment(holder, position)
+        }
+
+        holder.buttonFlipSign.setOnClickListener {
+            adjustments[position].flipSign()
+
+            holder.buttonFlipSign.text = if (adjustments[position].getIsNegative()) "-" else "+"
         }
     }
 

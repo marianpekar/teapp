@@ -154,7 +154,11 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
             var seconds = record.getTime()
             val adjustments = record.getAdjustments()
             if (adjustments.isNotEmpty() && infusions < record.getInfusions() && infusions > 0) {
-                seconds += adjustments[record.getInfusions() - infusions - 1].seconds
+
+                val adjustment = adjustments[record.getInfusions() - infusions - 1]
+                val adjustmentSeconds = if (adjustment.getIsNegative()) adjustment.seconds * -1 else adjustment.seconds
+
+                seconds += adjustmentSeconds
             }
 
             textViewStopWatch.text = formatTime(seconds)
@@ -167,7 +171,11 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         val adjustments = record.getAdjustments()
         var seconds = record.getTime()
         if (adjustments.isNotEmpty() && infusions < record.getInfusions() && infusions > 0) {
-            seconds += adjustments[record.getInfusions() - infusions - 1].seconds
+
+            val adjustment = adjustments[record.getInfusions() - infusions - 1]
+            val adjustmentSeconds = if (adjustment.getIsNegative()) adjustment.seconds * -1 else adjustment.seconds
+
+            seconds += adjustmentSeconds
         }
 
         timer = CustomCountdownTimer(seconds * 1000, 1000, this)

@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/buttonPlusMinus"
+                android:id="@+id/buttonFlipSign"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -30,6 +30,8 @@
                 android:layout_marginEnd="5dp"
                 android:padding="8dp"
                 android:text="+"
+                android:textColor="@color/default_text_on_light"
+                android:textSize="24sp"
                 tools:ignore="HardcodedText" />
 
             <EditText
