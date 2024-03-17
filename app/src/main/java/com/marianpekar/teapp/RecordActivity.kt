@@ -168,10 +168,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         timer = CustomCountdownTimer(record.getSecondsAdjusted(infusions) * 1000, 1000, this)
     }
 
-    private fun shouldAdjustTimer(adjustments: List<Adjustment>) : Boolean {
-        return adjustments.isNotEmpty() && infusions < record.getInfusions() && infusions > 0
-    }
-
     private fun setTimerButtons() {
         buttonStartStop.setOnClickListener {
             if (timer.isRunning()) {
