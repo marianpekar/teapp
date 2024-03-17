@@ -49,6 +49,7 @@ class AddRecordActivity : AppCompatActivity() {
         }
 
         editTextTemperature = findViewById(R.id.editTextTemperature)
+        editTextTemperature.setupClearOnFocusBehavior()
 
         setBackButton()
         setAddRecordButton()
@@ -92,14 +93,22 @@ class AddRecordActivity : AppCompatActivity() {
 
     private fun setAddRecordButton() {
         val editTextName: EditText = findViewById(R.id.editTextRecordName)
+        editTextName.setupClearOnFocusBehavior()
+
         val editTextMinutes: EditText = findViewById(R.id.editTextMinutes)
+        editTextMinutes.setupClearOnFocusBehavior()
 
         val editTextSeconds: EditText = findViewById(R.id.editTextSeconds)
+        editTextSeconds.setupClearOnFocusBehavior()
+
         val secondsTextWatcher = SecondsTextWatcher(editTextSeconds)
         editTextSeconds.addTextChangedListener(secondsTextWatcher)
 
         val editTextGrams: EditText = findViewById(R.id.editTextGrams)
+        editTextGrams.setupClearOnFocusBehavior()
+
         val editTextMillis: EditText = findViewById(R.id.editTextMillis)
+        editTextMillis.setupClearOnFocusBehavior()
 
         val buttonAddRecord: Button = findViewById(R.id.buttonSaveRecord)
 

@@ -31,6 +31,9 @@ class AdjustmentsAdapter(
         val minutes =  totalSeconds / 60
         val remainingSeconds = totalSeconds % 60
 
+        holder.editTextMinutes.setupClearOnFocusBehavior()
+        holder.editTextSeconds.setupClearOnFocusBehavior()
+
         holder.editTextMinutes.setText(minutes.toString())
         holder.editTextSeconds.setText(String.format("%02d", remainingSeconds))
 

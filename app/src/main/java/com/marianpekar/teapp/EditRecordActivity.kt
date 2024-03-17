@@ -48,18 +48,7 @@ class EditRecordActivity : AppCompatActivity() {
 
         records = RecordsStorage(this@EditRecordActivity)
 
-        editTextName = findViewById(R.id.editTextRecordName)
-        editTextMinutes = findViewById(R.id.editTextMinutes)
-        editTextSeconds = findViewById(R.id.editTextSeconds)
-        editTextGrams = findViewById(R.id.editTextGrams)
-        editTextMillis = findViewById(R.id.editTextMillis)
-        editTextInfusions = findViewById(R.id.editTextCounter)
-        editTextTemperature = findViewById(R.id.editTextTemperature)
-
-        recyclerAdjustments = findViewById(R.id.recyclerTimeAdjustments)
-        recyclerAdjustments.layoutManager = LinearLayoutManager(this@EditRecordActivity)
-
-        editTextInfusions = findViewById(R.id.editTextCounter)
+        setUiReferences()
 
         setRecord()
 
@@ -73,6 +62,36 @@ class EditRecordActivity : AppCompatActivity() {
         setInfusionConvenientButtons()
         setTemperatureConvenientButtons()
         setDeleteButton()
+    }
+
+    private fun setUiReferences()
+    {
+        editTextName = findViewById(R.id.editTextRecordName)
+        editTextName.setupClearOnFocusBehavior()
+
+        editTextMinutes = findViewById(R.id.editTextMinutes)
+        editTextMinutes.setupClearOnFocusBehavior()
+
+        editTextSeconds = findViewById(R.id.editTextSeconds)
+        editTextSeconds.setupClearOnFocusBehavior()
+
+        editTextGrams = findViewById(R.id.editTextGrams)
+        editTextGrams.setupClearOnFocusBehavior()
+
+        editTextMillis = findViewById(R.id.editTextMillis)
+        editTextMillis.setupClearOnFocusBehavior()
+
+        editTextInfusions = findViewById(R.id.editTextCounter)
+        editTextInfusions.setupClearOnFocusBehavior()
+
+        editTextTemperature = findViewById(R.id.editTextTemperature)
+        editTextTemperature.setupClearOnFocusBehavior()
+
+        editTextInfusions = findViewById(R.id.editTextCounter)
+        editTextInfusions.setupClearOnFocusBehavior()
+
+        recyclerAdjustments = findViewById(R.id.recyclerTimeAdjustments)
+        recyclerAdjustments.layoutManager = LinearLayoutManager(this@EditRecordActivity)
     }
 
     private fun setAdjustmentsRecycler() {

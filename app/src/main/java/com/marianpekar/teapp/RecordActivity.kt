@@ -40,6 +40,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private lateinit var minusOneButton: Button
     private lateinit var resetInfusionsButton: Button
     private lateinit var resetTimerButton: Button
+    private lateinit var editTextGrams: EditText
+    private lateinit var editTextMillis: EditText
 
     private lateinit var textViewInfusionsCounter: TextView
     private var infusions: Int = 0
@@ -92,6 +94,12 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         minusOneButton = findViewById(R.id.buttonCounterMinusOne)
         resetInfusionsButton = findViewById(R.id.buttonCounterReset)
         resetTimerButton = findViewById(R.id.buttonStopWatchReset)
+
+        editTextGrams = findViewById(R.id.editTextGrams)
+        editTextGrams.setupClearOnFocusBehavior()
+
+        editTextMillis = findViewById(R.id.editTextMillis)
+        editTextMillis.setupClearOnFocusBehavior()
     }
 
     override fun onDestroy() {
@@ -353,8 +361,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     }
 
     private fun setRatioCalculator() {
-        val editTextGrams: EditText = findViewById(R.id.editTextGrams)
-        val editTextMillis: EditText = findViewById(R.id.editTextMillis)
+
 
         fun resetValues() {
             editTextGrams.setText(String.format("%.1f", record.getGrams()))
