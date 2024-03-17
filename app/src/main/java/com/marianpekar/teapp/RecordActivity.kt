@@ -1,16 +1,10 @@
 package com.marianpekar.teapp
 
-import android.Manifest
 import android.app.ActivityManager
-import android.app.NotificationChannel
-import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.pm.PackageManager
 import android.media.MediaPlayer
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
@@ -21,9 +15,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
@@ -47,7 +39,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private var infusions: Int = 0
 
     private lateinit var mediaPlayer: MediaPlayer
-    private val notificationChannelId: String = "teapp_notification_channel_id"
 
     private lateinit var preferences: SharedPreferences
     private lateinit var infusionsPrefKey: String
@@ -238,7 +229,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         }
 
         if (!isAppInForeground(this@RecordActivity)) {
-            showPushNotification()
+            val serviceIntent = Intent(this@RecordActivity, NotificationService::class.java)
+            ContextCompat.startForegroundService(this@RecordActivity, serviceIntent)
         } else {
             Toast.makeText(this@RecordActivity, R.string.your_tea_is_ready, Toast.LENGTH_LONG)
                 .show()
@@ -260,60 +252,6 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         resetInfusionsButton.isEnabled = value
     }
 
-    private fun showPushNotification() {
-        createNotificationChannel()
-
-        val notification = NotificationCompat.Builder(this@RecordActivity, notificationChannelId)
-            .setSmallIcon(R.drawable.teacup)
-            .setContentTitle(getString(R.string.app_name))
-            .setContentText(getString(R.string.your_tea_is_ready))
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .build()
-
-        with(NotificationManagerCompat.from(this@RecordActivity)) {
-            if (ActivityCompat.checkSelfPermission(
-                    this@RecordActivity,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return
-            }
-
-            notify(R.integer.notification_id, notification)
-        }
-    }
-
-    private fun createNotificationChannel() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                notificationChannelId,
-                getString(R.string.notification_channel_name),
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-                .apply {
-                    description = getString(R.string.notification_channel_description)
-                    enableLights(true)
-                    lightColor = R.color.green_tea_darker
-
-                    // Enable custom notification sound
-                    setSound(
-                        Uri.parse("android.resource://${packageName}/${R.raw.flute_shot}"),
-                        null
-                    )
-                }
-
-            val notificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
-        }
-    }
 
     private fun isAppInForeground(context: Context): Boolean {
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
