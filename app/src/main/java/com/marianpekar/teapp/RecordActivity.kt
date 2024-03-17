@@ -4,8 +4,12 @@ import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.media.AudioManager
 import android.media.MediaPlayer
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
@@ -229,12 +233,42 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         }
 
         if (!isAppInForeground(this@RecordActivity)) {
-            val serviceIntent = Intent(this@RecordActivity, NotificationService::class.java)
-            ContextCompat.startForegroundService(this@RecordActivity, serviceIntent)
+            pushNotification()
         } else {
-            Toast.makeText(this@RecordActivity, R.string.your_tea_is_ready, Toast.LENGTH_LONG)
-                .show()
+            Toast.makeText(this@RecordActivity, R.string.your_tea_is_ready, Toast.LENGTH_LONG).show()
+            playSoundOrVibrate()
+        }
+    }
+
+    private fun pushNotification() {
+        val serviceIntent = Intent(this@RecordActivity, NotificationService::class.java)
+        ContextCompat.startForegroundService(this@RecordActivity, serviceIntent)
+    }
+
+    private fun playSoundOrVibrate() {
+        val audioManager = this@RecordActivity.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        val currentVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC)
+
+        if (currentVolume == 0) {
+            vibrate()
+        } else {
             mediaPlayer.start()
+        }
+    }
+
+    private fun vibrate() {
+        val duration = 1000L
+        val vibrator = getSystemService(Vibrator::class.java)
+
+        if (vibrator.hasVibrator()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                // For Android 8.0 (API level 26) and above
+                vibrator.vibrate(VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                // For devices below Android 8.0
+                @Suppress("DEPRECATION")
+                vibrator.vibrate(duration)
+            }
         }
     }
 
