@@ -48,65 +48,15 @@ class EditRecordActivity : AppCompatActivity() {
 
         records = RecordsStorage(this@EditRecordActivity)
 
-        setUiReferences()
-
         setRecord()
-
+        setUiReferences()
         setAdjustmentsRecycler()
-
         setEditTexts()
         setBackButton()
-        setSecondsEditText()
-        setTemperatureEditText()
         setSaveRecordButton()
         setInfusionConvenientButtons()
         setTemperatureConvenientButtons()
         setDeleteButton()
-    }
-
-    private fun setUiReferences()
-    {
-        editTextName = findViewById(R.id.editTextRecordName)
-        editTextName.setupClearOnFocusBehavior()
-
-        editTextMinutes = findViewById(R.id.editTextMinutes)
-        editTextMinutes.setupClearOnFocusBehavior()
-
-        editTextSeconds = findViewById(R.id.editTextSeconds)
-        editTextSeconds.setupClearOnFocusBehavior()
-
-        editTextGrams = findViewById(R.id.editTextGrams)
-        editTextGrams.setupClearOnFocusBehavior()
-
-        editTextMillis = findViewById(R.id.editTextMillis)
-        editTextMillis.setupClearOnFocusBehavior()
-
-        editTextInfusions = findViewById(R.id.editTextCounter)
-        editTextInfusions.setupClearOnFocusBehavior()
-
-        editTextTemperature = findViewById(R.id.editTextTemperature)
-        editTextTemperature.setupClearOnFocusBehavior()
-
-        editTextInfusions = findViewById(R.id.editTextCounter)
-        editTextInfusions.setupClearOnFocusBehavior()
-
-        recyclerAdjustments = findViewById(R.id.recyclerTimeAdjustments)
-        recyclerAdjustments.layoutManager = LinearLayoutManager(this@EditRecordActivity)
-    }
-
-    private fun setAdjustmentsRecycler() {
-        adapterAdjustments = AdjustmentsAdapter(adjustments, this@EditRecordActivity)
-        recyclerAdjustments.adapter = adapterAdjustments
-    }
-
-    private fun setSecondsEditText() {
-        val secondsTextWatcher = SecondsTextWatcher(editTextSeconds)
-        editTextSeconds.addTextChangedListener(secondsTextWatcher)
-    }
-
-    private fun setTemperatureEditText() {
-        val temperatureTextWatcher = TemperatureTextWatcher(editTextTemperature)
-        editTextTemperature.addTextChangedListener(temperatureTextWatcher)
     }
 
     private fun setRecord() {
@@ -119,6 +69,41 @@ class EditRecordActivity : AppCompatActivity() {
         adjustments = record.getAdjustments().toMutableList()
     }
 
+    private fun setUiReferences()
+    {
+        editTextName = findViewById(R.id.editTextRecordName)
+        editTextName.setupClearOnFocusBehavior()
+
+        editTextMinutes = findViewById(R.id.editTextMinutes)
+        editTextMinutes.addTextChangedListener(MaxNumberTextWatcher(editTextMinutes, 99))
+        editTextMinutes.setupClearOnFocusBehavior()
+
+        editTextSeconds = findViewById(R.id.editTextSeconds)
+        editTextSeconds.addTextChangedListener(SecondsTextWatcher(editTextSeconds))
+        editTextSeconds.setupClearOnFocusBehavior()
+
+        editTextGrams = findViewById(R.id.editTextGrams)
+        editTextGrams.setupClearOnFocusBehavior()
+
+        editTextMillis = findViewById(R.id.editTextMillis)
+        editTextMillis.setupClearOnFocusBehavior()
+
+        editTextInfusions = findViewById(R.id.editTextCounter)
+        editTextInfusions.addTextChangedListener(MaxNumberTextWatcher(editTextInfusions, 99))
+        editTextInfusions.setupClearOnFocusBehavior()
+
+        editTextTemperature = findViewById(R.id.editTextTemperature)
+        editTextTemperature.addTextChangedListener(MaxNumberTextWatcher(editTextTemperature, 100))
+        editTextTemperature.setupClearOnFocusBehavior()
+    }
+
+    private fun setAdjustmentsRecycler() {
+        recyclerAdjustments = findViewById(R.id.recyclerTimeAdjustments)
+        recyclerAdjustments.layoutManager = LinearLayoutManager(this@EditRecordActivity)
+        adapterAdjustments = AdjustmentsAdapter(adjustments, this@EditRecordActivity)
+        recyclerAdjustments.adapter = adapterAdjustments
+    }
+
     private fun setEditTexts() {
         editTextName.setText(record.getName())
 
@@ -127,6 +112,7 @@ class EditRecordActivity : AppCompatActivity() {
         val remainingSeconds = totalSeconds % 60
 
         editTextMinutes.setText(minutes.toString())
+
         editTextSeconds.setText(String.format("%02d", remainingSeconds))
 
         editTextGrams.setText(record.getGrams().toString())
@@ -165,8 +151,6 @@ class EditRecordActivity : AppCompatActivity() {
 
         editTextTemperature.setText(record.getTemperature().toString())
     }
-
-
 
     private fun setBackButton() {
         val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)

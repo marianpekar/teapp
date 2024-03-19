@@ -19,6 +19,11 @@ class AddRecordActivity : AppCompatActivity() {
 
     private lateinit var records : RecordsStorage
 
+    private lateinit var editTextName: EditText
+    private lateinit var editTextMinutes: EditText
+    private lateinit var editTextSeconds: EditText
+    private lateinit var editTextGrams: EditText
+    private lateinit var editTextMillis: EditText
     private lateinit var editTextInfusions: EditText
     private lateinit var editTextTemperature: EditText
 
@@ -40,22 +45,51 @@ class AddRecordActivity : AppCompatActivity() {
 
         records = RecordsStorage(this@AddRecordActivity)
 
+        setUiReferences()
+        setBackButton()
+        setAddRecordButton()
+        setInfusionConvenientButtons()
+        setTemperatureConvenientButtons()
+    }
+
+
+    private fun setBackButton() {
+        val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
+        imageButtonLeftArrow.setOnClickListener {
+            backToMainActivity()
+        }
+    }
+
+    private fun setUiReferences() {
         recyclerAdjustments = findViewById(R.id.recyclerTimeAdjustments)
         recyclerAdjustments.layoutManager = LinearLayoutManager(this@AddRecordActivity)
 
         editTextInfusions = findViewById(R.id.editTextCounter)
+        editTextInfusions.addTextChangedListener(MaxNumberTextWatcher(editTextInfusions, 99))
         editTextInfusions.addTextChangedListener {
             setAdjustmentsRecycler()
         }
 
         editTextTemperature = findViewById(R.id.editTextTemperature)
+        editTextTemperature.addTextChangedListener(MaxNumberTextWatcher(editTextTemperature, 100))
         editTextTemperature.setupClearOnFocusBehavior()
 
-        setBackButton()
-        setAddRecordButton()
-        setInfusionConvenientButtons()
-        setTemperatureConvenientButtons()
-        setTemperatureEditText()
+        editTextName = findViewById(R.id.editTextRecordName)
+        editTextName.setupClearOnFocusBehavior()
+
+        editTextMinutes = findViewById(R.id.editTextMinutes)
+        editTextMinutes.addTextChangedListener(MaxNumberTextWatcher(editTextMinutes, 99))
+        editTextMinutes.setupClearOnFocusBehavior()
+
+        editTextSeconds = findViewById(R.id.editTextSeconds)
+        editTextSeconds.addTextChangedListener(SecondsTextWatcher(editTextSeconds))
+        editTextSeconds.setupClearOnFocusBehavior()
+
+        editTextGrams = findViewById(R.id.editTextGrams)
+        editTextGrams.setupClearOnFocusBehavior()
+
+        editTextMillis = findViewById(R.id.editTextMillis)
+        editTextMillis.setupClearOnFocusBehavior()
     }
 
     private fun setAdjustmentsRecycler() {
@@ -89,37 +123,7 @@ class AddRecordActivity : AppCompatActivity() {
         recyclerAdjustments.adapter = adapterAdjustments
     }
 
-    private fun setTemperatureEditText() {
-        val temperatureTextWatcher = TemperatureTextWatcher(editTextTemperature)
-        editTextTemperature.addTextChangedListener(temperatureTextWatcher)
-    }
-
-    private fun setBackButton() {
-        val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
-        imageButtonLeftArrow.setOnClickListener {
-            backToMainActivity()
-        }
-    }
-
     private fun setAddRecordButton() {
-        val editTextName: EditText = findViewById(R.id.editTextRecordName)
-        editTextName.setupClearOnFocusBehavior()
-
-        val editTextMinutes: EditText = findViewById(R.id.editTextMinutes)
-        editTextMinutes.setupClearOnFocusBehavior()
-
-        val editTextSeconds: EditText = findViewById(R.id.editTextSeconds)
-        editTextSeconds.setupClearOnFocusBehavior()
-
-        val secondsTextWatcher = SecondsTextWatcher(editTextSeconds)
-        editTextSeconds.addTextChangedListener(secondsTextWatcher)
-
-        val editTextGrams: EditText = findViewById(R.id.editTextGrams)
-        editTextGrams.setupClearOnFocusBehavior()
-
-        val editTextMillis: EditText = findViewById(R.id.editTextMillis)
-        editTextMillis.setupClearOnFocusBehavior()
-
         val buttonAddRecord: Button = findViewById(R.id.buttonSaveRecord)
 
         buttonAddRecord.setOnClickListener {

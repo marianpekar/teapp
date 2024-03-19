@@ -4,7 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 
-class TemperatureTextWatcher(private val editText: EditText) : TextWatcher {
+class MaxNumberTextWatcher(private val editText: EditText, private val maxNumber: Int) : TextWatcher {
     override fun afterTextChanged(editable: Editable?) {
         editable?.let {
             val input = it.toString()
@@ -13,7 +13,7 @@ class TemperatureTextWatcher(private val editText: EditText) : TextWatcher {
                 val number = input.toInt()
 
                 val formattedNumber = when {
-                    number > 100 -> "100"
+                    number > maxNumber -> maxNumber.toString()
                     else -> number.toString()
                 }
 

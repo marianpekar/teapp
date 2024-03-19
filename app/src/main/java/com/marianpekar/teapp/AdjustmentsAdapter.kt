@@ -39,8 +39,8 @@ class AdjustmentsAdapter(
 
         holder.buttonFlipSign.text = if (adjustments[position].getIsNegative()) "-" else "+"
 
-        val secondsTextWatcher = SecondsTextWatcher(holder.editTextSeconds)
-        holder.editTextSeconds.addTextChangedListener(secondsTextWatcher)
+        holder.editTextMinutes.addTextChangedListener(MaxNumberTextWatcher(holder.editTextMinutes, 99))
+        holder.editTextSeconds.addTextChangedListener(SecondsTextWatcher(holder.editTextSeconds))
 
         holder.editTextMinutes.addTextChangedListener {
             setAdjustment(holder, position)
