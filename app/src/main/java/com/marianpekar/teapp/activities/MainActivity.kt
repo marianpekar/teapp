@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.marianpekar.teapp.R
+import com.marianpekar.teapp.adapters.RecordsAdapter
+import com.marianpekar.teapp.data.RecordsStorage
 
 class MainActivity : AppCompatActivity() {
 

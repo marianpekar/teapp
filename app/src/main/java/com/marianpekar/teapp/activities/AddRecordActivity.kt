@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.marianpekar.teapp.adapters.AdjustmentsAdapter
+import com.marianpekar.teapp.utilities.MaxNumberTextWatcher
+import com.marianpekar.teapp.R
+import com.marianpekar.teapp.data.RecordsStorage
+import com.marianpekar.teapp.utilities.SecondsTextWatcher
+import com.marianpekar.teapp.data.Adjustment
+import com.marianpekar.teapp.data.Record
+import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
 
 class AddRecordActivity : AppCompatActivity() {
 

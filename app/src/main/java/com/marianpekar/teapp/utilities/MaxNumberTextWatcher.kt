@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.utilities
 
 import android.text.Editable
 import android.text.TextWatcher

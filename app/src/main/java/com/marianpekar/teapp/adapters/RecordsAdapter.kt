@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.marianpekar.teapp.R
+import com.marianpekar.teapp.activities.EditRecordActivity
+import com.marianpekar.teapp.activities.RecordActivity
+import com.marianpekar.teapp.data.Record
 
 class RecordsAdapter(
     private var records: List<Record>,

@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.services
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,6 +10,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import com.marianpekar.teapp.R
+import com.marianpekar.teapp.activities.RecordActivity
 
 class NotificationService : Service() {
 

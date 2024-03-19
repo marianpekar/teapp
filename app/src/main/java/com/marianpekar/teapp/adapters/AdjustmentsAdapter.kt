@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
+import com.marianpekar.teapp.utilities.MaxNumberTextWatcher
+import com.marianpekar.teapp.R
+import com.marianpekar.teapp.utilities.SecondsTextWatcher
+import com.marianpekar.teapp.data.Adjustment
+import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
 
 class AdjustmentsAdapter(
     private var adjustments: List<Adjustment>,

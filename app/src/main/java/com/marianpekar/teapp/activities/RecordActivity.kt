@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.activities
 
 import android.app.ActivityManager
 import android.content.Context
@@ -23,6 +23,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
+import com.marianpekar.teapp.utilities.CustomCountdownTimer
+import com.marianpekar.teapp.R
+import com.marianpekar.teapp.data.RecordsStorage
+import com.marianpekar.teapp.data.Record
+import com.marianpekar.teapp.services.NotificationService
+import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
 
 
 class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler {

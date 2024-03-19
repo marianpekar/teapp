@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.data
 
 import android.content.Context
 import com.google.gson.Gson

@@ -1,4 +1,4 @@
-package com.marianpekar.teapp
+package com.marianpekar.teapp.data
 
 class Adjustment(
     var seconds: Long,
