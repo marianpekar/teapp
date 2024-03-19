@@ -4,7 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 
-class SecondsTextWatcher(private val editText: EditText) : TextWatcher {
+class EditTextWatcherIntegerBoundaries(private val editText: EditText, private val max: Int, private val min: Int = 0) : TextWatcher {
     override fun afterTextChanged(editable: Editable?) {
         editable?.let {
             val input = it.toString()
@@ -13,9 +13,9 @@ class SecondsTextWatcher(private val editText: EditText) : TextWatcher {
                 val number = input.toInt()
 
                 val formattedNumber = when {
-                    number < 10 -> "0$number"
-                    number > 59 -> "59"
-                    else -> String.format("%02d", number)
+                    number > max -> max.toString()
+                    number < min -> min.toString()
+                    else -> number.toString()
                 }
 
                 if (input != formattedNumber) {

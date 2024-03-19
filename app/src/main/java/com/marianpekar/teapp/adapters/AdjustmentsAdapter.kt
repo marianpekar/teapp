@@ -8,9 +8,9 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.RecyclerView
-import com.marianpekar.teapp.utilities.MaxNumberTextWatcher
+import com.marianpekar.teapp.utilities.EditTextWatcherIntegerBoundaries
 import com.marianpekar.teapp.R
-import com.marianpekar.teapp.utilities.SecondsTextWatcher
+import com.marianpekar.teapp.utilities.EditTextWatcherSeconds
 import com.marianpekar.teapp.data.Adjustment
 import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
 
@@ -44,8 +44,8 @@ class AdjustmentsAdapter(
 
         holder.buttonFlipSign.text = if (adjustments[position].getIsNegative()) "-" else "+"
 
-        holder.editTextMinutes.addTextChangedListener(MaxNumberTextWatcher(holder.editTextMinutes, 99))
-        holder.editTextSeconds.addTextChangedListener(SecondsTextWatcher(holder.editTextSeconds))
+        holder.editTextMinutes.addTextChangedListener(EditTextWatcherIntegerBoundaries(holder.editTextMinutes, 99))
+        holder.editTextSeconds.addTextChangedListener(EditTextWatcherSeconds(holder.editTextSeconds))
 
         holder.editTextMinutes.addTextChangedListener {
             setAdjustment(holder, position)

@@ -4,7 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 
-class MaxNumberTextWatcher(private val editText: EditText, private val maxNumber: Int) : TextWatcher {
+class EditTextWatcherSeconds(private val editText: EditText) : TextWatcher {
     override fun afterTextChanged(editable: Editable?) {
         editable?.let {
             val input = it.toString()
@@ -13,8 +13,9 @@ class MaxNumberTextWatcher(private val editText: EditText, private val maxNumber
                 val number = input.toInt()
 
                 val formattedNumber = when {
-                    number > maxNumber -> maxNumber.toString()
-                    else -> number.toString()
+                    number < 10 -> "0$number"
+                    number > 59 -> "59"
+                    else -> String.format("%02d", number)
                 }
 
                 if (input != formattedNumber) {

@@ -15,10 +15,10 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.marianpekar.teapp.adapters.AdjustmentsAdapter
-import com.marianpekar.teapp.utilities.MaxNumberTextWatcher
+import com.marianpekar.teapp.utilities.EditTextWatcherIntegerBoundaries
 import com.marianpekar.teapp.R
 import com.marianpekar.teapp.data.RecordsStorage
-import com.marianpekar.teapp.utilities.SecondsTextWatcher
+import com.marianpekar.teapp.utilities.EditTextWatcherSeconds
 import com.marianpekar.teapp.data.Adjustment
 import com.marianpekar.teapp.data.Record
 import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
@@ -60,7 +60,6 @@ class AddRecordActivity : AppCompatActivity() {
         setTemperatureConvenientButtons()
     }
 
-
     private fun setBackButton() {
         val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
         imageButtonLeftArrow.setOnClickListener {
@@ -73,24 +72,24 @@ class AddRecordActivity : AppCompatActivity() {
         recyclerAdjustments.layoutManager = LinearLayoutManager(this@AddRecordActivity)
 
         editTextInfusions = findViewById(R.id.editTextCounter)
-        editTextInfusions.addTextChangedListener(MaxNumberTextWatcher(editTextInfusions, 99))
+        editTextInfusions.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextInfusions, 99, 1))
         editTextInfusions.addTextChangedListener {
             setAdjustmentsRecycler()
         }
 
         editTextTemperature = findViewById(R.id.editTextTemperature)
-        editTextTemperature.addTextChangedListener(MaxNumberTextWatcher(editTextTemperature, 100))
+        editTextTemperature.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextTemperature, 100))
         editTextTemperature.setupClearOnFocusBehavior()
 
         editTextName = findViewById(R.id.editTextRecordName)
         editTextName.setupClearOnFocusBehavior()
 
         editTextMinutes = findViewById(R.id.editTextMinutes)
-        editTextMinutes.addTextChangedListener(MaxNumberTextWatcher(editTextMinutes, 99))
+        editTextMinutes.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextMinutes, 99))
         editTextMinutes.setupClearOnFocusBehavior()
 
         editTextSeconds = findViewById(R.id.editTextSeconds)
-        editTextSeconds.addTextChangedListener(SecondsTextWatcher(editTextSeconds))
+        editTextSeconds.addTextChangedListener(EditTextWatcherSeconds(editTextSeconds))
         editTextSeconds.setupClearOnFocusBehavior()
 
         editTextGrams = findViewById(R.id.editTextGrams)
@@ -101,11 +100,15 @@ class AddRecordActivity : AppCompatActivity() {
     }
 
     private fun setAdjustmentsRecycler() {
+        val infusionsText = editTextInfusions.text.toString()
+
+        if (infusionsText.isEmpty())
+            return
+
         val currentAdjustments = adjustments.toList()
 
         adjustments.clear()
 
-        val infusionsText = editTextInfusions.text.toString()
         val infusions = if (infusionsText.isNotEmpty()) infusionsText.toInt() else 0
 
         if (infusions >= 2)
