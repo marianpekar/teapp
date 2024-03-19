@@ -21,7 +21,7 @@ class Record(
                 continue
 
             var summary = "${grams}g | ${milliliters}ml | ${temperature}° | ${timeFormatted()}"
-            adjustments.forEach { summary += it.getSecondsAdjustmentFormatted()}
+            adjustments.forEach { summary += it.getSecondsFormatted()}
             return summary
         }
 

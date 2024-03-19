@@ -5,11 +5,11 @@ class Adjustment(
 ) {
     private var isNegative: Boolean = false
 
-    fun getSecondsAdjustmentFormatted(): String {
+    fun getSecondsFormatted(): String {
         if (seconds == 0L)
             return " 0s"
 
-        return " ${if (seconds >= 0) "+" else "-"}${seconds}s"
+        return " ${if (isNegative) "-" else "+"}${seconds}s"
     }
 
     fun flipSign() {
