@@ -59,6 +59,8 @@ class AddRecordActivity : AppCompatActivity() {
     }
 
     private fun setAdjustmentsRecycler() {
+        val currentAdjustments = adjustments.toList()
+
         adjustments.clear()
 
         val infusionsText = editTextInfusions.text.toString()
@@ -69,7 +71,15 @@ class AddRecordActivity : AppCompatActivity() {
             var i = 0
             while (i < infusions - 1)
             {
-                adjustments.add(Adjustment(0))
+                val currentAdjustment = currentAdjustments.getOrNull(i)
+                if (currentAdjustment != null)
+                {
+                    adjustments.add(currentAdjustment)
+                }
+                else
+                {
+                    adjustments.add(Adjustment(0))
+                }
                 i++
             }
         }

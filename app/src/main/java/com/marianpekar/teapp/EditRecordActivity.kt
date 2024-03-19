@@ -134,6 +134,9 @@ class EditRecordActivity : AppCompatActivity() {
 
         editTextInfusions.setText(record.getInfusions().toString())
         editTextInfusions.addTextChangedListener {
+
+            val currentAdjustments = adjustments.toList()
+
             adjustments.clear()
 
             val infusionsText = editTextInfusions.text.toString()
@@ -144,7 +147,15 @@ class EditRecordActivity : AppCompatActivity() {
                 var i = 0
                 while (i < infusions - 1)
                 {
-                    adjustments.add(Adjustment(0))
+                    val currentAdjustment = currentAdjustments.getOrNull(i)
+                    if (currentAdjustment != null)
+                    {
+                        adjustments.add(currentAdjustment)
+                    }
+                    else
+                    {
+                        adjustments.add(Adjustment(0))
+                    }
                     i++
                 }
             }
@@ -154,6 +165,8 @@ class EditRecordActivity : AppCompatActivity() {
 
         editTextTemperature.setText(record.getTemperature().toString())
     }
+
+
 
     private fun setBackButton() {
         val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
