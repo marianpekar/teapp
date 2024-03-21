@@ -169,6 +169,12 @@ class AddRecordActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!records.areAdjustmentsValid(adjustments, seconds))
+            {
+                Toast.makeText(this@AddRecordActivity, R.string.cant_add_adjustment_longer_than_base, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             records.addRecord(Record(name, grams, millis, temperature, totalSeconds, infusions, adapterAdjustments.getAdjustments()))
 
             Toast.makeText(this@AddRecordActivity, R.string.new_record_added, Toast.LENGTH_LONG).show()

@@ -205,6 +205,12 @@ class EditRecordActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            if (!records.areAdjustmentsValid(adjustments, seconds))
+            {
+                Toast.makeText(this@EditRecordActivity, R.string.cant_add_adjustment_longer_than_base, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
             records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions, adjustments))
 
             Toast.makeText(this@EditRecordActivity, R.string.record_saved, Toast.LENGTH_LONG).show()

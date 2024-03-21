@@ -55,6 +55,18 @@ class RecordsStorage(private val context: Context) {
         return name.isNotEmpty() && grams > 0 && millis > 0 && temperature > 0 && seconds > 0 && infusions > 0
     }
 
+    fun areAdjustmentsValid(adjustments: List<Adjustment>, seconds: Long): Boolean {
+        for (adjustment in adjustments) {
+            if (!adjustment.getIsNegative())
+                continue
+
+            if (adjustment.seconds >= seconds)
+                return false
+        }
+
+        return true
+    }
+
     private fun saveRecords() {
         val json = Gson().toJson(records)
 
