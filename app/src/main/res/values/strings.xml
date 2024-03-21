@@ -38,4 +38,6 @@
     <string name="record_removed">Record removed</string>
     <string name="degree_symbol">°</string>
     <string name="cant_add_record_of_existing_name">You already have a record of this name</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="leaving_activity_stops_timer">Leaving this screen while the timer is running will stop the timer.</string>
 </resources>

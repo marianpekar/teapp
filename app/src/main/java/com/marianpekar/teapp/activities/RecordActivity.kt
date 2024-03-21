@@ -18,6 +18,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -145,7 +146,7 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private fun setOnBackPressedCallback() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                backToMainActivity()
+                showBackToMainActivityDialog()
             }
         }
         this@RecordActivity.onBackPressedDispatcher.addCallback(this, callback);
@@ -154,6 +155,30 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
     private fun setBackButton() {
         val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
         imageButtonLeftArrow.setOnClickListener {
+            showBackToMainActivityDialog()
+        }
+    }
+
+    private fun showBackToMainActivityDialog() {
+        if (timer.isRunning()) {
+            val alertDialogBuilder = AlertDialog.Builder(this)
+
+            alertDialogBuilder.setTitle(R.string.are_you_sure)
+            alertDialogBuilder.setMessage(R.string.leaving_activity_stops_timer)
+
+            alertDialogBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
+                backToMainActivity()
+                dialog.dismiss()
+            }
+
+            alertDialogBuilder.setNegativeButton(R.string.no) { dialog, _ ->
+                dialog.dismiss()
+            }
+
+            val alertDialog: AlertDialog = alertDialogBuilder.create()
+            alertDialog.show()
+        }
+        else {
             backToMainActivity()
         }
     }
