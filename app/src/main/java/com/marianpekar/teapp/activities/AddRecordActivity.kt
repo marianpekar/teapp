@@ -169,7 +169,7 @@ class AddRecordActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (!records.areAdjustmentsValid(adjustments, seconds))
+            if (!records.areAdjustmentsValid(adjustments, totalSeconds))
             {
                 Toast.makeText(this@AddRecordActivity, R.string.cant_add_adjustment_longer_than_base, Toast.LENGTH_LONG).show()
                 return@setOnClickListener
