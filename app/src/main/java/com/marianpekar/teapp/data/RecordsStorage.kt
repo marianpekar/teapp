@@ -96,4 +96,8 @@ class RecordsStorage(private val context: Context) {
             e.printStackTrace()
         }
     }
+
+    fun getCount(): Int {
+        return records.size
+    }
 }

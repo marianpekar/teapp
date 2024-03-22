@@ -1,6 +1,7 @@
 package com.marianpekar.teapp.activities
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
@@ -39,6 +40,9 @@ class AddRecordActivity : AppCompatActivity() {
     private lateinit var adapterAdjustments : AdjustmentsAdapter
     private val adjustments : MutableList<Adjustment> = mutableListOf()
 
+    private lateinit var preferences: SharedPreferences
+    private lateinit var infusionsPrefKey: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -52,6 +56,8 @@ class AddRecordActivity : AppCompatActivity() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         records = RecordsStorage(this@AddRecordActivity)
+
+        preferences = applicationContext.getSharedPreferences(getString(R.string.app_name), 0)
 
         setUiReferences()
         setBackButton()
@@ -178,6 +184,13 @@ class AddRecordActivity : AppCompatActivity() {
             records.addRecord(Record(name, grams, millis, temperature, totalSeconds, infusions, adapterAdjustments.getAdjustments()))
 
             Toast.makeText(this@AddRecordActivity, R.string.new_record_added, Toast.LENGTH_LONG).show()
+
+
+            val recordIndex = records.getCount() - 1
+            infusionsPrefKey = "infusions_${recordIndex}"
+            val editor = preferences.edit()
+            editor.putInt(infusionsPrefKey, infusions)
+            editor.apply()
 
             backToMainActivity()
         }
