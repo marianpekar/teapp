@@ -30,6 +30,7 @@ class CustomCountdownTimer(
             }
 
             override fun onFinish() {
+                isRunning = false
                 onChangeHandler.onTimerFinished()
             }
         }
