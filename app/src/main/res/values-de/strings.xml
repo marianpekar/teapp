@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_new_record">Neuen Eintrag hinzufügen</string>
+    <string name="default_record_name">Eintragname</string>
+    <string name="open_record">Eintrag öffnen</string>
+    <string name="back">Zurück</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="reset">Reset</string>
+    <string name="your_tea_is_ready">Ihr Tee ist fertig!</string>
+    <string name="notification_channel_description">Erhalten Sie eine Benachrichtigung, wenn Ihr Tee fertig ist</string>
+    <string name="no_infusions_left">Keine Infusionen mehr übrig</string>
+    <string name="save_record">Eintrag speichern</string>
+    <string name="cant_add_record">Kann Eintrag mit leeren oder Null-Werten nicht speichern</string>
+    <string name="new_record_added">Neuer Eintrag hinzugefügt</string>
+    <string name="delete_record">Eintrag löschen</string>
+    <string name="record_saved">Eintrag aktualisiert</string>
+    <string name="delete_record_are_you_sure">Möchten Sie diesen Eintrag wirklich löschen?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="update_record">Eintrag aktualisieren</string>
+    <string name="add_record">Eintrag hinzufügen</string>
+    <string name="record_removed">Eintrag entfernt</string>
+    <string name="cant_add_record_of_existing_name">Sie haben bereits einen Eintrag mit diesem Namen</string>
+    <string name="are_you_sure">Sind Sie sicher?</string>
+    <string name="leaving_activity_stops_timer">Das Verlassen dieses Bildschirms während des laufenden Timers stoppt den Timer</string>
+    <string name="cant_add_adjustment_longer_than_base">Eine oder mehrere negative Anpassungen sind länger als die Basistime</string>
+</resources>
