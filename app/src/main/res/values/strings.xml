@@ -1,30 +1,30 @@
 <resources>
-    <string name="app_name">Teapp</string>
+    <string name="app_name" translatable="false">Teapp</string>
     <string name="add_new_record">Add new record</string>
     <string name="default_record_name">Record Name</string>
     <string name="default_record_summary">0g | 0ml | 0° | 0:00 | 0x</string>
     <string name="open_record">Open Record</string>
     <string name="back">Back</string>
-    <string name="default_stopwatch_value">0:00</string>
+    <string name="default_stopwatch_value" translatable="false">0:00</string>
     <string name="start">Start</string>
     <string name="pause">Pause</string>
     <string name="reset">Reset</string>
-    <string name="default_counter_value">0</string>
-    <string name="plus_one">+1</string>
-    <string name="minus_one">-1</string>
-    <string name="grams_short">g</string>
-    <string name="millis_short">ml</string>
+    <string name="default_counter_value" translatable="false">0</string>
+    <string name="plus_one" translatable="false">+1</string>
+    <string name="minus_one" translatable="false">-1</string>
+    <string name="grams_short" translatable="false">g</string>
+    <string name="millis_short" translatable="false">ml</string>
     <string name="your_tea_is_ready">Your tea is ready!</string>
-    <string name="notification_channel_name">Teapp Notifications</string>
+    <string name="notification_channel_name" translatable="false">Teapp Notifications</string>
     <string name="notification_channel_description">Receive notification when your tea is ready</string>
     <string name="no_infusions_left">No infusions left</string>
-    <string name="default_minutes_value">00</string>
-    <string name="deg60">60°</string>
-    <string name="deg80">80°</string>
-    <string name="deg90">90°</string>
-    <string name="plain60">60</string>
-    <string name="plain80">80</string>
-    <string name="plain90">90</string>
+    <string name="default_minutes_value" translatable="false">00</string>
+    <string name="deg60" translatable="false">60°</string>
+    <string name="deg80" translatable="false">80°</string>
+    <string name="deg90" translatable="false">90°</string>
+    <string name="plain60" translatable="false">60</string>
+    <string name="plain80" translatable="false">80</string>
+    <string name="plain90" translatable="false">90</string>
     <string name="save_record">Save Record</string>
     <string name="cant_add_record">Can\'t store record with empty or zero values</string>
     <string name="new_record_added">New record added</string>
@@ -36,7 +36,7 @@
     <string name="update_record">Update Record</string>
     <string name="add_record">Add Record</string>
     <string name="record_removed">Record removed</string>
-    <string name="degree_symbol">°</string>
+    <string name="degree_symbol" translatable="false">°</string>
     <string name="cant_add_record_of_existing_name">You already have a record of this name</string>
     <string name="are_you_sure">Are you sure?</string>
     <string name="leaving_activity_stops_timer">Leaving this screen while the timer is running will stop the timer</string>

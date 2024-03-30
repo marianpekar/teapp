@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_new_record">Přidat záznam</string>
+    <string name="default_record_name">Název záznamu</string>
+    <string name="default_record_summary">0g | 0ml | 0° | 0:00 | 0x</string>
+    <string name="open_record">Otevřít záznam</string>
+    <string name="back">Zpět</string>
+    <string name="start">Start</string>
+    <string name="pause">Pauza</string>
+    <string name="reset">Reset</string>
+    <string name="your_tea_is_ready">Čaj je připraven!</string>
+    <string name="notification_channel_description">Zobraz notifikaci když je čaj připraven</string>
+    <string name="no_infusions_left">Žádné další nálevy</string>
+    <string name="save_record">Uložit záznam</string>
+    <string name="cant_add_record">Nelze uložit záznam s prázdnými hodnotami</string>
+    <string name="new_record_added">Nový záznam uložen</string>
+    <string name="delete_record">Smazat záznam</string>
+    <string name="record_saved">Záznam uložen</string>
+    <string name="delete_record_are_you_sure">Jste si jisti že tento záznam chcete smazat?</string>
+    <string name="yes">Ano</string>
+    <string name="no">Ne</string>
+    <string name="update_record">Upravit záznam</string>
+    <string name="add_record">Přidat záznam</string>
+    <string name="record_removed">Záznam odstraněn</string>
+    <string name="cant_add_record_of_existing_name">Záznam s tímto názvem již existuje</string>
+    <string name="are_you_sure">Jste si jistí?</string>
+    <string name="leaving_activity_stops_timer">Opuštění této obrazovky zátímco časomíra běží, časomíru zastaví</string>
+    <string name="cant_add_adjustment_longer_than_base">Jeden nebo více záporných odchylek je delších než základní čas</string>
+</resources>
