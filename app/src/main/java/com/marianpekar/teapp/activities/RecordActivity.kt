@@ -107,8 +107,8 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
         editTextMillis.setupClearOnFocusBehavior()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onStop() {
+        super.onStop()
         mediaPlayer.release()
 
         val editor = preferences.edit()
