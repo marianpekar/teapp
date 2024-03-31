@@ -2,7 +2,6 @@
 <resources>
     <string name="add_new_record">Přidat záznam</string>
     <string name="default_record_name">Název záznamu</string>
-    <string name="default_record_summary">0g | 0ml | 0° | 0:00 | 0x</string>
     <string name="open_record">Otevřít záznam</string>
     <string name="back">Zpět</string>
     <string name="start">Start</string>
