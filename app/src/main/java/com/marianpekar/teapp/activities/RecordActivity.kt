@@ -109,11 +109,16 @@ class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler
 
     override fun onStop() {
         super.onStop()
-        mediaPlayer.release()
 
         val editor = preferences.edit()
         editor.putInt(infusionsPrefKey, textViewInfusionsCounter.text.toString().toInt())
         editor.apply()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        mediaPlayer.release()
     }
 
     private fun setRecord() {
