@@ -28,4 +28,8 @@
     <string name="menu_open">Menu otevřeno</string>
     <string name="menu_close">Menu uzavřeno</string>
     <string name="language">Jazyk</string>
+    <string name="english">Angličtina</string>
+    <string name="czech">Čeština</string>
+    <string name="german">Němčina</string>
+    <string name="choose_language">Výběr jazyka</string>
 </resources>

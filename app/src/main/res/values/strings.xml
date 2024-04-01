@@ -44,4 +44,8 @@
     <string name="menu_open">Menu open</string>
     <string name="menu_close">Menu close</string>
     <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="czech">Czech</string>
+    <string name="german">German</string>
+    <string name="choose_language">Choose Language</string>
 </resources>

@@ -38,17 +38,21 @@ class MainActivity : AppCompatActivityLocale() {
         private fun onNavigationItemSelectedDelegate(item: MenuItem): Boolean {
             when (item.itemId) {
                 R.id.language -> {
-                    val languages = arrayOf("English", "Czech", "German")
+                    val languages = arrayOf(
+                        getString(R.string.english),
+                        getString(R.string.czech),
+                        getString(R.string.german)
+                    )
                     val languageCodes = arrayOf("en", "cs", "de")
                     val builder = AlertDialog.Builder(this@MainActivity)
-                    builder.setTitle("Choose Language")
+                    builder.setTitle(getString(R.string.choose_language))
                     builder.setSingleChoiceItems(languages, -1) { dialog, which ->
                         val chosenLanguage = languageCodes[which]
                         setLocale(chosenLanguage)
                         dialog.dismiss()
                         recreate()
                     }
-                    builder.setNegativeButton("Cancel", null)
+                    builder.setNegativeButton(getString(R.string.back), null)
                     builder.show()
                 }
             }
