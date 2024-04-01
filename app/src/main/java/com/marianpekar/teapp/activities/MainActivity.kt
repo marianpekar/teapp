@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -19,7 +19,7 @@ import com.marianpekar.teapp.R
 import com.marianpekar.teapp.adapters.RecordsAdapter
 import com.marianpekar.teapp.data.RecordsStorage
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivityLocale() {
 
     private lateinit var recycler: RecyclerView
     private lateinit var adapter: RecordsAdapter
@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
+    private val navigationClicksListener = NavigationClicksListener()
+
     inner class NavigationClicksListener : NavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
             return onNavigationItemSelectedDelegate(item)
@@ -35,13 +37,24 @@ class MainActivity : AppCompatActivity() {
 
         private fun onNavigationItemSelectedDelegate(item: MenuItem): Boolean {
             when (item.itemId) {
-                R.id.settings -> TODO()
+                R.id.language -> {
+                    val languages = arrayOf("English", "Czech", "German")
+                    val languageCodes = arrayOf("en", "cs", "de")
+                    val builder = AlertDialog.Builder(this@MainActivity)
+                    builder.setTitle("Choose Language")
+                    builder.setSingleChoiceItems(languages, -1) { dialog, which ->
+                        val chosenLanguage = languageCodes[which]
+                        setLocale(chosenLanguage)
+                        dialog.dismiss()
+                        recreate()
+                    }
+                    builder.setNegativeButton("Cancel", null)
+                    builder.show()
+                }
             }
             return false
         }
     }
-
-    private val navigationClicksListener = NavigationClicksListener()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

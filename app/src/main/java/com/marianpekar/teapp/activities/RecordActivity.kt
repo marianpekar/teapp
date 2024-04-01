@@ -19,7 +19,6 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -32,7 +31,7 @@ import com.marianpekar.teapp.services.NotificationService
 import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
 
 
-class RecordActivity : AppCompatActivity(), CustomCountdownTimer.OnChangeHandler {
+class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeHandler {
 
     private lateinit var record: Record
     private var recordIndex: Int = -1

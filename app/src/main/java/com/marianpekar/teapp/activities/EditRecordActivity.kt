@@ -10,7 +10,6 @@ import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
@@ -25,7 +24,7 @@ import com.marianpekar.teapp.data.Adjustment
 import com.marianpekar.teapp.data.Record
 import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
 
-class EditRecordActivity : AppCompatActivity() {
+class EditRecordActivity : AppCompatActivityLocale() {
 
     private lateinit var records : RecordsStorage
     private lateinit var record: Record

@@ -41,7 +41,7 @@
     <string name="are_you_sure">Are you sure?</string>
     <string name="leaving_activity_stops_timer">Leaving this screen while the timer is running will stop the timer</string>
     <string name="cant_add_adjustment_longer_than_base">One or more negative adjustments are longer than base time</string>
-    <string name="settings">Settings</string>
     <string name="menu_open">Menu open</string>
     <string name="menu_close">Menu close</string>
+    <string name="language">Language</string>
 </resources>

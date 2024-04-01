@@ -25,7 +25,7 @@
     <string name="are_you_sure">Sind Sie sicher?</string>
     <string name="leaving_activity_stops_timer">Das Verlassen dieses Bildschirms während des laufenden Timers stoppt den Timer</string>
     <string name="cant_add_adjustment_longer_than_base">Eine oder mehrere negative Anpassungen sind länger als die Basistime</string>
-    <string name="settings">Einstellungen</string>
     <string name="menu_open">Menü geöffnet</string>
     <string name="menu_close">Menü geschlossen</string>
+    <string name="language">Sprache</string>
 </resources>
