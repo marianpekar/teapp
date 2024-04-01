@@ -25,4 +25,7 @@
     <string name="are_you_sure">Jste si jistí?</string>
     <string name="leaving_activity_stops_timer">Opuštění této obrazovky zátímco časomíra běží, časomíru zastaví</string>
     <string name="cant_add_adjustment_longer_than_base">Jeden nebo více záporných odchylek je delších než základní čas</string>
+    <string name="settings">Nastavení</string>
+    <string name="menu_open">Menu otevřeno</string>
+    <string name="menu_close">Menu uzavřeno</string>
 </resources>
