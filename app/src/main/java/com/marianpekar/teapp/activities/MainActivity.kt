@@ -35,8 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         private fun onNavigationItemSelectedDelegate(item: MenuItem): Boolean {
-            when (item.itemId){
-                android.R.id.home -> toggleDrawer()
+            when (item.itemId) {
                 R.id.settings -> TODO()
             }
             return false
@@ -76,15 +75,6 @@ class MainActivity : AppCompatActivity() {
         drawerToggle.syncState()
 
         navigationView.setNavigationItemSelectedListener(navigationClicksListener)
-    }
-
-    private fun toggleDrawer(): Boolean {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-        return true
     }
 
     private fun setRecycler() {
