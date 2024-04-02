@@ -35,21 +35,16 @@
             tools:layout_editor_absoluteX="321dp"
             tools:layout_editor_absoluteY="8dp" />
 
-    </androidx.appcompat.widget.Toolbar>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="42dp"
+            android:contentDescription="@string/app_name"
+            android:layout_marginTop="15dp"
+            app:srcCompat="@drawable/teapp"
+            app:tint="@color/green_tea" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="100dp"
-        android:layout_height="42dp"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.140"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.637"
-        app:srcCompat="@drawable/teapp"
-        app:tint="@color/green_tea" />
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawerLayout"
