@@ -7,10 +7,47 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginBottom="1dp">
+
+            <ImageButton
+                android:id="@+id/imageButtonLeftArrow"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/rounded_button_background"
+                android:clickable="true"
+                android:contentDescription="@string/back"
+                android:focusable="true"
+                android:padding="4dp"
+                android:scaleType="centerInside"
+                app:fabSize="normal"
+                app:maxImageSize="16dp"
+                app:srcCompat="@drawable/left_arrow"
+                app:tint="@color/default_text_on_light" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="100dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="15dp"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@drawable/teapp"
+                app:tint="@color/green_tea" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -34,39 +71,37 @@
                     android:id="@+id/textRecordName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="12dp"
                     android:layout_marginTop="4dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="@string/default_record_name"
                     android:textSize="32sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageButtonLeftArrow"
+                    app:layout_constraintStart_toEndOf="@+id/cupImage"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textRecordSummary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="12dp"
                     android:fontFamily="sans-serif-condensed"
                     android:text="@string/default_record_summary"
                     android:textSize="14sp"
-                    app:layout_constraintStart_toEndOf="@+id/imageButtonLeftArrow"
+                    app:layout_constraintStart_toEndOf="@+id/cupImage"
                     app:layout_constraintTop_toBottomOf="@+id/textRecordName" />
 
-                <ImageButton
-                    android:id="@+id/imageButtonLeftArrow"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:layout_marginStart="16dp"
-                    android:background="@drawable/rounded_button_background"
-                    android:contentDescription="@string/back"
-                    android:padding="10dp"
-                    android:scaleType="centerInside"
+                <ImageView
+                    android:id="@+id/cupImage"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="22dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/left_arrow"
-                    app:tint="@color/default_text_on_light" />
+                    app:layout_constraintVertical_bias="0.592"
+                    app:srcCompat="@drawable/teacup"
+                    app:tint="@color/default_text_on_light"
+                    tools:ignore="ContentDescription" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
