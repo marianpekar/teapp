@@ -32,4 +32,6 @@
     <string name="czech">Tschechisch</string>
     <string name="german">Deutsch</string>
     <string name="choose_language">Sprachauswahl</string>
+    <string name="create_data_backup">Datensicherung erstellen</string>
+    <string name="restore_data">Daten wiederherstellen</string>
 </resources>

@@ -97,6 +97,14 @@ class RecordsStorage(private val context: Context) {
         }
     }
 
+    fun exportRecords() {
+        //TODO
+    }
+
+    fun importRecords() {
+        //TODO
+    }
+
     fun getCount(): Int {
         return records.size
     }

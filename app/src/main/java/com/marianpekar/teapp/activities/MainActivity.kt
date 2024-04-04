@@ -55,6 +55,13 @@ class MainActivity : AppCompatActivityLocale() {
                     builder.setNegativeButton(getString(R.string.back), null)
                     builder.show()
                 }
+                R.id.exportRecords -> {
+                    //TODO
+                }
+                R.id.importRecords -> {
+                    //TODO
+                }
+
             }
             return false
         }
