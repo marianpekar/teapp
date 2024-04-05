@@ -97,12 +97,22 @@ class RecordsStorage(private val context: Context) {
         }
     }
 
-    fun exportRecords() {
-        //TODO
+    fun exportRecords(): String {
+        return Gson().toJson(records)
     }
 
-    fun importRecords() {
-        //TODO
+    fun importRecords(json: String) {
+        try {
+            records.clear()
+
+            val typeToken = object : TypeToken<List<Record>>(){}.type
+            val importedRecords: List<Record> = Gson().fromJson(json, typeToken)
+
+            records.addAll(importedRecords)
+            saveRecords()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     fun getCount(): Int {

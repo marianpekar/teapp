@@ -1,10 +1,13 @@
 package com.marianpekar.teapp.activities
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
@@ -29,6 +32,9 @@ class MainActivity : AppCompatActivityLocale() {
     private lateinit var drawerToggle: ActionBarDrawerToggle
 
     private val navigationClicksListener = NavigationClicksListener()
+
+    private lateinit var importLauncher: ActivityResultLauncher<String>
+    private lateinit var exportLauncher: ActivityResultLauncher<String>
 
     inner class NavigationClicksListener : NavigationView.OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -56,10 +62,10 @@ class MainActivity : AppCompatActivityLocale() {
                     builder.show()
                 }
                 R.id.exportRecords -> {
-                    //TODO
+                    exportLauncher.launch("teapp.json")
                 }
                 R.id.importRecords -> {
-                    //TODO
+                    importLauncher.launch("application/json")
                 }
 
             }
@@ -81,10 +87,32 @@ class MainActivity : AppCompatActivityLocale() {
         }
 
         records = RecordsStorage(this@MainActivity)
-        setRecycler()
 
+        setImportAndExportLaunchers()
+        setRecycler()
         setDrawer()
         setAddNewRecordButton()
+    }
+
+    private fun setImportAndExportLaunchers() {
+        importLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let { it ->
+                val jsonRecords = contentResolver.openInputStream(it)?.bufferedReader().use { it?.readText() }
+                jsonRecords?.let {
+                    records.importRecords(it)
+                    recreate()
+                }
+            }
+        }
+
+        exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri: Uri? ->
+            uri?.let {
+                val jsonRecords = records.exportRecords()
+                jsonRecords.let {
+                    contentResolver.openOutputStream(uri)?.bufferedWriter().use { writer -> writer?.write(jsonRecords) }
+                }
+            }
+        }
     }
 
     private fun setRecycler() {
