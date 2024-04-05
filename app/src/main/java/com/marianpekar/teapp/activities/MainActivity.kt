@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageButton
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -101,6 +102,7 @@ class MainActivity : AppCompatActivityLocale() {
                 jsonRecords?.let {
                     records.importRecords(it)
                     recreate()
+                    Toast.makeText(this@MainActivity, R.string.backup_restored, Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -110,6 +112,7 @@ class MainActivity : AppCompatActivityLocale() {
                 val jsonRecords = records.exportRecords()
                 jsonRecords.let {
                     contentResolver.openOutputStream(uri)?.bufferedWriter().use { writer -> writer?.write(jsonRecords) }
+                    Toast.makeText(this@MainActivity, R.string.backup_created, Toast.LENGTH_LONG).show()
                 }
             }
         }

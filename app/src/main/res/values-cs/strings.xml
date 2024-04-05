@@ -34,4 +34,6 @@
     <string name="choose_language">Výběr jazyka</string>
     <string name="create_data_backup">Zálohovat data</string>
     <string name="restore_data">Načíst zálohu</string>
+    <string name="backup_created">Záloha vytvořena</string>
+    <string name="backup_restored">Data obnovena ze zálohy</string>
 </resources>

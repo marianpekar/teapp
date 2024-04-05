@@ -34,4 +34,6 @@
     <string name="choose_language">Sprachauswahl</string>
     <string name="create_data_backup">Datensicherung erstellen</string>
     <string name="restore_data">Daten wiederherstellen</string>
+    <string name="backup_created">Datensicherung erstellt</string>
+    <string name="backup_restored">Daten wiederhergestellt</string>
 </resources>
