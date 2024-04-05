@@ -11,14 +11,6 @@ class RecordsStorage(private val context: Context) {
 
     init {
         loadRecords()
-
-        if (records.isEmpty()) {
-            // Add a default records when the class is initialized with no existing records
-            addRecord(Record("Satsuma", 2f, 250, 80, 90, 2, listOf(Adjustment(30))))
-            addRecord(Record("Miyazaki", 2f, 250, 60, 240, 3, listOf(Adjustment(0), Adjustment(0))))
-            addRecord(Record("Natsu", 2f, 250, 80, 60, 3, listOf(Adjustment(15), Adjustment(30))))
-            saveRecords()
-        }
     }
 
     fun getAllRecords(): List<Record> {
@@ -91,10 +83,17 @@ class RecordsStorage(private val context: Context) {
 
             inputStream.close()
         } catch (e: FileNotFoundException) {
-            // File not found, ignore
+            createAndSaveDefaultRecords()
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    private fun createAndSaveDefaultRecords() {
+        addRecord(Record("Satsuma", 2f, 250, 80, 90, 2, listOf(Adjustment(30))))
+        addRecord(Record("Miyazaki", 2f, 250, 60, 240, 3, listOf(Adjustment(0), Adjustment(0))))
+        addRecord(Record("Natsu", 2f, 250, 80, 60, 3, listOf(Adjustment(15), Adjustment(30))))
+        saveRecords()
     }
 
     fun exportRecords(): String {
