@@ -2,6 +2,7 @@ package com.marianpekar.teapp.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -16,6 +17,9 @@ class RecordNotesActivity : AppCompatActivityLocale() {
 
     private lateinit var record: Record
     private var recordIndex: Int = -1
+    private lateinit var recordStorage : RecordsStorage
+
+    private lateinit var editTextNotes : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,11 +31,19 @@ class RecordNotesActivity : AppCompatActivityLocale() {
             insets
         }
 
+        recordStorage = RecordsStorage(this@RecordNotesActivity)
+
         setRecord()
         setHeader()
+        setEditText()
         setOnBackPressedCallback()
         setBackButton()
         setCupButton()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        recordStorage.setNotes(recordIndex, editTextNotes.text.toString())
     }
 
     private fun setRecord() {
@@ -40,7 +52,7 @@ class RecordNotesActivity : AppCompatActivityLocale() {
             throw Exception("Record index is -1")
         }
 
-        record = RecordsStorage(this@RecordNotesActivity).getRecord(recordIndex)
+        record = recordStorage.getRecord(recordIndex)
     }
 
     private fun setHeader() {
@@ -49,6 +61,16 @@ class RecordNotesActivity : AppCompatActivityLocale() {
 
         textRecordName.text = record.getName()
         textRecordSummary.text = record.summaryWithAdjustmentsFormatted()
+    }
+
+    private fun setEditText() {
+        editTextNotes = findViewById(R.id.editTextNotes)
+
+        val notes = record.getNotes()
+        if (notes.isEmpty())
+            return
+
+        editTextNotes.setText(notes)
     }
 
     private fun setOnBackPressedCallback() {

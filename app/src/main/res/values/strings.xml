@@ -54,4 +54,5 @@
     <string name="backup_restored">Data restored from a backup</string>
     <string name="notes">Notes</string>
     <string name="teacup">Tea</string>
+    <string name="type_your_notes">Type your notes here</string>
 </resources>

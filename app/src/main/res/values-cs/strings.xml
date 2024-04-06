@@ -38,4 +38,5 @@
     <string name="backup_restored">Data obnovena ze zálohy</string>
     <string name="notes">Poznámky</string>
     <string name="teacup">Čaj</string>
+    <string name="type_your_notes">Místo na poznámky</string>
 </resources>

@@ -38,4 +38,5 @@
     <string name="backup_restored">Daten wiederhergestellt</string>
     <string name="notes">Notizen</string>
     <string name="teacup">Tee</string>
+    <string name="type_your_notes">Geben Sie hier Ihre Notizen ein</string>
 </resources>
