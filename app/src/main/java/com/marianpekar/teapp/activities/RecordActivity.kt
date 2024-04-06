@@ -29,6 +29,7 @@ import com.marianpekar.teapp.data.RecordsStorage
 import com.marianpekar.teapp.data.Record
 import com.marianpekar.teapp.services.NotificationService
 import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
+import kotlin.reflect.KClass
 
 
 class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeHandler {
@@ -45,6 +46,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
     private lateinit var resetTimerButton: Button
     private lateinit var editTextGrams: EditText
     private lateinit var editTextMillis: EditText
+    private lateinit var buttonNotes: ImageButton
 
     private lateinit var textViewInfusionsCounter: TextView
     private var infusions: Int = 0
@@ -80,6 +82,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
         setBackButton()
         setOnBackPressedCallback()
 
+        setNotesButton()
         setHeader()
 
         setTimer()
@@ -98,6 +101,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
         minusOneButton = findViewById(R.id.buttonCounterMinusOne)
         resetInfusionsButton = findViewById(R.id.buttonCounterReset)
         resetTimerButton = findViewById(R.id.buttonStopWatchReset)
+        buttonNotes = findViewById(R.id.buttonNotes)
 
         editTextGrams = findViewById(R.id.editTextGrams)
         editTextGrams.setupClearOnFocusBehavior()
@@ -147,10 +151,16 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
         textRecordSummary.text = record.summaryWithAdjustmentsFormatted()
     }
 
+    private fun setNotesButton() {
+        buttonNotes.setOnClickListener {
+            toActivityWithDialogWhenTimerIsRunning(RecordNotesActivity::class)
+        }
+    }
+
     private fun setOnBackPressedCallback() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                showBackToMainActivityDialog()
+                toActivityWithDialogWhenTimerIsRunning(MainActivity::class)
             }
         }
         this@RecordActivity.onBackPressedDispatcher.addCallback(this, callback);
@@ -159,11 +169,11 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
     private fun setBackButton() {
         val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
         imageButtonLeftArrow.setOnClickListener {
-            showBackToMainActivityDialog()
+            toActivityWithDialogWhenTimerIsRunning(MainActivity::class)
         }
     }
 
-    private fun showBackToMainActivityDialog() {
+    private fun toActivityWithDialogWhenTimerIsRunning(targetActivity: KClass<*>) {
         if (timer.isRunning()) {
             val alertDialogBuilder = AlertDialog.Builder(this)
 
@@ -171,7 +181,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
             alertDialogBuilder.setMessage(R.string.leaving_activity_stops_timer)
 
             alertDialogBuilder.setPositiveButton(R.string.yes) { dialog, _ ->
-                backToMainActivity()
+                leaveActivity(targetActivity)
                 dialog.dismiss()
             }
 
@@ -183,12 +193,12 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
             alertDialog.show()
         }
         else {
-            backToMainActivity()
+            leaveActivity(targetActivity)
         }
     }
 
-    private fun backToMainActivity() {
-        val intent = Intent(this@RecordActivity, MainActivity::class.java)
+    private fun leaveActivity(targetActivity: KClass<*>) {
+        val intent = Intent(this@RecordActivity, targetActivity.java)
         startActivity(intent)
         timer.pause()
         finish()

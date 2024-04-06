@@ -36,4 +36,6 @@
     <string name="restore_data">Daten wiederherstellen</string>
     <string name="backup_created">Datensicherung erstellt</string>
     <string name="backup_restored">Daten wiederhergestellt</string>
+    <string name="notes">Notizen</string>
+    <string name="teacup">Tee</string>
 </resources>

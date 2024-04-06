@@ -52,4 +52,6 @@
     <string name="restore_data">Restore data</string>
     <string name="backup_created">Data backup created</string>
     <string name="backup_restored">Data restored from a backup</string>
+    <string name="notes">Notes</string>
+    <string name="teacup">Tea</string>
 </resources>

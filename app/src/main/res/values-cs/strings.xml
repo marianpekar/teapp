@@ -36,4 +36,6 @@
     <string name="restore_data">Načíst zálohu</string>
     <string name="backup_created">Záloha vytvořena</string>
     <string name="backup_restored">Data obnovena ze zálohy</string>
+    <string name="notes">Poznámky</string>
+    <string name="teacup">Čaj</string>
 </resources>

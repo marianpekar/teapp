@@ -7,8 +7,18 @@ class Record(
     private val temperature: Int,
     private val seconds: Long,
     private val infusions: Int,
-    private val adjustments: List<Adjustment>
+    private val adjustments: List<Adjustment>,
 ) {
+
+    private var notes = ""
+
+    fun setNotes(newNotes: String) {
+        notes = newNotes
+    }
+
+    fun getNotes(): String {
+        return notes
+    }
 
     fun summaryFormatted(): String {
         return "${grams}g | ${milliliters}ml | ${temperature}° | ${timeFormatted()} | ${infusions}x"

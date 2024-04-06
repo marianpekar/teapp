@@ -36,6 +36,15 @@ class RecordsStorage(private val context: Context) {
         saveRecords()
     }
 
+    fun setNotes(index: Int, notes: String) {
+        records[index].setNotes(notes)
+        saveRecords()
+    }
+
+    fun getNotes(index: Int) : String {
+        return records[index].getNotes()
+    }
+
     fun areRecordParamsValid(
         name: String,
         grams: Float,
