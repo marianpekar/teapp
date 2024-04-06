@@ -30,7 +30,7 @@
             app:maxImageSize="16dp"
             android:padding="12dp"
             android:scaleType="centerInside"
-            app:srcCompat="@drawable/pencil"
+            app:srcCompat="@drawable/pencil_with_plus"
             app:tint="@color/default_text_on_light"
             tools:layout_editor_absoluteX="321dp"
             tools:layout_editor_absoluteY="8dp" />
