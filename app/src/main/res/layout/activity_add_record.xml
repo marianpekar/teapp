@@ -363,34 +363,20 @@
 
         </LinearLayout>
 
-        <androidx.cardview.widget.CardView
+        <Button
+            android:id="@+id/buttonSaveRecord"
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_marginLeft="2dp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="2dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_height="75dp"
             android:backgroundTint="@color/green_tea_darker"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="0dp">
+            android:text="@string/add_record"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <Button
-                    android:id="@+id/buttonSaveRecord"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/green_tea_darker"
-                    android:text="@string/add_record"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </ScrollView>
