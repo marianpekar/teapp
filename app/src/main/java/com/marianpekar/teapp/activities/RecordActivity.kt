@@ -199,6 +199,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
 
     private fun leaveActivity(targetActivity: KClass<*>) {
         val intent = Intent(this@RecordActivity, targetActivity.java)
+        intent.putExtra("position", recordIndex)
         startActivity(intent)
         timer.pause()
         finish()
