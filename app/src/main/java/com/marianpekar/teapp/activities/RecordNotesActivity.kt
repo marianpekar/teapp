@@ -7,7 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.marianpekar.teapp.R
 
-class RecordNotesActivity : AppCompatActivity() {
+class RecordNotesActivity : AppCompatActivityLocale() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
