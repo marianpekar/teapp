@@ -67,7 +67,9 @@ class RecordNotesActivity : AppCompatActivityLocale() {
         editTextNotes = findViewById(R.id.editTextNotes)
 
         val notes = record.getNotes()
-        if (notes.isEmpty())
+
+        // null check is for backward compatibility with records saved before notes were added
+        if (notes.isNullOrEmpty())
             return
 
         editTextNotes.setText(notes)
