@@ -1,44 +1,20 @@
 package com.marianpekar.teapp.activities
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.widget.addTextChangedListener
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.marianpekar.teapp.adapters.AdjustmentsAdapter
-import com.marianpekar.teapp.utilities.EditTextWatcherIntegerBoundaries
 import com.marianpekar.teapp.R
 import com.marianpekar.teapp.data.RecordsStorage
-import com.marianpekar.teapp.utilities.EditTextWatcherSeconds
-import com.marianpekar.teapp.data.Adjustment
 import com.marianpekar.teapp.data.Record
-import com.marianpekar.teapp.utilities.setupClearOnFocusBehavior
 
-class AddRecordActivity : AppCompatActivityLocale() {
+class AddRecordActivity : SetupRecordActivityBase() {
 
     private lateinit var records : RecordsStorage
-
-    private lateinit var editTextName: EditText
-    private lateinit var editTextMinutes: EditText
-    private lateinit var editTextSeconds: EditText
-    private lateinit var editTextGrams: EditText
-    private lateinit var editTextMillis: EditText
-    private lateinit var editTextInfusions: EditText
-    private lateinit var editTextTemperature: EditText
-
-    private lateinit var recyclerAdjustments: RecyclerView
-    private lateinit var adapterAdjustments : AdjustmentsAdapter
-    private val adjustments : MutableList<Adjustment> = mutableListOf()
 
     private lateinit var preferences: SharedPreferences
     private lateinit var infusionsPrefKey: String
@@ -65,85 +41,6 @@ class AddRecordActivity : AppCompatActivityLocale() {
         setAddRecordButton()
         setInfusionConvenientButtons()
         setTemperatureConvenientButtons()
-    }
-
-    private fun setBackButton() {
-        val imageButtonLeftArrow: ImageButton = findViewById(R.id.imageButtonLeftArrow)
-        imageButtonLeftArrow.setOnClickListener {
-            backToMainActivity()
-        }
-    }
-
-    private fun setUiReferences() {
-        recyclerAdjustments = findViewById(R.id.recyclerTimeAdjustments)
-        recyclerAdjustments.layoutManager = LinearLayoutManager(this@AddRecordActivity)
-
-        editTextInfusions = findViewById(R.id.editTextCounter)
-        editTextInfusions.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextInfusions, 99, 1))
-        editTextInfusions.addTextChangedListener {
-            setAdjustmentsRecycler()
-        }
-
-        editTextTemperature = findViewById(R.id.editTextTemperature)
-        editTextTemperature.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextTemperature, if (isTempInFahrenheit) 212 else 100))
-        editTextTemperature.setupClearOnFocusBehavior()
-
-        editTextName = findViewById(R.id.editTextRecordName)
-        editTextName.setupClearOnFocusBehavior()
-
-        editTextMinutes = findViewById(R.id.editTextMinutes)
-        editTextMinutes.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextMinutes, 99))
-        editTextMinutes.setupClearOnFocusBehavior()
-
-        editTextSeconds = findViewById(R.id.editTextSeconds)
-        editTextSeconds.addTextChangedListener(EditTextWatcherSeconds(editTextSeconds))
-        editTextSeconds.setupClearOnFocusBehavior()
-
-        editTextGrams = findViewById(R.id.editTextGrams)
-        editTextGrams.setupClearOnFocusBehavior()
-
-        editTextMillis = findViewById(R.id.editTextMillis)
-        editTextMillis.setupClearOnFocusBehavior()
-    }
-
-    private fun setTemperatureUnitsLabel() {
-        val temperatureUnits: TextView = findViewById(R.id.textTemperatureUnit)
-        temperatureUnits.text = if (isTempInFahrenheit) getString(R.string.deg_fahrenheit) else getString(R.string.deg_celsius)
-    }
-
-    private fun setAdjustmentsRecycler() {
-        val infusionsText = editTextInfusions.text.toString()
-
-        if (infusionsText.isEmpty())
-            return
-
-        val currentAdjustments = adjustments.toList()
-
-        adjustments.clear()
-
-        val infusions = if (infusionsText.isNotEmpty()) infusionsText.toInt() else 0
-
-        if (infusions >= 2)
-        {
-            var i = 0
-            while (i < infusions - 1)
-            {
-                val currentAdjustment = currentAdjustments.getOrNull(i)
-                if (currentAdjustment != null)
-                {
-                    adjustments.add(currentAdjustment)
-                }
-                else
-                {
-                    adjustments.add(Adjustment(0))
-                }
-                i++
-            }
-        }
-
-        adapterAdjustments = AdjustmentsAdapter(adjustments, this@AddRecordActivity)
-
-        recyclerAdjustments.adapter = adapterAdjustments
     }
 
     private fun setAddRecordButton() {
@@ -199,58 +96,6 @@ class AddRecordActivity : AppCompatActivityLocale() {
             editor.apply()
 
             backToMainActivity()
-        }
-    }
-
-    private fun backToMainActivity() {
-        val intent = Intent(this@AddRecordActivity, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
-
-    private fun setInfusionConvenientButtons() {
-        val plusOneButton: Button = findViewById(R.id.buttonCounterPlusOne)
-        val minusOneButton: Button = findViewById(R.id.buttonCounterMinusOne)
-
-        plusOneButton.setOnClickListener {
-            val infusionsText = editTextInfusions.text.toString()
-            var infusions = if (infusionsText.isNotEmpty()) infusionsText.toInt() else 0
-
-            infusions++
-            editTextInfusions.setText(infusions.toString())
-        }
-
-        minusOneButton.setOnClickListener {
-            val infusionsText = editTextInfusions.text.toString()
-            var infusions = if (infusionsText.isNotEmpty()) infusionsText.toInt() else 0
-
-            if (infusions <= 0)
-                return@setOnClickListener
-
-            infusions--
-            editTextInfusions.setText(infusions.toString())
-        }
-    }
-
-    private fun setTemperatureConvenientButtons() {
-        val deg60Button: Button = findViewById(R.id.button60deg)
-        val deg80Button: Button = findViewById(R.id.button80deg)
-        val deg90Button: Button = findViewById(R.id.button90deg)
-
-        deg60Button.text = if (isTempInFahrenheit) "140°" else "60°"
-        deg80Button.text = if (isTempInFahrenheit) "176°" else "80°"
-        deg90Button.text = if (isTempInFahrenheit) "194°" else "90°"
-
-        deg60Button.setOnClickListener {
-            editTextTemperature.setText(if (isTempInFahrenheit) "140" else "60")
-        }
-
-        deg80Button.setOnClickListener {
-            editTextTemperature.setText(if (isTempInFahrenheit) "176" else "80")
-        }
-
-        deg90Button.setOnClickListener {
-            editTextTemperature.setText(if (isTempInFahrenheit) "194" else "90")
         }
     }
 }
