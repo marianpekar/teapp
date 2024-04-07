@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_language"/>
 
     <item
+        android:id="@+id/temperatureScale"
+        android:title="@string/temperature_scale"
+        android:icon="@drawable/ic_temperature"/>
+
+    <item
         android:id="@+id/exportRecords"
         android:title="@string/create_data_backup"
         android:icon="@drawable/ic_export"/>

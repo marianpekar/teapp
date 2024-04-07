@@ -7,10 +7,24 @@ import com.marianpekar.teapp.R
 import java.util.Locale
 
 open class AppCompatActivityLocale : AppCompatActivity() {
+
+    protected var isTempInFahrenheits = false
+
     fun setLocale(lang: String) {
-        val preferences = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit()
-        preferences.putString("Language", lang)
-        preferences.apply()
+        val prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit()
+        prefs.putString("Language", lang)
+        prefs.apply()
+    }
+
+    fun setIsTempInFahrenheits(value: Boolean) {
+        isTempInFahrenheits = value
+        putIsTempInFahrenheitsInPrefs()
+    }
+
+    private fun putIsTempInFahrenheitsInPrefs() {
+        val prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit()
+        prefs.putBoolean("isTempInFahrenheit", isTempInFahrenheits)
+        prefs.apply()
     }
 
     private fun Context.updateLocale(lang: String): Context {
@@ -21,9 +35,12 @@ open class AppCompatActivityLocale : AppCompatActivity() {
     }
 
     override fun attachBaseContext(newBase: Context) {
-        val lang = newBase.getSharedPreferences(newBase.getString(R.string.app_name), Context.MODE_PRIVATE)
-            .getString("Language", Locale.getDefault().language)
+        val prefs = newBase.getSharedPreferences(newBase.getString(R.string.app_name), Context.MODE_PRIVATE)
+
+        val lang = prefs.getString("Language", Locale.getDefault().language)
         val langContext = newBase.updateLocale(lang ?: Locale.getDefault().language)
         super.attachBaseContext(langContext)
+
+        isTempInFahrenheits = prefs.getBoolean("isTempInFahrenheit", false);
     }
 }

@@ -62,6 +62,23 @@ class MainActivity : AppCompatActivityLocale() {
                     builder.setNegativeButton(getString(R.string.back), null)
                     builder.show()
                 }
+                R.id.temperatureScale -> {
+                    val scales = arrayOf(
+                        getString(R.string.celsius),
+                        getString(R.string.fahrenheit)
+                    )
+                    val builder = AlertDialog.Builder(this@MainActivity)
+                    builder.setTitle(getString(R.string.temperature_scale))
+                    builder.setSingleChoiceItems(scales, -1) { dialog, which ->
+                        val chosenScale = scales[which]
+                        setIsTempInFahrenheits (chosenScale == getString(R.string.fahrenheit))
+                        Toast.makeText(this@MainActivity, getString(R.string.temperature_scale) + ": " + chosenScale, Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+                        recreate()
+                    }
+                    builder.setNegativeButton(getString(R.string.back), null)
+                    builder.show()
+                }
                 R.id.exportRecords -> {
                     exportLauncher.launch("teapp.json")
                 }

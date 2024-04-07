@@ -39,4 +39,5 @@
     <string name="notes">Notizen</string>
     <string name="teacup">Tee</string>
     <string name="type_your_notes">Geben Sie hier Ihre Notizen ein</string>
+    <string name="temperature_scale">Temperaturskala</string>
 </resources>
