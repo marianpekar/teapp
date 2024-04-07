@@ -273,16 +273,20 @@ class EditRecordActivity : AppCompatActivityLocale() {
         val deg80Button: Button = findViewById(R.id.button80deg)
         val deg90Button: Button = findViewById(R.id.button90deg)
 
+        deg60Button.text = if (isTempInFahrenheit) "140°" else "60°"
+        deg80Button.text = if (isTempInFahrenheit) "176°" else "80°"
+        deg90Button.text = if (isTempInFahrenheit) "194°" else "90°"
+
         deg60Button.setOnClickListener {
-            editTextTemperature.setText(R.string.plain60)
+            editTextTemperature.setText(if (isTempInFahrenheit) "140" else "60")
         }
 
         deg80Button.setOnClickListener {
-            editTextTemperature.setText(R.string.plain80)
+            editTextTemperature.setText(if (isTempInFahrenheit) "176" else "80")
         }
 
         deg90Button.setOnClickListener {
-            editTextTemperature.setText(R.string.plain90)
+            editTextTemperature.setText(if (isTempInFahrenheit) "194" else "90")
         }
     }
 
