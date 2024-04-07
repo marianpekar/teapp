@@ -109,7 +109,9 @@ class EditRecordActivity : AppCompatActivityLocale() {
         editTextInfusions.setupClearOnFocusBehavior()
 
         editTextTemperature = findViewById(R.id.editTextTemperature)
-        editTextTemperature.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextTemperature, 100))
+        editTextTemperature.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextTemperature,
+            if (isTempInFahrenheit) 212 else 100,
+            if (isTempInFahrenheit) 32 else 0))
         editTextTemperature.setupClearOnFocusBehavior()
     }
 
@@ -219,7 +221,7 @@ class EditRecordActivity : AppCompatActivityLocale() {
                 return@setOnClickListener
             }
 
-            records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions, adjustments))
+            records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions, adjustments, isTempInFahrenheit))
 
             Toast.makeText(this@EditRecordActivity, R.string.record_saved, Toast.LENGTH_LONG).show()
 

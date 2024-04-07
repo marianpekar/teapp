@@ -99,9 +99,9 @@ class RecordsStorage(private val context: Context) {
     }
 
     private fun createAndSaveDefaultRecords() {
-        addRecord(Record("Satsuma", 2f, 250, 80, 90, 2, listOf(Adjustment(30))))
-        addRecord(Record("Miyazaki", 2f, 250, 60, 240, 3, listOf(Adjustment(0), Adjustment(0))))
-        addRecord(Record("Natsu", 2f, 250, 80, 60, 3, listOf(Adjustment(15), Adjustment(30))))
+        addRecord(Record("Satsuma", 2f, 250, 80, 90, 2, listOf(Adjustment(30)), false))
+        addRecord(Record("Miyazaki", 2f, 250, 60, 240, 3, listOf(Adjustment(0), Adjustment(0)),false))
+        addRecord(Record("Natsu", 2f, 250, 80, 60, 3, listOf(Adjustment(15), Adjustment(30)),false))
         saveRecords()
     }
 

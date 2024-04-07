@@ -1,14 +1,33 @@
 package com.marianpekar.teapp.data
 
-class Record(
-    private val name: String,
-    private val grams: Float,
-    private val milliliters: Int,
-    private val temperature: Int,
-    private val seconds: Long,
-    private val infusions: Int,
-    private val adjustments: List<Adjustment>,
-) {
+class Record {
+
+    private val name: String
+    private val grams: Float
+    private val milliliters: Int
+    private val temperature: Int
+    private val seconds: Long
+    private val infusions: Int
+    private val adjustments: List<Adjustment>
+
+    constructor(
+        name: String,
+        grams: Float,
+        milliliters: Int,
+        temperature: Int,
+        seconds: Long,
+        infusions: Int,
+        adjustments: List<Adjustment>,
+        isTempInFahrenheit: Boolean
+    ) {
+        this.name = name
+        this.grams = grams
+        this.milliliters = milliliters
+        this.temperature = if (isTempInFahrenheit) ((temperature - 32) / 1.8).toInt() else temperature
+        this.seconds = seconds
+        this.infusions = infusions
+        this.adjustments = adjustments
+    }
 
     private var notes = ""
 
