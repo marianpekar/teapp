@@ -96,8 +96,8 @@ class Record {
         return milliliters
     }
 
-    fun getTemperature(): Int {
-        return temperature
+    fun getTemperature(inFahrenheit: Boolean): Int {
+        return if (inFahrenheit) { (temperature * 1.8).toInt() + 32 } else { temperature }
     }
 
     fun getAdjustments(): List<Adjustment> {

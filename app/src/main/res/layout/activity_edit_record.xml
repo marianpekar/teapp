@@ -321,12 +321,14 @@
                             android:textSize="72sp" />
 
                         <TextView
+                            android:id="@+id/textTemperatureUnit"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:layout_marginEnd="100dp"
-                            android:text="@string/degree_symbol"
+                            android:layout_marginEnd="70dp"
+                            android:text="@string/deg_celsius"
                             android:textColor="@color/default_text_on_light"
-                            android:textSize="50sp" />
+                            android:gravity="bottom"
+                            android:textSize="32sp" />
                     </LinearLayout>
 
                     <LinearLayout

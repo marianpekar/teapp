@@ -7,6 +7,7 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -63,6 +64,7 @@ class EditRecordActivity : AppCompatActivityLocale() {
 
         setRecord()
         setUiReferences()
+        setTemperatureUnitsLabel()
         setAdjustmentsRecycler()
         setEditTexts()
         setBackButton()
@@ -109,10 +111,13 @@ class EditRecordActivity : AppCompatActivityLocale() {
         editTextInfusions.setupClearOnFocusBehavior()
 
         editTextTemperature = findViewById(R.id.editTextTemperature)
-        editTextTemperature.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextTemperature,
-            if (isTempInFahrenheit) 212 else 100,
-            if (isTempInFahrenheit) 32 else 0))
+        editTextTemperature.addTextChangedListener(EditTextWatcherIntegerBoundaries(editTextTemperature, if (isTempInFahrenheit) 212 else 100))
         editTextTemperature.setupClearOnFocusBehavior()
+    }
+
+    private fun setTemperatureUnitsLabel() {
+        val temperatureUnits: TextView = findViewById(R.id.textTemperatureUnit)
+        temperatureUnits.text = if (isTempInFahrenheit) getString(R.string.deg_fahrenheit) else getString(R.string.deg_celsius)
     }
 
     private fun setAdjustmentsRecycler() {
@@ -170,7 +175,7 @@ class EditRecordActivity : AppCompatActivityLocale() {
             setAdjustmentsRecycler()
         }
 
-        editTextTemperature.setText(record.getTemperature().toString())
+        editTextTemperature.setText(record.getTemperature(isTempInFahrenheit).toString())
     }
 
     private fun setBackButton() {
