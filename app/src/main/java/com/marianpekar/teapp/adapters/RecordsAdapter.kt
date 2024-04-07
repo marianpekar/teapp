@@ -15,7 +15,8 @@ import com.marianpekar.teapp.data.Record
 
 class RecordsAdapter(
     private var records: List<Record>,
-    private var context: Context
+    private var context: Context,
+    private var isTempInFahrenheit: Boolean
 ) : RecyclerView.Adapter<RecordsAdapter.RecordsViewHolder>() {
 
     class RecordsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,7 +34,7 @@ class RecordsAdapter(
     override fun onBindViewHolder(holder: RecordsViewHolder, position: Int) {
         val record = records[position]
         holder.textRecordName.text = record.getName()
-        holder.textRecordSummary.text = record.summaryFormatted()
+        holder.textRecordSummary.text = record.summaryFormatted(isTempInFahrenheit)
 
         holder.imageButtonCup.setOnClickListener {
             val intent = Intent(context, RecordActivity::class.java)

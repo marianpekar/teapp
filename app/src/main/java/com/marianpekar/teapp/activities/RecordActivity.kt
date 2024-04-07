@@ -148,7 +148,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
         val textRecordSummary: TextView = findViewById(R.id.textRecordSummary)
 
         textRecordName.text = record.getName()
-        textRecordSummary.text = record.summaryWithAdjustmentsFormatted()
+        textRecordSummary.text = record.summaryWithAdjustmentsFormatted(isTempInFahrenheit)
     }
 
     private fun setNotesButton() {

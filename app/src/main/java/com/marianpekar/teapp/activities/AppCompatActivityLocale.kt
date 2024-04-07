@@ -8,7 +8,7 @@ import java.util.Locale
 
 open class AppCompatActivityLocale : AppCompatActivity() {
 
-    protected var isTempInFahrenheits = false
+    protected var isTempInFahrenheit = false
 
     fun setLocale(lang: String) {
         val prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit()
@@ -16,14 +16,14 @@ open class AppCompatActivityLocale : AppCompatActivity() {
         prefs.apply()
     }
 
-    fun setIsTempInFahrenheits(value: Boolean) {
-        isTempInFahrenheits = value
-        putIsTempInFahrenheitsInPrefs()
+    fun setIsTempInFahrenheit(value: Boolean) {
+        isTempInFahrenheit = value
+        putIsTempInFahrenheitInPrefs()
     }
 
-    private fun putIsTempInFahrenheitsInPrefs() {
+    private fun putIsTempInFahrenheitInPrefs() {
         val prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit()
-        prefs.putBoolean("isTempInFahrenheit", isTempInFahrenheits)
+        prefs.putBoolean("isTempInFahrenheit", isTempInFahrenheit)
         prefs.apply()
     }
 
@@ -41,6 +41,6 @@ open class AppCompatActivityLocale : AppCompatActivity() {
         val langContext = newBase.updateLocale(lang ?: Locale.getDefault().language)
         super.attachBaseContext(langContext)
 
-        isTempInFahrenheits = prefs.getBoolean("isTempInFahrenheit", false);
+        isTempInFahrenheit = prefs.getBoolean("isTempInFahrenheit", false);
     }
 }

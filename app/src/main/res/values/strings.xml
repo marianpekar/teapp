@@ -57,7 +57,7 @@
     <string name="type_your_notes">Type your notes here</string>
     <string name="deg_celsius" translatable="false">°C</string>
     <string name="deg_fahrenheit" translatable="false">°F</string>
-    <string name="fahrenheit" translatable="false">Celsius</string>
-    <string name="celsius" translatable="false">Fahrenheit</string>
+    <string name="celsius" translatable="false">Celsius</string>
+    <string name="fahrenheit" translatable="false">Fahrenheit</string>
     <string name="temperature_scale">Temperature Scale</string>
 </resources>

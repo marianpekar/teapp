@@ -20,22 +20,30 @@ class Record(
         return notes
     }
 
-    fun summaryFormatted(): String {
-        return "${grams}g | ${milliliters}ml | ${temperature}° | ${timeFormatted()} | ${infusions}x"
+    fun summaryFormatted(isTempInFahrenheit: Boolean): String {
+        return "${grams}g | ${milliliters}ml | ${getDisplayTemperature(isTempInFahrenheit)} | ${timeFormatted()} | ${infusions}x"
     }
 
-    fun summaryWithAdjustmentsFormatted(): String {
+    private fun getDisplayTemperature(isTempInFahrenheit: Boolean): String {
+        return if (isTempInFahrenheit) {
+            "${(temperature * 1.8).toInt() + 32}°F"
+        } else {
+            "$temperature°C"
+        }
+    }
+
+    fun summaryWithAdjustmentsFormatted(isTempInFahrenheit: Boolean): String {
 
         for (adjustment in adjustments) {
             if (adjustment.seconds <= 0)
                 continue
 
-            var summary = "${grams}g | ${milliliters}ml | ${temperature}° | ${timeFormatted()}"
+            var summary = "${grams}g | ${milliliters}ml | ${getDisplayTemperature(isTempInFahrenheit)} | ${timeFormatted()}"
             adjustments.forEach { summary += it.getSecondsFormatted()}
             return summary
         }
 
-        return summaryFormatted()
+        return summaryFormatted(isTempInFahrenheit)
     }
 
     private fun timeFormatted(): String {

@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivityLocale() {
                     builder.setTitle(getString(R.string.temperature_scale))
                     builder.setSingleChoiceItems(scales, -1) { dialog, which ->
                         val chosenScale = scales[which]
-                        setIsTempInFahrenheits (chosenScale == getString(R.string.fahrenheit))
+                        setIsTempInFahrenheit (chosenScale == getString(R.string.fahrenheit))
                         Toast.makeText(this@MainActivity, getString(R.string.temperature_scale) + ": " + chosenScale, Toast.LENGTH_LONG).show()
                         dialog.dismiss()
                         recreate()
@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivityLocale() {
         recycler = findViewById(R.id.recyclerRecords)
         recycler.layoutManager = LinearLayoutManager(this@MainActivity)
 
-        adapter = RecordsAdapter(records.getAllRecords(), this@MainActivity)
+        adapter = RecordsAdapter(records.getAllRecords(), this@MainActivity, isTempInFahrenheit)
 
         recycler.adapter = adapter
     }
