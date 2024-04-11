@@ -68,7 +68,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
 
         stopService(Intent(this, NotificationService::class.java))
 
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         mediaPlayer = MediaPlayer.create(this@RecordActivity, R.raw.flute_shot)
 
@@ -172,7 +172,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
                 toActivityWithDialogWhenTimerIsRunning(MainActivity::class)
             }
         }
-        this@RecordActivity.onBackPressedDispatcher.addCallback(this, callback);
+        this@RecordActivity.onBackPressedDispatcher.addCallback(this, callback)
     }
 
     private fun setBackButton() {
@@ -397,64 +397,66 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
 
     private fun setRatioCalculator() {
 
+        val weightDecimalPlaces = if (areUnitsImperial) 3 else 2
+        val volumeDecimalPlaces = if (areUnitsImperial) 1 else 0
+
         fun resetValues() {
-            editTextWeight.setText(record.getWeight(areUnitsImperial).toString())
-            editTextVolume.setText(record.getVolume(areUnitsImperial).toString())
+            editTextWeight.setText(String.format("%.${weightDecimalPlaces}f",record.getWeight(areUnitsImperial)))
+            editTextVolume.setText(String.format("%.${volumeDecimalPlaces}f", record.getVolume(areUnitsImperial)))
         }
 
         resetValues()
 
         val ratio = record.getRatio()
 
-        var gramsTextChangedByUser = false
-        var millisTextChangedByUser = false
+        var weightChangedByUser = false
+        var volumeTextChangedByUser = false
 
         editTextWeight.addTextChangedListener {
-            if (gramsTextChangedByUser)
+            if (weightChangedByUser)
                 return@addTextChangedListener
 
-            val gramsText = it.toString()
-            if (gramsText.isNotEmpty()) {
-                val gramsValue = gramsText.toFloat()
+            val weightText = it.toString()
+            if (weightText.isNotEmpty()) {
+                val weightValue = weightText.toFloat()
 
-                if (gramsValue <= 0.0f) {
+                if (weightValue <= 0.0f) {
                     return@addTextChangedListener
                 }
 
-                val newMillis = (gramsValue * ratio).toInt()
-                millisTextChangedByUser = true
-                editTextVolume.setText(newMillis.toString())
-                millisTextChangedByUser = false
+                val newVolume = weightValue * ratio
+                volumeTextChangedByUser = true
+                editTextVolume.setText(String.format("%.${volumeDecimalPlaces}f", newVolume))
+                volumeTextChangedByUser = false
             }
-
         }
 
         editTextVolume.addTextChangedListener {
-            if (millisTextChangedByUser)
+            if (volumeTextChangedByUser)
                 return@addTextChangedListener
 
-            val millisText = it.toString()
-            if (millisText.isNotEmpty()) {
-                val millisValue = millisText.toFloat()
+            val volumeText = it.toString()
+            if (volumeText.isNotEmpty()) {
+                val volumeValue = volumeText.toFloat()
 
-                if (millisValue <= 0.0f) {
+                if (volumeValue <= 0.0f) {
                     return@addTextChangedListener
                 }
 
-                val newGrams = millisValue / ratio
-                gramsTextChangedByUser = true
-                editTextWeight.setText(String.format("%.1f", newGrams))
-                gramsTextChangedByUser = false
+                val newWeight = volumeValue / ratio
+                weightChangedByUser = true
+                editTextWeight.setText(String.format("%.${weightDecimalPlaces}f", newWeight))
+                weightChangedByUser = false
             }
         }
 
         val buttonResetRatio: Button = findViewById(R.id.buttonRatioReset)
         buttonResetRatio.setOnClickListener {
-            gramsTextChangedByUser = true
-            millisTextChangedByUser = true
+            weightChangedByUser = true
+            volumeTextChangedByUser = true
             resetValues()
-            gramsTextChangedByUser = false
-            millisTextChangedByUser = false
+            weightChangedByUser = false
+            volumeTextChangedByUser = false
         }
     }
 }

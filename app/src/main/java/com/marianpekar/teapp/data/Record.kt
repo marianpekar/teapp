@@ -46,9 +46,9 @@ class Record {
 
     private fun getDisplayTemperature(isTempInFahrenheit: Boolean): String {
         return if (isTempInFahrenheit) {
-            "${(temperature * 1.8).toInt() + 32}°F"
+            "${(temperature * 1.8).toInt() + 32} °F"
         } else {
-            "$temperature°C"
+            "$temperature °C"
         }
     }
 
@@ -71,7 +71,7 @@ class Record {
         val decimalPlaces = if (areUnitsImperial) 3 else 2
         val format = "%.${decimalPlaces}f"
         val weight = getWeight(areUnitsImperial)
-        return "${String.format(format, weight)}$unit"
+        return "${String.format(format, weight)} $unit"
     }
 
     private fun volumeFormatted(areUnitsImperial: Boolean): String {
@@ -79,7 +79,7 @@ class Record {
         val decimalPlaces = if (areUnitsImperial) 1 else 0
         val format = "%.${decimalPlaces}f"
         val volume = getVolume(areUnitsImperial)
-        return "${String.format(format, volume)}$unit"
+        return "${String.format(format, volume)} $unit"
     }
 
     private fun timeFormatted(): String {

@@ -262,7 +262,7 @@
                     android:fontFamily="sans-serif-condensed"
                     android:hint="@string/default_counter_value"
                     android:importantForAutofill="no"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/default_text_on_light"
                     android:textSize="48sp" />

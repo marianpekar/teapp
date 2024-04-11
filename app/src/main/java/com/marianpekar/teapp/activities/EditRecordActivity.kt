@@ -86,8 +86,10 @@ class EditRecordActivity : SetupRecordActivityBase() {
 
         editTextSeconds.setText(String.format("%02d", remainingSeconds))
 
-        editTextWeight.setText(record.getWeight(areUnitsImperial).toString())
-        editTextVolume.setText(record.getVolume(areUnitsImperial).toString())
+        val weightDecimalPlaces = if (areUnitsImperial) 3 else 2
+        val volumeDecimalPlaces = if (areUnitsImperial) 1 else 0
+        editTextWeight.setText(String.format("%.${weightDecimalPlaces}f",record.getWeight(areUnitsImperial)))
+        editTextVolume.setText(String.format("%.${volumeDecimalPlaces}f", record.getVolume(areUnitsImperial)))
 
         editTextInfusions.setText(record.getInfusions().toString())
         editTextInfusions.addTextChangedListener {
