@@ -7,8 +7,13 @@ import com.marianpekar.teapp.R
 import java.util.Locale
 
 open class AppCompatActivityLocale : AppCompatActivity() {
+    private var _isTempInFahrenheit = false
+    protected val isTempInFahrenheit: Boolean
+        get() = _isTempInFahrenheit
 
-    protected var isTempInFahrenheit = false
+    private var _areUnitsImperial = false
+    protected val areUnitsImperial: Boolean
+        get() = _areUnitsImperial
 
     fun setLocale(lang: String) {
         val prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit()
@@ -17,13 +22,18 @@ open class AppCompatActivityLocale : AppCompatActivity() {
     }
 
     fun setIsTempInFahrenheit(value: Boolean) {
-        isTempInFahrenheit = value
-        putIsTempInFahrenheitInPrefs()
+        _isTempInFahrenheit = value
+        putBoolean("isTempInFahrenheit", isTempInFahrenheit)
     }
 
-    private fun putIsTempInFahrenheitInPrefs() {
+    fun setAreUnitsImperial(value: Boolean) {
+        _areUnitsImperial = value
+        putBoolean("areUnitsImperial", areUnitsImperial)
+    }
+
+    private fun putBoolean(key: String, value: Boolean) {
         val prefs = getSharedPreferences(getString(R.string.app_name), Context.MODE_PRIVATE).edit()
-        prefs.putBoolean("isTempInFahrenheit", isTempInFahrenheit)
+        prefs.putBoolean(key, value)
         prefs.apply()
     }
 
@@ -41,6 +51,7 @@ open class AppCompatActivityLocale : AppCompatActivity() {
         val langContext = newBase.updateLocale(lang ?: Locale.getDefault().language)
         super.attachBaseContext(langContext)
 
-        isTempInFahrenheit = prefs.getBoolean("isTempInFahrenheit", false);
+        _isTempInFahrenheit = prefs.getBoolean("isTempInFahrenheit", false)
+        _areUnitsImperial = prefs.getBoolean("areUnitsImperial", false)
     }
 }

@@ -60,4 +60,9 @@
     <string name="celsius" translatable="false">Celsius</string>
     <string name="fahrenheit" translatable="false">Fahrenheit</string>
     <string name="temperature_scale">Temperature Scale</string>
+    <string name="units">Units</string>
+    <string name="units_metric">Metric</string>
+    <string name="units_imperial">Imperial</string>
+    <string name="ounces_short" translatable="false">oz</string>
+    <string name="ounces_fluid_short" translatable="false">fl oz</string>
 </resources>

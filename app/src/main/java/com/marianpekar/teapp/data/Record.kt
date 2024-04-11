@@ -3,8 +3,8 @@ package com.marianpekar.teapp.data
 class Record {
 
     private val name: String
-    private val grams: Float
-    private val milliliters: Int
+    private val weight: Float
+    private val volume: Float
     private val temperature: Int
     private val seconds: Long
     private val infusions: Int
@@ -12,17 +12,18 @@ class Record {
 
     constructor(
         name: String,
-        grams: Float,
-        milliliters: Int,
+        weight: Float,
+        volume: Float,
         temperature: Int,
         seconds: Long,
         infusions: Int,
         adjustments: List<Adjustment>,
-        isTempInFahrenheit: Boolean
+        isTempInFahrenheit: Boolean,
+        areUnitsImperial: Boolean
     ) {
         this.name = name
-        this.grams = grams
-        this.milliliters = milliliters
+        this.weight = if (areUnitsImperial) weight * 28.3495f else weight
+        this.volume = if (areUnitsImperial) volume * 28.4130f else volume
         this.temperature = if (isTempInFahrenheit) ((temperature - 32) / 1.8).toInt() else temperature
         this.seconds = seconds
         this.infusions = infusions
@@ -39,8 +40,8 @@ class Record {
         return notes
     }
 
-    fun summaryFormatted(isTempInFahrenheit: Boolean): String {
-        return "${grams}g | ${milliliters}ml | ${getDisplayTemperature(isTempInFahrenheit)} | ${timeFormatted()} | ${infusions}x"
+    fun summaryFormatted(isTempInFahrenheit: Boolean, areUnitsImperial: Boolean): String {
+        return "${weightFormatted(areUnitsImperial)} | ${volumeFormatted(areUnitsImperial)} | ${getDisplayTemperature(isTempInFahrenheit)} | ${timeFormatted()} | ${infusions}x"
     }
 
     private fun getDisplayTemperature(isTempInFahrenheit: Boolean): String {
@@ -51,18 +52,34 @@ class Record {
         }
     }
 
-    fun summaryWithAdjustmentsFormatted(isTempInFahrenheit: Boolean): String {
+    fun summaryWithAdjustmentsFormatted(isTempInFahrenheit: Boolean, areUnitsImperial: Boolean): String {
 
         for (adjustment in adjustments) {
             if (adjustment.seconds <= 0)
                 continue
 
-            var summary = "${grams}g | ${milliliters}ml | ${getDisplayTemperature(isTempInFahrenheit)} | ${timeFormatted()}"
+            var summary = "${weightFormatted(areUnitsImperial)} | ${volumeFormatted(areUnitsImperial)} | ${getDisplayTemperature(isTempInFahrenheit)} | ${timeFormatted()}"
             adjustments.forEach { summary += it.getSecondsFormatted()}
             return summary
         }
 
-        return summaryFormatted(isTempInFahrenheit)
+        return summaryFormatted(isTempInFahrenheit, areUnitsImperial)
+    }
+
+    private fun weightFormatted(areUnitsImperial: Boolean): String {
+        val unit = if (areUnitsImperial) "oz" else "g"
+        val decimalPlaces = if (areUnitsImperial) 3 else 2
+        val format = "%.${decimalPlaces}f"
+        val weight = getWeight(areUnitsImperial)
+        return "${String.format(format, weight)}$unit"
+    }
+
+    private fun volumeFormatted(areUnitsImperial: Boolean): String {
+        val unit = if (areUnitsImperial) "fl oz" else "ml"
+        val decimalPlaces = if (areUnitsImperial) 1 else 0
+        val format = "%.${decimalPlaces}f"
+        val volume = getVolume(areUnitsImperial)
+        return "${String.format(format, volume)}$unit"
     }
 
     private fun timeFormatted(): String {
@@ -85,15 +102,15 @@ class Record {
     }
 
     fun getRatio(): Float {
-        return milliliters / grams
+        return volume / weight
     }
 
-    fun getGrams(): Float {
-        return grams
+    fun getWeight(areUnitsImperial: Boolean): Float {
+        return if (areUnitsImperial) weight / 28.3495f else weight
     }
 
-    fun getMilliliters(): Int {
-        return milliliters
+    fun getVolume(areUnitsImperial: Boolean): Float {
+        return if (areUnitsImperial) volume / 28.4130f else volume
     }
 
     fun getTemperature(inFahrenheit: Boolean): Int {

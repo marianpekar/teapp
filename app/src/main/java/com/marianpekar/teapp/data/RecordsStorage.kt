@@ -47,13 +47,13 @@ class RecordsStorage(private val context: Context) {
 
     fun areRecordParamsValid(
         name: String,
-        grams: Float,
-        millis: Int,
+        weight: Float,
+        volume: Float,
         temperature: Int,
         seconds: Long,
         infusions: Int
     ): Boolean {
-        return name.isNotEmpty() && grams > 0 && millis > 0 && temperature > 0 && seconds > 0 && infusions > 0
+        return name.isNotEmpty() && weight > 0 && volume > 0 && temperature > 0 && seconds > 0 && infusions > 0
     }
 
     fun areAdjustmentsValid(adjustments: List<Adjustment>, seconds: Long): Boolean {
@@ -99,9 +99,9 @@ class RecordsStorage(private val context: Context) {
     }
 
     private fun createAndSaveDefaultRecords() {
-        addRecord(Record("Satsuma", 2f, 250, 80, 90, 2, listOf(Adjustment(30)), false))
-        addRecord(Record("Miyazaki", 2f, 250, 60, 240, 3, listOf(Adjustment(0), Adjustment(0)),false))
-        addRecord(Record("Natsu", 2f, 250, 80, 60, 3, listOf(Adjustment(15), Adjustment(30)),false))
+        addRecord(Record("Satsuma", 2f, 250.0f, 80, 90, 2, listOf(Adjustment(30)), false, false))
+        addRecord(Record("Miyazaki", 2f, 250.0f, 60, 240, 3, listOf(Adjustment(0), Adjustment(0)),false, false))
+        addRecord(Record("Natsu", 2f, 250.0f, 80, 60, 3, listOf(Adjustment(15), Adjustment(30)),false, false))
         saveRecords()
     }
 

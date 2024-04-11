@@ -40,4 +40,7 @@
     <string name="teacup">Tee</string>
     <string name="type_your_notes">Geben Sie hier Ihre Notizen ein</string>
     <string name="temperature_scale">Temperaturskala</string>
+    <string name="units">Einheiten</string>
+    <string name="units_metric">Metrische</string>
+    <string name="units_imperial">Imperiale</string>
 </resources>

@@ -71,8 +71,25 @@ class MainActivity : AppCompatActivityLocale() {
                     builder.setTitle(getString(R.string.temperature_scale))
                     builder.setSingleChoiceItems(scales, -1) { dialog, which ->
                         val chosenScale = scales[which]
-                        setIsTempInFahrenheit (chosenScale == getString(R.string.fahrenheit))
+                        setIsTempInFahrenheit(chosenScale == getString(R.string.fahrenheit))
                         Toast.makeText(this@MainActivity, getString(R.string.temperature_scale) + ": " + chosenScale, Toast.LENGTH_LONG).show()
+                        dialog.dismiss()
+                        recreate()
+                    }
+                    builder.setNegativeButton(getString(R.string.back), null)
+                    builder.show()
+                }
+                R.id.units -> {
+                    val units = arrayOf(
+                        getString(R.string.units_imperial),
+                        getString(R.string.units_metric)
+                    )
+                    val builder = AlertDialog.Builder(this@MainActivity)
+                    builder.setTitle(getString(R.string.units))
+                    builder.setSingleChoiceItems(units, -1) { dialog, which ->
+                        val chosenUnits = units[which]
+                        setAreUnitsImperial(chosenUnits == getString(R.string.units_imperial))
+                        Toast.makeText(this@MainActivity, getString(R.string.units) + ": " + chosenUnits, Toast.LENGTH_LONG).show()
                         dialog.dismiss()
                         recreate()
                     }
@@ -139,7 +156,7 @@ class MainActivity : AppCompatActivityLocale() {
         recycler = findViewById(R.id.recyclerRecords)
         recycler.layoutManager = LinearLayoutManager(this@MainActivity)
 
-        adapter = RecordsAdapter(records.getAllRecords(), this@MainActivity, isTempInFahrenheit)
+        adapter = RecordsAdapter(records.getAllRecords(), this@MainActivity, isTempInFahrenheit, areUnitsImperial)
 
         recycler.adapter = adapter
     }

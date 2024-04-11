@@ -12,6 +12,11 @@
         android:icon="@drawable/ic_temperature"/>
 
     <item
+        android:id="@+id/units"
+        android:title="@string/units"
+        android:icon="@drawable/ic_units"/>
+
+    <item
         android:id="@+id/exportRecords"
         android:title="@string/create_data_backup"
         android:icon="@drawable/ic_export"/>

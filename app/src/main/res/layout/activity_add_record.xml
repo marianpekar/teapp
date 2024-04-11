@@ -230,7 +230,7 @@
                 android:orientation="horizontal">
 
                 <EditText
-                    android:id="@+id/editTextGrams"
+                    android:id="@+id/editTextWeight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -244,6 +244,7 @@
                     android:textSize="48sp" />
 
                 <TextView
+                    android:id="@+id/textViewWeight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.25"
@@ -253,7 +254,7 @@
                     android:translationY="5dp" />
 
                 <EditText
-                    android:id="@+id/editTextMillis"
+                    android:id="@+id/editTextVolume"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -267,6 +268,7 @@
                     android:textSize="48sp" />
 
                 <TextView
+                    android:id="@+id/textViewVolume"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.25"

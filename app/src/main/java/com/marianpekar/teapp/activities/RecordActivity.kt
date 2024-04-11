@@ -44,8 +44,8 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
     private lateinit var minusOneButton: Button
     private lateinit var resetInfusionsButton: Button
     private lateinit var resetTimerButton: Button
-    private lateinit var editTextGrams: EditText
-    private lateinit var editTextMillis: EditText
+    private lateinit var editTextWeight: EditText
+    private lateinit var editTextVolume: EditText
     private lateinit var buttonNotes: ImageButton
 
     private lateinit var textViewInfusionsCounter: TextView
@@ -75,6 +75,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
         preferences = applicationContext.getSharedPreferences(getString(R.string.app_name), 0)
 
         setUiReferences()
+        setUnitsLabels()
 
         setRecord()
         setInfusions()
@@ -103,11 +104,19 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
         resetTimerButton = findViewById(R.id.buttonStopWatchReset)
         buttonNotes = findViewById(R.id.buttonNotes)
 
-        editTextGrams = findViewById(R.id.editTextGrams)
-        editTextGrams.setupClearOnFocusBehavior()
+        editTextWeight = findViewById(R.id.editTextWeight)
+        editTextWeight.setupClearOnFocusBehavior()
 
-        editTextMillis = findViewById(R.id.editTextMillis)
-        editTextMillis.setupClearOnFocusBehavior()
+        editTextVolume = findViewById(R.id.editTextVolume)
+        editTextVolume.setupClearOnFocusBehavior()
+    }
+
+    private fun setUnitsLabels() {
+        val textViewWeight = findViewById<TextView>(R.id.textViewWeight)
+        textViewWeight.text = if (areUnitsImperial) getString(R.string.ounces_short) else getString(R.string.grams_short)
+
+        val textViewVolume = findViewById<TextView>(R.id.textViewVolume)
+        textViewVolume.text = if (areUnitsImperial) getString(R.string.ounces_fluid_short) else getString(R.string.millis_short)
     }
 
     override fun onStop() {
@@ -148,7 +157,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
         val textRecordSummary: TextView = findViewById(R.id.textRecordSummary)
 
         textRecordName.text = record.getName()
-        textRecordSummary.text = record.summaryWithAdjustmentsFormatted(isTempInFahrenheit)
+        textRecordSummary.text = record.summaryWithAdjustmentsFormatted(isTempInFahrenheit, areUnitsImperial)
     }
 
     private fun setNotesButton() {
@@ -389,8 +398,8 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
     private fun setRatioCalculator() {
 
         fun resetValues() {
-            editTextGrams.setText(String.format("%.1f", record.getGrams()))
-            editTextMillis.setText(record.getMilliliters().toString())
+            editTextWeight.setText(record.getWeight(areUnitsImperial).toString())
+            editTextVolume.setText(record.getVolume(areUnitsImperial).toString())
         }
 
         resetValues()
@@ -400,7 +409,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
         var gramsTextChangedByUser = false
         var millisTextChangedByUser = false
 
-        editTextGrams.addTextChangedListener {
+        editTextWeight.addTextChangedListener {
             if (gramsTextChangedByUser)
                 return@addTextChangedListener
 
@@ -414,13 +423,13 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
 
                 val newMillis = (gramsValue * ratio).toInt()
                 millisTextChangedByUser = true
-                editTextMillis.setText(newMillis.toString())
+                editTextVolume.setText(newMillis.toString())
                 millisTextChangedByUser = false
             }
 
         }
 
-        editTextMillis.addTextChangedListener {
+        editTextVolume.addTextChangedListener {
             if (millisTextChangedByUser)
                 return@addTextChangedListener
 
@@ -434,7 +443,7 @@ class RecordActivity : AppCompatActivityLocale(), CustomCountdownTimer.OnChangeH
 
                 val newGrams = millisValue / ratio
                 gramsTextChangedByUser = true
-                editTextGrams.setText(String.format("%.1f", newGrams))
+                editTextWeight.setText(String.format("%.1f", newGrams))
                 gramsTextChangedByUser = false
             }
         }

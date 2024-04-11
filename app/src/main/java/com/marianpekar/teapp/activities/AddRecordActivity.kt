@@ -36,6 +36,7 @@ class AddRecordActivity : SetupRecordActivityBase() {
         preferences = applicationContext.getSharedPreferences(getString(R.string.app_name), 0)
 
         setUiReferences()
+        setUnitsLabels()
         setTemperatureUnitsLabel()
         setBackButton()
         setAddRecordButton()
@@ -64,11 +65,11 @@ class AddRecordActivity : SetupRecordActivityBase() {
             val infusionsText = editTextInfusions.text.toString()
             val infusions = if (infusionsText.isNotEmpty()) infusionsText.toInt() else 0
 
-            val gramsText = editTextGrams.text.toString()
+            val gramsText = editTextWeight.text.toString()
             val grams = if (gramsText.isNotEmpty()) gramsText.toFloat() else 0.0f
 
-            val millisText = editTextMillis.text.toString()
-            val millis = if (millisText.isNotEmpty()) millisText.toInt() else 0
+            val millisText = editTextVolume.text.toString()
+            val millis = if (millisText.isNotEmpty()) millisText.toFloat() else 0.0f
 
             val temperatureText = editTextTemperature.text.toString()
             val temperature = if (temperatureText.isNotEmpty()) temperatureText.toInt() else 0
@@ -84,7 +85,7 @@ class AddRecordActivity : SetupRecordActivityBase() {
                 return@setOnClickListener
             }
 
-            records.addRecord(Record(name, grams, millis, temperature, totalSeconds, infusions, adapterAdjustments.getAdjustments(), isTempInFahrenheit))
+            records.addRecord(Record(name, grams, millis, temperature, totalSeconds, infusions, adapterAdjustments.getAdjustments(), isTempInFahrenheit, areUnitsImperial))
 
             Toast.makeText(this@AddRecordActivity, R.string.new_record_added, Toast.LENGTH_LONG).show()
 

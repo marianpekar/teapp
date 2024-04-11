@@ -44,6 +44,7 @@ class EditRecordActivity : SetupRecordActivityBase() {
 
         setRecord()
         setUiReferences()
+        setUnitsLabels()
         setTemperatureUnitsLabel()
         setAdjustmentsRecycler()
         setEditTexts()
@@ -85,8 +86,8 @@ class EditRecordActivity : SetupRecordActivityBase() {
 
         editTextSeconds.setText(String.format("%02d", remainingSeconds))
 
-        editTextGrams.setText(record.getGrams().toString())
-        editTextMillis.setText(record.getMilliliters().toString())
+        editTextWeight.setText(record.getWeight(areUnitsImperial).toString())
+        editTextVolume.setText(record.getVolume(areUnitsImperial).toString())
 
         editTextInfusions.setText(record.getInfusions().toString())
         editTextInfusions.addTextChangedListener {
@@ -146,11 +147,11 @@ class EditRecordActivity : SetupRecordActivityBase() {
             val infusionsText = editTextInfusions.text.toString()
             val infusions = if (infusionsText.isNotEmpty()) infusionsText.toInt() else 0
 
-            val gramsText = editTextGrams.text.toString()
+            val gramsText = editTextWeight.text.toString()
             val grams = if (gramsText.isNotEmpty()) gramsText.toFloat() else 0.0f
 
-            val millisText = editTextMillis.text.toString()
-            val millis = if (millisText.isNotEmpty()) millisText.toInt() else 0
+            val millisText = editTextVolume.text.toString()
+            val millis = if (millisText.isNotEmpty()) millisText.toFloat() else 0.0f
 
             val temperatureText = editTextTemperature.text.toString()
             val temperature = if (temperatureText.isNotEmpty()) temperatureText.toInt() else 0
@@ -166,7 +167,7 @@ class EditRecordActivity : SetupRecordActivityBase() {
                 return@setOnClickListener
             }
 
-            records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions, adjustments, isTempInFahrenheit))
+            records.replaceRecord(recordIndex, Record(name, grams, millis, temperature, totalSeconds, infusions, adjustments, isTempInFahrenheit, areUnitsImperial))
 
             Toast.makeText(this@EditRecordActivity, R.string.record_saved, Toast.LENGTH_LONG).show()
 

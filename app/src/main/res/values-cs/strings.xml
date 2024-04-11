@@ -40,4 +40,7 @@
     <string name="teacup">Čaj</string>
     <string name="type_your_notes">Místo na poznámky</string>
     <string name="temperature_scale">Teplotní stupnice</string>
+    <string name="units">Jednotky</string>
+    <string name="units_metric">Metrické</string>
+    <string name="units_imperial">Imperiální</string>
 </resources>

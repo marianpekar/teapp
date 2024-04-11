@@ -19,8 +19,8 @@ open class SetupRecordActivityBase : AppCompatActivityLocale() {
     protected lateinit var editTextName: EditText
     protected lateinit var editTextMinutes: EditText
     protected lateinit var editTextSeconds: EditText
-    protected lateinit var editTextGrams: EditText
-    protected lateinit var editTextMillis: EditText
+    protected lateinit var editTextWeight: EditText
+    protected lateinit var editTextVolume: EditText
     protected lateinit var editTextInfusions: EditText
     protected lateinit var editTextTemperature: EditText
 
@@ -54,11 +54,19 @@ open class SetupRecordActivityBase : AppCompatActivityLocale() {
         editTextSeconds.addTextChangedListener(EditTextWatcherSeconds(editTextSeconds))
         editTextSeconds.setupClearOnFocusBehavior()
 
-        editTextGrams = findViewById(R.id.editTextGrams)
-        editTextGrams.setupClearOnFocusBehavior()
+        editTextWeight = findViewById(R.id.editTextWeight)
+        editTextWeight.setupClearOnFocusBehavior()
 
-        editTextMillis = findViewById(R.id.editTextMillis)
-        editTextMillis.setupClearOnFocusBehavior()
+        editTextVolume = findViewById(R.id.editTextVolume)
+        editTextVolume.setupClearOnFocusBehavior()
+    }
+
+    protected fun setUnitsLabels() {
+        val textViewWeight = findViewById<TextView>(R.id.textViewWeight)
+        textViewWeight.text = if (areUnitsImperial) getString(R.string.ounces_short) else getString(R.string.grams_short)
+
+        val textViewVolume = findViewById<TextView>(R.id.textViewVolume)
+        textViewVolume.text = if (areUnitsImperial) getString(R.string.ounces_fluid_short) else getString(R.string.millis_short)
     }
 
     private fun setAdjustmentsRecycler() {
