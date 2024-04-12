@@ -223,9 +223,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -236,21 +237,21 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:fontFamily="sans-serif-condensed"
-                    android:hint="@string/default_counter_value"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:hint="@string/default_counter_value"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/default_text_on_light"
-                    android:textSize="48sp" />
+                    android:textSize="38sp" />
 
                 <TextView
                     android:id="@+id/textViewWeight"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.40"
+                    android:layout_weight="0.50"
                     android:fontFamily="sans-serif-condensed"
                     android:text="@string/grams_short"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:translationY="5dp" />
 
                 <EditText
@@ -260,21 +261,21 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:fontFamily="sans-serif-condensed"
-                    android:hint="@string/default_counter_value"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:hint="@string/default_counter_value"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/default_text_on_light"
-                    android:textSize="48sp" />
+                    android:textSize="38sp" />
 
                 <TextView
                     android:id="@+id/textViewVolume"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.40"
+                    android:layout_weight="0.50"
                     android:fontFamily="sans-serif-condensed"
                     android:text="@string/millis_short"
-                    android:textSize="24sp"
+                    android:textSize="22sp"
                     android:translationY="5dp" />
 
             </LinearLayout>
